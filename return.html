@@ -197,6 +197,7 @@ const ROWS = [
   ["6109731962","MD KAMIL","MD KAMIL",29,"M","C2 / 42","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6109731962","MD SERAJ","MD SERAJ",31,"M","C2 / 43","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6109731962","ZIA ASHRAF","ZIA ASHRAF",52,"M","C2 / 44","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
+  ["PENDING","OWAIS","OWAIS","—","M","TBD / 0","TO BE BOOKED","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6109731962","AQIL AHMED","AQIL AHMED",58,"M","C2 / 45","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6838143265","PARWEZ ALAM","PARWEZ ALAM",65,"M","C2 / 60","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6838143265","SAJIDUL HUDA","SAJIDUL HUDA",46,"M","C2 / 61","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
@@ -263,7 +264,7 @@ function render() {
     <article class="ticket">
       <div class="t-top">
         <span>Return · Electronic Reservation Slip</span>
-        <span class="cnf">CNF</span>
+        <span class="cnf">${r.pnr === "PENDING" ? "TO BOOK" : "CNF"}</span>
       </div>
       <div class="t-body">
         <div class="route">
