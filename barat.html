@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Baraat Train List — 15 Nov 2026</title>
+<style>
+  :root {
+    --ink: #121826;
+    --muted: #5b6475;
+    --paper: #ece7dc;
+    --navy: #1b3a6b;
+    --navy2: #12284d;
+    --red: #b42318;
+    --veg: #157347;
+    --line: #d7d0c2;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Segoe UI", system-ui, sans-serif; }
+  body { min-height: 100vh; }
+  .app {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+  }
+  aside {
+    background: #f7f3ea;
+    border-bottom: 1px solid var(--line);
+    padding: 14px;
+  }
+  .count-row {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .count-box {
+    min-width: 92px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 16px;
+    padding: 12px 10px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .count-box strong { display: block; font-size: 34px; line-height: 1; }
+  .count-box span { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .8; }
+  .count-box em { display: block; margin-top: 6px; font-style: normal; font-size: 12px; color: #f3d27a; }
+  .search-wrap { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  input[type="search"], select {
+    width: 100%;
+    height: 44px;
+    border: 1.5px solid #cfc7b8;
+    border-radius: 12px;
+    padding: 0 12px;
+    font-size: 15px;
+    background: #fff;
+    color: var(--ink);
+  }
+  .filters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .filters label, .sort-row label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 4px;
+  }
+  .break {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .break div {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px;
+    text-align: center;
+  }
+  .break b { display: block; font-size: 16px; }
+  .break span { font-size: 11px; color: var(--muted); }
+  main { padding: 14px 14px 80px; }
+  .board {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--navy2);
+    color: #fff;
+    border-radius: 16px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+  .board b { display: block; font-size: 16px; }
+  .board small { opacity: .75; }
+  .list { display: grid; gap: 12px; }
+  .ticket {
+    background: #fffef9;
+    border: 1.5px solid #1b3a6b;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 3px 4px 0 rgba(18,40,77,.12);
+  }
+  .t-top {
+    background: var(--navy);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .t-top .cnf {
+    background: #e8f8ee;
+    color: var(--veg);
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+  .t-body { padding: 12px; }
+  .route {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 6px;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #cfc7b8;
+  }
+  .route .st { font-size: 11px; color: var(--muted); text-transform: uppercase; }
+  .route b { display: block; font-size: 18px; }
+  .route .time { color: var(--navy); }
+  .route .mid { text-align: center; color: var(--navy); font-weight: 800; }
+  .who {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 0 8px;
+  }
+  .who h3 { margin: 0; font-size: 18px; line-height: 1.15; }
+  .who .final { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+  .badge {
+    min-width: 86px;
+    text-align: center;
+    background: #13284d;
+    color: #fff;
+    border-radius: 12px;
+    padding: 8px 8px 7px;
+  }
+  .badge b { display: block; font-size: 18px; }
+  .badge span { font-size: 10px; letter-spacing: .04em; opacity: .8; }
+  .facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+  .facts div {
+    background: #f4efe4;
+    border-radius: 10px;
+    padding: 7px 8px;
+  }
+  .facts label { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; }
+  .facts b { font-size: 12px; }
+  .meal-v { color: var(--veg); }
+  .meal-n { color: var(--red); }
+  .empty { text-align: center; padding: 40px 10px; color: var(--muted); }
+  @media (min-width: 860px) {
+    .app { grid-template-columns: 280px 1fr; }
+    aside {
+      border-bottom: 0;
+      border-right: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+    }
+    .count-row { flex-direction: column; }
+    .count-box { min-width: 0; padding: 18px 12px; }
+    .count-box strong { font-size: 56px; }
+    .filters { grid-template-columns: 1fr; }
+    .list { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+    main { padding: 18px 22px 50px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="count-row">
+      <div class="count-box">
+        <strong id="shown">47</strong>
+        <span>of <b id="total">47</b> passengers</span>
+        <em id="pnrShown">9 PNRs</em>
+      </div>
+      <div class="search-wrap">
+        <input id="q" type="search" placeholder="Search name, PNR, seat…">
+        <div class="sort-row">
+          <label for="sort">Sort</label>
+          <select id="sort">
+            <option value="seat">Coach / Seat</option>
+            <option value="name">Passenger name</option>
+            <option value="pnr">PNR</option>
+            <option value="from">Boarding</option>
+            <option value="age">Age</option>
+            <option value="meal">Meal</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="filters">
+      <div>
+        <label for="from">Boarding</label>
+        <select id="from">
+          <option value="all">All stations</option>
+          <option value="LKR">Luckeesarai (LKR)</option>
+          <option value="PNBE">Patna (PNBE)</option>
+          <option value="ASN">Asansol (ASN)</option>
+        </select>
+      </div>
+      <div>
+        <label for="coach">Coach</label>
+        <select id="coach">
+          <option value="all">All coaches</option>
+          <option value="C1">C1</option>
+          <option value="C3">C3</option>
+          <option value="C18">C18</option>
+        </select>
+      </div>
+      <div>
+        <label for="meal">Meal</label>
+        <select id="meal">
+          <option value="all">All meals</option>
+          <option value="VEG">Veg</option>
+          <option value="NON VEG">Non veg</option>
+        </select>
+      </div>
+      <div>
+        <label for="gender">Gender</label>
+        <select id="gender">
+          <option value="all">All</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+      </div>
+    </div>
+    <div class="break">
+      <div><b id="cLKR">0</b><span>LKR</span></div>
+      <div><b id="cPNBE">0</b><span>PNBE</span></div>
+      <div><b id="cASN">0</b><span>ASN</span></div>
+    </div>
+  </aside>
+  <main>
+    <div class="board">
+      <div><small>Train</small><b>22348 VANDE BHARAT EXP</b></div>
+      <div style="text-align:right"><small>Date · Class</small><b>15 Nov 2026 · CC</b></div>
+    </div>
+    <div class="list" id="list"></div>
+    <div class="empty" id="empty" hidden>No tickets match these filters.</div>
+  </main>
+</div>
+<script>
+const ROWS = [
+  ["6949803856","MOHD ALAM","MOHD ALAM",45,"M","NON VEG","C18 / 5","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949803856","MANAHIL ALAM","MANAHIL ALAM",21,"M","NON VEG","C18 / 6","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949803856","MODASSIN BARKAT","MODASSIN BARKAT",36,"M","NON VEG","C18 / 7","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949803856","SARWAR ALAM","SARWAR ALAM",33,"M","NON VEG","C18 / 8","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949803856","ABU NOMAN KHAN","ABU NOMAN KHAN",35,"M","NON VEG","C18 / 9","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949803856","ROOMAN ALAM","ROOMAN ALAM",29,"M","NON VEG","C18 / 41","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6609698876","SHAGUFTA","SHAGUFTA",50,"F","NON VEG","C18 / 26","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6609698876","SHAZI","SHAZI",44,"M","NON VEG","C18 / 27","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6609698876","KASHIF ASHIQUI","KASHIF ASHIQUI",22,"M","NON VEG","C18 / 28","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6609698876","MANIR HUDA","MANIR HUDA",58,"M","NON VEG","C18 / 29","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6609698876","MAZHAR HUSSAIN","MAZHAR HUSSAIN",58,"M","NON VEG","C18 / 36","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6609698876","SARTAJ ALAM","SARTAJ ALAM",62,"M","NON VEG","C18 / 37","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109700606","MASOOD RAGHIB","MASOOD RAGHIB",27,"M","VEG","C3 / 24","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109700606","ABHISHEK GUPTA","ABHISHEK GUPTA",29,"M","NON VEG","C3 / 21","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109700606","MD KAMIL","MD KAMIL",29,"M","NON VEG","C3 / 22","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109700606","MD SERAJ","MD SERAJ",31,"M","NON VEG","C3 / 23","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109700606","ZIA ASHRAF","ZIA ASHRAF",52,"M","NON VEG","C3 / 25","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109700606","AQIL AHMED","AQIL AHMED",58,"M","NON VEG","C3 / 26","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109696037","ASIF ALAM","ASIF ALAM",29,"M","NON VEG","C18 / 30","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109696037","TANWEER ASHRAF","TANWEER ASHRAF",61,"M","NON VEG","C18 / 31","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109696037","SALHADDIN","SALHADDIN",61,"M","NON VEG","C18 / 32","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109696037","MUMTAZ","MUMTAZ",63,"M","NON VEG","C18 / 33","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109696037","MINHAJUL ABEEDEN","MINHAJUL ABEEDEN",38,"M","NON VEG","C18 / 34","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109696037","TABREZ HAYAT","TABREZ HAYAT",52,"M","NON VEG","C18 / 35","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6209695880","NAJMUL HUDA","NAJMUL HUDA",61,"M","NON VEG","C18 / 20","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6209695880","TAAZEEM NAJMI","TAAZEEM NAJMI",22,"M","NON VEG","C18 / 21","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6209695880","RAGHIB NAJMI","RAGHIB NAJMI",26,"M","NON VEG","C18 / 22","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6209695880","AMIN HUDA","AMIN HUDA",55,"M","NON VEG","C18 / 23","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6209695880","AZIZ HUDA","AZIZ HUDA",55,"M","NON VEG","C18 / 24","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6209695880","PARWEZ ALAM","PARWEZ ALAM",65,"M","NON VEG","C18 / 25","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6509695742","QAISER MAM","QAISER MAM",63,"M","VEG","C1 / 11","NO CHOICE","PATNA JN (PNBE)","15-Nov-2026","08:00","14:35","22348 / VANDE BHARAT EXP"],
+  ["6509695742","NASIM PERWAZ","NASIM PERWAZ",62,"M","VEG","C1 / 12","AISLE","PATNA JN (PNBE)","15-Nov-2026","08:00","14:35","22348 / VANDE BHARAT EXP"],
+  ["6509695742","SOEB RAJA","SOEB RAJA",60,"M","VEG","C1 / 10","WINDOW SIDE","PATNA JN (PNBE)","15-Nov-2026","08:00","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949802710","TABISH HAYAT","TABISH HAYAT",44,"M","NON VEG","C18 / 10","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949802710","ZAINUL ABADEEN","ZAINUL ABADEEN",42,"M","NON VEG","C18 / 11","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949802710","ISRAR RAFIQUE","ISRAR RAFIQUE",56,"M","NON VEG","C18 / 12","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949802710","SHAKIL AHMED","SHAKIL AHMED",65,"M","NON VEG","C18 / 13","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949802710","SHAHEENA","SHAHEENA",58,"F","NON VEG","C18 / 14","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949802710","REHANA BEGUM","REHANA BEGUM",54,"F","NON VEG","C18 / 15","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109705267","SHAHWAZ ANIS","SHAHWAZ ANIS",45,"M","VEG","C3 / 50","WINDOW SIDE","ASANSOL JN (ASN)","15-Nov-2026","11:58","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109705267","SAJIDUL HUDA","SAJIDUL HUDA",46,"M","VEG","C3 / 51","NO CHOICE","ASANSOL JN (ASN)","15-Nov-2026","11:58","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109705267","ANWARUL HAQUE","ANWARUL HAQUE",45,"M","VEG","C3 / 52","NO CHOICE","ASANSOL JN (ASN)","15-Nov-2026","11:58","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109705267","FAHIMUL HUDA","FAHIMUL HUDA",42,"M","NON VEG","C3 / 53","NO CHOICE","ASANSOL JN (ASN)","15-Nov-2026","11:58","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109705267","IMRANUL HUDA","IMRANUL HUDA",41,"M","NON VEG","C3 / 54","WINDOW SIDE","ASANSOL JN (ASN)","15-Nov-2026","11:58","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109705267","SAJJADUL ARFAN","SAJJADUL ARFAN",40,"M","VEG","C3 / 55","WINDOW SIDE","ASANSOL JN (ASN)","15-Nov-2026","11:58","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949825032","FAIZAN AHMED","FAIZAN AHMED",28,"M","NON VEG","C18 / 19","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6949825032","FAISAL SHAKEEL","FAISAL SHAKEEL",32,"M","NON VEG","C18 / 18","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"]
+].map(r => ({
+  pnr:r[0], ticket:r[1], final:r[2], age:r[3], gender:r[4], meal:r[5],
+  coachSeat:r[6], pref:r[7], from:r[8], date:r[9], dep:r[10], arr:r[11], train:r[12],
+  coach: r[6].split(" / ")[0], seat: Number(r[6].split(" / ")[1]),
+  code: r[8].includes("PNBE") ? "PNBE" : r[8].includes("ASN") ? "ASN" : "LKR",
+  st: r[8].includes("PNBE") ? "PNBE" : r[8].includes("ASN") ? "ASN" : "LKR"
+}));
+
+function rows() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const from = document.getElementById("from").value;
+  const coach = document.getElementById("coach").value;
+  const meal = document.getElementById("meal").value;
+  const gender = document.getElementById("gender").value;
+  const sort = document.getElementById("sort").value;
+  let out = ROWS.filter(r => {
+    const hay = [r.pnr, r.ticket, r.final, r.coachSeat, r.pref, r.from].join(" ").toLowerCase();
+    return (!q || hay.includes(q))
+      && (from === "all" || r.code === from)
+      && (coach === "all" || r.coach === coach)
+      && (meal === "all" || r.meal === meal)
+      && (gender === "all" || r.gender === gender);
+  });
+  const cmp = {
+    seat: (a,b) => a.coach.localeCompare(b.coach, undefined, {numeric:true}) || a.seat - b.seat,
+    name: (a,b) => a.ticket.localeCompare(b.ticket),
+    pnr: (a,b) => a.pnr.localeCompare(b.pnr) || a.seat - b.seat,
+    from: (a,b) => a.dep.localeCompare(b.dep) || a.coach.localeCompare(b.coach) || a.seat - b.seat,
+    age: (a,b) => a.age - b.age,
+    meal: (a,b) => a.meal.localeCompare(b.meal) || a.ticket.localeCompare(b.ticket)
+  };
+  return out.sort(cmp[sort] || cmp.seat);
+}
+
+function render() {
+  const data = rows();
+  const pnrs = new Set(data.map(r => r.pnr));
+  document.getElementById("shown").textContent = data.length;
+  document.getElementById("total").textContent = ROWS.length;
+  document.getElementById("pnrShown").textContent = pnrs.size + " PNRs";
+  document.getElementById("cLKR").textContent = data.filter(r => r.code === "LKR").length;
+  document.getElementById("cPNBE").textContent = data.filter(r => r.code === "PNBE").length;
+  document.getElementById("cASN").textContent = data.filter(r => r.code === "ASN").length;
+  document.getElementById("empty").hidden = data.length > 0;
+  document.getElementById("list").innerHTML = data.map(r => `
+    <article class="ticket">
+      <div class="t-top">
+        <span>Electronic Reservation Slip</span>
+        <span class="cnf">CNF</span>
+      </div>
+      <div class="t-body">
+        <div class="route">
+          <div>
+            <div class="st">From · ${r.date}</div>
+            <b>${r.st}</b>
+            <div class="time">${r.dep}</div>
+          </div>
+          <div class="mid">→</div>
+          <div style="text-align:right">
+            <div class="st">To · Howrah</div>
+            <b>HWH</b>
+            <div class="time">${r.arr}</div>
+          </div>
+        </div>
+        <div class="who">
+          <div>
+            <h3>${r.ticket}</h3>
+            <p class="final">Final list name: ${r.final}</p>
+          </div>
+          <div class="badge"><b>${r.coach}-${r.seat}</b><span>${r.pref}</span></div>
+        </div>
+        <div class="facts">
+          <div><label>PNR</label><b>${r.pnr}</b></div>
+          <div><label>Age / Gender</label><b>${r.age} / ${r.gender === "F" ? "Female" : "Male"}</b></div>
+          <div><label>Meal</label><b class="${r.meal === "VEG" ? "meal-v" : "meal-n"}">${r.meal}</b></div>
+          <div><label>Coach / Seat</label><b>${r.coachSeat}</b></div>
+          <div><label>Class</label><b>Chair Car (CC)</b></div>
+          <div><label>Train</label><b>22348 VB</b></div>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+["q","sort","from","coach","meal","gender"].forEach(id => {
+  document.getElementById(id).addEventListener("input", render);
+  document.getElementById(id).addEventListener("change", render);
+});
+render();
+</script>
+</body>
+</html>
