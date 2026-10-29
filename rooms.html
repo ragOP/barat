@@ -163,7 +163,7 @@
 <body>
 <div class="no-print">
   <h1>Noor weds Raghib</h1>
-  <p>25 rooms, numbered 504→500 then 405→401, 305→301, 205→201, 105→101. 51 guests, one triple in 102. Print as door plates (2 per A4).</p>
+  <p>5th floor confirmed. 4th floor is 404→400. Remaining guests on 304→300, 204→200, 104→101. Print as door plates (2 per A4).</p>
   <div class="actions">
     <button type="button" onclick="window.print()">Print door plates</button>
     <a href="/return.html">Return train list</a>
@@ -179,31 +179,30 @@
 <div class="plates" id="plates"></div>
 <script>
 const ROOMS = [
-  { n: "504", why: "The couple", people: ["Raghib Najmi", "Afifa Noor"], bridal: true },
-  { n: "503", why: "As you asked", people: ["Amin Huda", "Shagufta"] },
-  { n: "502", why: "As you asked", people: ["Shakil Ahmed", "Shaheena"] },
-  { n: "501", why: "As you asked", people: ["Aqil Ahmed", "Rehana Begum"] },
-  { n: "500", why: "As you asked", people: ["Taazeem Najmi", "Sayem Kalim"] },
-  { n: "405", why: "Kept together from your first list", people: ["Najmul Huda", "Israr Rafique"] },
-  { n: "404", why: "Similar age, 55 & 52", people: ["Aziz Huda", "Zia Ashraf"] },
-  { n: "403", why: "Elders, both 58, same ticket", people: ["Manir Huda", "Mazhar Hussain"] },
-  { n: "402", why: "Alam seniors, 65 & 62", people: ["Parwez Alam", "Sartaj Alam"] },
-  { n: "401", why: "Same ticket, both 61", people: ["Tanweer Asraf", "Salhaddin"] },
-  { n: "305", why: "Seniors, both 63", people: ["Mumtaz", "Quiser Imam"] },
-  { n: "304", why: "Seniors, both 62", people: ["Md Nasim", "Md Shakeel"] },
-  { n: "303", why: "60 & 52", people: ["Soeb Raza", "Tabrez Hayat"] },
-  { n: "302", why: "Huda brothers, 46 & 41", people: ["Sajidul Huda", "Imranul Huda"] },
-  { n: "301", why: "Same ticket, both 45", people: ["Shahwaz Anis", "Anwar Ul Haque"] },
-  { n: "205", why: "Alam father & son", people: ["Mohd Alam", "Manahil Alam"] },
-  { n: "204", why: "Both 44", people: ["Shazi", "Tabish Hayat"] },
-  { n: "203", why: "Same ticket, 42 & 40", people: ["Fahim Huda", "Sajiadul Arfan"] },
-  { n: "202", why: "Abeden family, 42 & 38", people: ["Zainul Abadeen", "Minhajul Abeden"] },
-  { n: "201", why: "Same ticket, 36 & 35", people: ["Modassir Barkat", "Abu Noman Khan"] },
-  { n: "105", why: "Alam brothers, 33 & 29", people: ["Sarwar Alam", "Rooman Alam"] },
-  { n: "104", why: "Shakeel family, 32 & 28", people: ["Faisal Shakeel", "Faizan Ahmed"] },
-  { n: "103", why: "Same ticket, 29 & 31", people: ["Md Kamil", "Md Seraj"] },
-  { n: "102", why: "Young group — only triple", people: ["Ashif Alam", "Masood Raghib", "Abhishek Gupta"] },
-  { n: "101", why: "Young, 29 & 22", people: ["Rahbar Shifat", "Kashif Ashiqui"] }
+  { n: "504", why: "Confirmed", people: ["Raghib Najmi", "Afifa Noor"], bridal: true },
+  { n: "503", why: "Confirmed", people: ["Amin Huda", "Shagufta"] },
+  { n: "502", why: "Confirmed", people: ["Shakil Ahmed", "Shaheena"] },
+  { n: "501", why: "Confirmed", people: ["Aqil Ahmed", "Rehana Begum"] },
+  { n: "500", why: "Confirmed", people: ["Taazeem Najmi", "Sayem Kalim"] },
+  { n: "404", why: "As you asked", people: ["Modassir Barkat", "Sarwar Alam", "Md Seraj"] },
+  { n: "403", why: "As you asked", people: ["Rooman Alam", "Rahbar Shifat", "Abhishek Gupta"] },
+  { n: "402", why: "As you asked", people: ["Md Kamil", "Abu Noman Khan"] },
+  { n: "401", why: "As you asked", people: ["Masood Raghib", "Ashif Alam"] },
+  { n: "400", why: "As you asked", people: ["Kashif Ashiqui", "Shazi"] },
+  { n: "304", why: "Kept together from your first list", people: ["Najmul Huda", "Israr Rafique"] },
+  { n: "303", why: "Similar age, 55 & 52", people: ["Aziz Huda", "Zia Ashraf"] },
+  { n: "302", why: "Elders, both 58, same ticket", people: ["Manir Huda", "Mazhar Hussain"] },
+  { n: "301", why: "Alam seniors, 65 & 62", people: ["Parwez Alam", "Sartaj Alam"] },
+  { n: "300", why: "Same ticket, both 61", people: ["Tanweer Asraf", "Salhaddin"] },
+  { n: "204", why: "Seniors, both 63", people: ["Mumtaz", "Quiser Imam"] },
+  { n: "203", why: "Seniors, both 62", people: ["Md Nasim", "Md Shakeel"] },
+  { n: "202", why: "60 & 52", people: ["Soeb Raza", "Tabrez Hayat"] },
+  { n: "201", why: "Huda brothers, 46 & 41", people: ["Sajidul Huda", "Imranul Huda"] },
+  { n: "200", why: "Same ticket, both 45", people: ["Shahwaz Anis", "Anwar Ul Haque"] },
+  { n: "104", why: "Alam father & son", people: ["Mohd Alam", "Manahil Alam"] },
+  { n: "103", why: "Ages 44, 42, 40", people: ["Tabish Hayat", "Fahim Huda", "Sajiadul Arfan"] },
+  { n: "102", why: "Abeden family, 42 & 38", people: ["Zainul Abadeen", "Minhajul Abeden"] },
+  { n: "101", why: "Shakeel family, 32 & 28", people: ["Faisal Shakeel", "Faizan Ahmed"] }
 ];
 
 const corner = `
