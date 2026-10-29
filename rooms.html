@@ -20,12 +20,12 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #efe4d2; color: var(--ink); }
   body { font-family: "Cormorant Garamond", Georgia, serif; }
-  .no-print { padding: 22px 18px 10px; max-width: 980px; margin: 0 auto; }
+  .no-print { padding: 22px 18px 10px; max-width: 1180px; margin: 0 auto; }
   .no-print h1 {
     font-family: Cinzel, serif; font-size: 22px; letter-spacing: .12em;
     text-transform: uppercase; margin: 0 0 6px;
   }
-  .no-print p { margin: 0 0 12px; color: var(--muted); font-size: 17px; }
+  .no-print > p { margin: 0 0 12px; color: var(--muted); font-size: 17px; }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 18px; }
   .actions a, .actions button {
     appearance: none; border: 0; cursor: pointer; text-decoration: none;
@@ -34,23 +34,25 @@
     padding: 11px 16px; border-radius: 999px;
   }
   .actions a { background: transparent; color: var(--wine); border: 1.5px solid var(--wine); }
+
   .hotel {
     margin: 8px 0 28px;
-    border: 2px solid var(--wine);
-    border-radius: 22px;
+    border: 2.5px solid var(--wine);
+    border-radius: 24px;
     overflow: hidden;
-    background: #fffaf2;
-    box-shadow: 0 16px 40px rgba(74,16,27,.1);
+    background: #3a1a14;
+    box-shadow: 0 18px 50px rgba(74,16,27,.18);
   }
-  .floor + .floor { border-top: 2px solid var(--wine); }
+  .floor { padding: 0 0 12px; background: linear-gradient(#4a2018, #32140f); }
+  .floor + .floor { border-top: 3px solid #c4a056; }
   .floor-head {
     display: flex; align-items: center; gap: 14px;
-    background: var(--wine2); color: #f8e7c4;
-    padding: 12px 16px;
+    background: linear-gradient(90deg, #2a1010, #6b1c2a);
+    color: #f8e7c4; padding: 12px 16px;
   }
   .floor-num {
-    font-family: Cinzel, serif; font-size: 40px; line-height: .9; font-weight: 700;
-    min-width: 52px;
+    font-family: Cinzel, serif; font-size: 42px; line-height: .9; font-weight: 700;
+    min-width: 52px; color: var(--gold2);
   }
   .floor-head h2 {
     margin: 0; font-family: Cinzel, serif; font-size: 15px;
@@ -60,124 +62,140 @@
   .floor-head .lock {
     margin-left: auto; font-family: Cinzel, serif; font-size: 11px;
     letter-spacing: .08em; text-transform: uppercase;
-    background: rgba(255,255,255,.1); border-radius: 999px; padding: 7px 10px;
-    white-space: nowrap;
+    background: #157347; color: #fff; border-radius: 999px; padding: 7px 10px;
   }
-  .floor-head .lock.full { background: #157347; color: #fff; }
-  .room-row {
+  .corridor {
     display: grid;
-    grid-template-columns: 36px 72px 1fr auto;
-    gap: 8px; align-items: center;
-    padding: 11px 14px;
-    border-top: 1px solid #ead9c4;
+    grid-template-columns: 1.22fr 1.08fr 1fr .92fr .84fr;
+    gap: 8px; padding: 12px 12px 6px; align-items: end;
   }
-  .room-row.ok { background: #f3faf4; }
-  .room-row.draft { background: #fffaf2; }
-  .tick svg { width: 22px; height: 22px; display: block; }
-  .tick .done { color: #157347; }
-  .tick .wait { color: #d0bfa8; }
-  .room-no { font-family: Cinzel, serif; font-weight: 700; font-size: 20px; color: var(--wine); }
-  .guests-line { font-size: 18px; line-height: 1.25; }
-  .pill {
-    font-family: Cinzel, serif; font-size: 10px; letter-spacing: .08em;
-    text-transform: uppercase; border-radius: 999px; padding: 5px 9px;
+  .door {
+    position: relative; text-align: center;
+    border-radius: 14px 14px 6px 6px;
+    padding: 12px 8px 10px;
+    min-height: 132px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.18), 0 8px 16px rgba(0,0,0,.18);
   }
-  .pill.ok { background: #157347; color: #fff; }
-  .pill.draft { background: #f0e2d0; color: var(--muted); }
-  .floor-banner {
-    font-family: Cinzel, serif; letter-spacing: .14em; text-transform: uppercase;
-    background: var(--wine2); color: #f8e7c4; text-align: center;
-    padding: 12px; border-radius: 14px; margin: 8px 0 4px;
+  .door .badge { font-family: Cinzel, serif; letter-spacing: .12em; text-transform: uppercase; }
+  .door .no { font-family: Cinzel, serif; font-weight: 700; line-height: 1; }
+  .door .who { margin: 6px 0 0; font-size: 14px; line-height: 1.2; }
+  .door .tag {
+    margin-top: auto; padding-top: 8px;
+    font-family: Cinzel, serif; font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
   }
-  @media (max-width: 720px) {
-    .room-row { grid-template-columns: 28px 64px 1fr; }
-    .pill { display: none; }
-    .floor-num { font-size: 32px; }
+  .crown { width: 28px; height: 20px; margin-bottom: 4px; color: #e8c96a; }
+  .r04 {
+    min-height: 188px; background: linear-gradient(180deg, #f7e7c4, #e4c98a);
+    color: #4a101b; border: 3px solid #f3d58a;
+    transform: translateY(-6px);
   }
+  .r04 .no { font-size: 30px; }
+  .r04 .tag { color: #7a2e16; }
+  .r03 {
+    min-height: 168px; background: linear-gradient(180deg, #f6ead8, #e8d3b4);
+    color: #4a101b; border: 2px solid #d7b57a;
+  }
+  .r03 .no { font-size: 26px; }
+  .r02 {
+    min-height: 152px; background: linear-gradient(180deg, #efe0cc, #ddc4a4);
+    color: #4a101b; border: 1.5px solid #c9a87a;
+  }
+  .r02 .no { font-size: 23px; }
+  .r01 {
+    min-height: 140px; background: linear-gradient(180deg, #e8d5c0, #d2b79a);
+    color: #4a101b; border: 1px solid #b99470;
+  }
+  .r01 .no { font-size: 21px; }
+  .r00 {
+    min-height: 128px; background: linear-gradient(180deg, #dec9b2, #c7ad93);
+    color: #4a101b; border: 1px solid #a88868; opacity: .96;
+  }
+  .r00 .no { font-size: 19px; }
+  .door.couple {
+    background: linear-gradient(180deg, #fff6dc, #f0c96a 55%, #d4a017);
+    border: 3px solid #ffe9a3;
+    box-shadow: 0 0 0 2px #6b1c2a, 0 12px 24px rgba(212,160,23,.45);
+    color: #4a101b;
+  }
+  .door.couple .tag { color: #6b1c2a; font-weight: 700; }
+  .door.king {
+    background: linear-gradient(180deg, #3a1418, #6b1c2a 40%, #c4a056);
+    color: #f8e7c4; border: 3px solid #e8c96a;
+    box-shadow: 0 0 0 2px #2a1010, 0 12px 24px rgba(232,201,106,.35);
+  }
+  .door.king .no { color: #ffe9a3; }
+  .door.king .tag { color: #ffe9a3; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 0 0 12px;
+    font-size: 14px; color: var(--muted);
+  }
+  .legend b { color: var(--wine); }
 
-  .plates {
-    display: grid; gap: 18px; padding: 10px 12px 40px;
-    max-width: 920px; margin: 0 auto;
-  }
+  .plates { display: grid; gap: 18px; padding: 10px 12px 40px; max-width: 920px; margin: 0 auto; }
   .plate {
-    background: var(--ivory);
-    aspect-ratio: 1.48 / 1;
-    padding: 10px;
-    box-shadow: 0 10px 30px rgba(74,16,27,.12);
-    position: relative;
+    background: var(--ivory); aspect-ratio: 1.48 / 1; padding: 10px;
+    box-shadow: 0 10px 30px rgba(74,16,27,.12); position: relative;
   }
   .plate.bridal { background: linear-gradient(180deg, #fbf6ea, #f3e2c4); }
-  .frame {
-    height: 100%;
-    border: 2.5px solid var(--wine);
-    padding: 7px;
-  }
+  .plate.king { background: linear-gradient(180deg, #f7ecd4, #e8c96a 120%); }
+  .plate.r04:not(.bridal):not(.king) { background: linear-gradient(180deg, #fbf6ea, #eed9b0); }
+  .frame { height: 100%; border: 2.5px solid var(--wine); padding: 7px; }
+  .plate.king .frame { border-color: #c4a056; }
   .frame2 {
-    height: 100%;
-    border: 1.5px solid var(--gold);
-    position: relative;
-    overflow: hidden;
+    height: 100%; border: 1.5px solid var(--gold); position: relative; overflow: hidden;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     text-align: center; padding: 18px 20px 16px;
-    background:
-      radial-gradient(circle at 50% 0%, rgba(196,160,86,.18), transparent 42%),
-      linear-gradient(#fbf3e4, #f7ead3);
+    background: radial-gradient(circle at 50% 0%, rgba(196,160,86,.18), transparent 42%), linear-gradient(#fbf3e4, #f7ead3);
   }
-  .orn {
-    position: absolute; width: 54px; height: 54px; color: var(--gold); opacity: .9;
+  .plate.king .frame2 {
+    background: radial-gradient(circle at 50% 0%, rgba(232,201,106,.35), transparent 46%), linear-gradient(#3a1418, #6b1c2a);
+    color: #f8e7c4; border-color: #e8c96a;
   }
+  .orn { position: absolute; width: 54px; height: 54px; color: var(--gold); opacity: .9; }
   .orn.tl { top: 6px; left: 6px; }
   .orn.tr { top: 6px; right: 6px; transform: scaleX(-1); }
   .orn.bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
   .orn.br { bottom: 6px; right: 6px; transform: scale(-1); }
   .kicker {
     font-family: Cinzel, serif; font-size: clamp(11px, 2.1vw, 15px);
-    letter-spacing: .28em; text-transform: uppercase; color: var(--wine);
-    margin: 0;
+    letter-spacing: .28em; text-transform: uppercase; color: var(--wine); margin: 0;
   }
+  .plate.king .kicker { color: #ffe9a3; }
   .kicker em {
     font-family: "Great Vibes", cursive; font-style: normal; font-size: 1.7em;
-    letter-spacing: 0; text-transform: none; color: var(--gold);
-    padding: 0 8px;
+    letter-spacing: 0; text-transform: none; color: var(--gold); padding: 0 8px;
   }
   .date {
     margin: 4px 0 0; font-size: clamp(12px, 2vw, 15px); letter-spacing: .22em;
     text-transform: uppercase; color: var(--muted);
   }
-  .rule {
-    width: 120px; height: 1px; background: var(--gold); margin: 12px auto 10px;
-    position: relative;
-  }
+  .plate.king .date { color: #e8d5a3; }
+  .rule { width: 120px; height: 1px; background: var(--gold); margin: 12px auto 10px; position: relative; }
   .rule:before, .rule:after {
     content: ""; position: absolute; top: -3px; width: 7px; height: 7px;
     border: 1px solid var(--gold); transform: rotate(45deg); background: var(--ivory);
   }
+  .plate.king .rule:before, .plate.king .rule:after { background: #6b1c2a; }
   .rule:before { left: -8px; }
   .rule:after { right: -8px; }
   .seal {
-    width: 92px; height: 92px; border-radius: 50%;
-    border: 2px solid var(--gold);
+    width: 92px; height: 92px; border-radius: 50%; border: 2px solid var(--gold);
     box-shadow: inset 0 0 0 5px var(--wine), 0 0 0 1px var(--gold2);
     background: var(--wine2); color: #f8e7c4;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     margin: 4px auto 12px;
   }
-  .plate.bridal .seal {
-    background: #7a1f32;
-    box-shadow: inset 0 0 0 5px #7a1f32, 0 0 0 1px var(--gold2);
+  .plate.bridal .seal { background: #7a1f32; box-shadow: inset 0 0 0 5px #7a1f32, 0 0 0 1px var(--gold2); }
+  .plate.king .seal {
+    background: #e8c96a; color: #4a101b;
+    box-shadow: inset 0 0 0 5px #c4a056, 0 0 0 1px #fff3c4;
   }
-  .seal span {
-    font-family: Cinzel, serif; font-size: 9px; letter-spacing: .22em;
-    text-transform: uppercase; opacity: .8;
-  }
-  .seal strong {
-    font-family: Cinzel, serif; font-size: 28px; line-height: 1; font-weight: 700;
-  }
+  .seal span { font-family: Cinzel, serif; font-size: 9px; letter-spacing: .22em; text-transform: uppercase; opacity: .8; }
+  .seal strong { font-family: Cinzel, serif; font-size: 28px; line-height: 1; font-weight: 700; }
   .guests { list-style: none; margin: 0; padding: 0; }
-  .guests li {
-    font-size: clamp(22px, 3.4vw, 34px); font-weight: 600; line-height: 1.15;
-    color: var(--wine2);
-  }
+  .guests li { font-size: clamp(22px, 3.4vw, 34px); font-weight: 600; line-height: 1.15; color: var(--wine2); }
+  .plate.king .guests li { color: #ffe9a3; }
   .guests li + li { margin-top: 4px; }
   .guests.triple li { font-size: clamp(18px, 2.8vw, 28px); }
   .guests li.amp {
@@ -189,7 +207,23 @@
     letter-spacing: .26em; text-transform: uppercase; color: var(--muted);
   }
   .plate.bridal .foot { color: var(--wine); }
+  .plate.king .foot { color: #ffe9a3; }
+  .plate-crown { width: 54px; height: 36px; margin-bottom: 4px; color: #e8c96a; }
+  .floor-banner {
+    font-family: Cinzel, serif; letter-spacing: .14em; text-transform: uppercase;
+    background: var(--wine2); color: #f8e7c4; text-align: center;
+    padding: 12px; border-radius: 14px; margin: 8px 0 4px;
+  }
 
+  @media (max-width: 860px) {
+    .corridor { grid-template-columns: 1fr; align-items: stretch; }
+    .door, .r04, .r03, .r02, .r01, .r00 { min-height: 0; transform: none; padding: 12px; }
+    .door { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; text-align: left; border-radius: 12px; }
+    .door .no { font-size: 24px !important; }
+    .door .who { margin: 0; font-size: 16px; }
+    .door .tag { padding: 0; }
+    .crown { margin: 0; }
+  }
   @media print {
     @page { size: A4 portrait; margin: 9mm; }
     .no-print { display: none !important; }
@@ -198,8 +232,7 @@
     .floor-banner { display: none !important; }
     .plate {
       width: 192mm; height: 132mm; margin: 0 auto 8mm;
-      box-shadow: none; break-inside: avoid; page-break-inside: avoid;
-      aspect-ratio: auto;
+      box-shadow: none; break-inside: avoid; page-break-inside: avoid; aspect-ratio: auto;
     }
     .plate:nth-of-type(even) { margin-bottom: 0; }
     .kicker { font-size: 15px; }
@@ -216,7 +249,8 @@
 <body>
 <div class="no-print">
   <h1>Noor weds Raghib</h1>
-  <p>Rooms are grouped floor by floor, 5th at the top. Green check = confirmed.</p>
+  <p>Each floor is a hotel corridor. Best room is always <b>x04</b> (like 504), then 03, 02, 01, 00.</p>
+  <p class="legend"><b>Gold tall door</b> = best on that floor · <b>Couple suite</b> = 504 · <b>King</b> = Najmul Huda, 104</p>
   <div class="actions">
     <button type="button" onclick="window.print()">Print door plates</button>
     <a href="/return.html">Return train list</a>
@@ -227,31 +261,31 @@
 <div class="plates" id="plates"></div>
 <script>
 const ROOMS = [
-  { n: "504", ok: true, why: "Confirmed", people: ["Raghib Najmi", "Afifa Noor"], bridal: true },
-  { n: "503", ok: true, why: "Confirmed", people: ["Amin Huda", "Shagufta"] },
-  { n: "502", ok: true, why: "Confirmed", people: ["Shakil Ahmed", "Shaheena"] },
-  { n: "501", ok: true, why: "Confirmed", people: ["Aqil Ahmed", "Rehana Begum"] },
-  { n: "500", ok: true, why: "Confirmed", people: ["Taazeem Najmi", "Sayem Kalim"] },
-  { n: "404", ok: true, why: "Confirmed", people: ["Modassir Barkat", "Sarwar Alam", "Md Seraj"] },
-  { n: "403", ok: true, why: "Confirmed", people: ["Rooman Alam", "Rahbar Shifat", "Abhishek Gupta"] },
-  { n: "402", ok: true, why: "Confirmed", people: ["Md Kamil", "Abu Noman Khan"] },
-  { n: "401", ok: true, why: "Confirmed", people: ["Masood Raghib", "Ashif Alam"] },
-  { n: "400", ok: true, why: "Confirmed", people: ["Kashif Ashiqui", "Shazi"] },
-  { n: "304", why: "Draft", people: ["Faisal Shakeel", "Faizan Ahmed"] },
-  { n: "303", why: "Draft", people: ["Aziz Huda", "Salhaddin"] },
-  { n: "302", why: "Draft", people: ["Parwez Alam", "Quiser Imam"] },
-  { n: "301", why: "Draft", people: ["Md Nasim", "Soeb Raza"] },
-  { n: "300", why: "Draft", people: ["Zainul Abadeen", "Tabish Hayat"] },
-  { n: "204", ok: true, why: "Confirmed", people: ["Tabrez Hayat", "Minhajul Abeden"] },
-  { n: "203", why: "Draft", people: ["Sajidul Huda", "Imranul Huda"] },
-  { n: "202", ok: true, why: "Confirmed", people: ["Shahwaz Anis", "Anwar Ul Haque"] },
-  { n: "201", ok: true, why: "Confirmed", people: ["Mohd Alam", "Manahil Alam"] },
-  { n: "200", ok: true, why: "Confirmed", people: ["Fahim Huda", "Sajiadul Arfan"] },
-  { n: "104", ok: true, why: "Confirmed", people: ["Najmul Huda", "Israr Rafique"] },
-  { n: "103", ok: true, why: "Confirmed", people: ["Mumtaz", "Sartaj Alam"] },
-  { n: "102", ok: true, why: "Confirmed", people: ["Owais", "Zia Ashraf"] },
-  { n: "101", ok: true, why: "Confirmed", people: ["Md Shakeel (Sukhi)", "Tanweer Asraf"] },
-  { n: "100", ok: true, why: "Confirmed", people: ["Manir Huda", "Mazhar Hussain"] }
+  { n: "504", ok: true, people: ["Raghib Najmi", "Afifa Noor"], bridal: true },
+  { n: "503", ok: true, people: ["Amin Huda", "Shagufta"] },
+  { n: "502", ok: true, people: ["Shakil Ahmed", "Shaheena"] },
+  { n: "501", ok: true, people: ["Aqil Ahmed", "Rehana Begum"] },
+  { n: "500", ok: true, people: ["Taazeem Najmi", "Sayem Kalim"] },
+  { n: "404", ok: true, people: ["Modassir Barkat", "Sarwar Alam", "Md Seraj"] },
+  { n: "403", ok: true, people: ["Rooman Alam", "Rahbar Shifat", "Abhishek Gupta"] },
+  { n: "402", ok: true, people: ["Md Kamil", "Abu Noman Khan"] },
+  { n: "401", ok: true, people: ["Masood Raghib", "Ashif Alam"] },
+  { n: "400", ok: true, people: ["Kashif Ashiqui", "Shazi"] },
+  { n: "304", ok: true, people: ["Salhaddin", "Quiser Imam"] },
+  { n: "303", ok: true, people: ["Aziz Huda", "Parwez Alam"] },
+  { n: "302", ok: true, people: ["Zainul Abadeen", "Tabish Hayat"] },
+  { n: "301", ok: true, people: ["Md Nasim", "Soeb Raza"] },
+  { n: "300", ok: true, people: ["Faisal Shakeel", "Faizan Ahmed"] },
+  { n: "204", ok: true, people: ["Tabrez Hayat", "Minhajul Abeden"] },
+  { n: "203", ok: true, people: ["Sajidul Huda", "Imranul Huda"] },
+  { n: "202", ok: true, people: ["Shahwaz Anis", "Anwar Ul Haque"] },
+  { n: "201", ok: true, people: ["Mohd Alam", "Manahil Alam"] },
+  { n: "200", ok: true, people: ["Fahim Huda", "Sajiadul Arfan"] },
+  { n: "104", ok: true, people: ["Najmul Huda", "Israr Rafique"], king: true },
+  { n: "103", ok: true, people: ["Mumtaz", "Sartaj Alam"] },
+  { n: "102", ok: true, people: ["Owais", "Zia Ashraf"] },
+  { n: "101", ok: true, people: ["Md Shakeel (Sukhi)", "Tanweer Asraf"] },
+  { n: "100", ok: true, people: ["Manir Huda", "Mazhar Hussain"] }
 ];
 
 const corner = `
@@ -262,8 +296,8 @@ const corner = `
   <path d="M22 10 C26 18 34 18 38 10" stroke="currentColor" stroke-width="1"/>
 </svg>`;
 
-const done = `<svg class="done" viewBox="0 0 24 24" aria-label="Confirmed"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5 l3 3 6-7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const wait = `<svg class="wait" viewBox="0 0 24 24" aria-label="Draft"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>`;
+const crown = `<svg class="crown" viewBox="0 0 64 40" fill="currentColor" aria-hidden="true"><path d="M6 34h52l-4-18-12 10L32 6 22 26 10 16 6 34z"/><circle cx="10" cy="14" r="3"/><circle cx="32" cy="5" r="3.4"/><circle cx="54" cy="14" r="3"/><rect x="8" y="32" width="48" height="6" rx="1"/></svg>`;
+const plateCrown = crown.replace('class="crown"', 'class="plate-crown"');
 
 const FLOORS = [
   { id: 5, title: "5th floor", ordinal: "5" },
@@ -274,19 +308,29 @@ const FLOORS = [
 ];
 
 function floorOf(n) { return Number(String(n)[0]); }
+function rank(n) { return "r" + String(n).slice(-2); }
+function tag(r) {
+  if (r.bridal) return "The Couple";
+  if (r.king) return "Father of the Groom";
+  if (String(r.n).endsWith("04")) return "Best on floor";
+  return "Baraat Stay";
+}
+function names(people, king) {
+  return people.map(p => {
+    if (king && p === "Najmul Huda") return "♛ " + p;
+    return p;
+  }).join("<br>");
+}
 
 document.getElementById("hotel").innerHTML = FLOORS.map(f => {
   const rooms = ROOMS.filter(r => floorOf(r.n) === f.id);
-  const locked = rooms.filter(r => r.ok).length;
-  const nums = rooms.map(r => r.n);
-  const range = nums[0] + " – " + nums[nums.length - 1];
-  const rows = rooms.map(r => `
-    <div class="room-row ${r.ok ? "ok" : "draft"}">
-      <div class="tick">${r.ok ? done : wait}</div>
-      <div class="room-no">${r.n}</div>
-      <div class="guests-line">${r.people.join(" · ")}</div>
-      <span class="pill ${r.ok ? "ok" : "draft"}">${r.ok ? "Locked" : "Draft"}</span>
-    </div>
+  const doors = rooms.map(r => `
+    <article class="door ${rank(r.n)}${r.bridal ? " couple" : ""}${r.king ? " king" : ""}">
+      ${r.king || r.bridal ? crown : ""}
+      <div class="badge no">${r.n}</div>
+      <div class="who">${names(r.people, r.king)}</div>
+      <div class="tag">${tag(r)}</div>
+    </article>
   `).join("");
   return `
     <section class="floor">
@@ -294,37 +338,39 @@ document.getElementById("hotel").innerHTML = FLOORS.map(f => {
         <div class="floor-num">${f.ordinal}</div>
         <div>
           <h2>${f.title}</h2>
-          <p>Rooms ${range}</p>
+          <p>Best room ${rooms[0].n} → ${rooms[rooms.length - 1].n}</p>
         </div>
-        <div class="lock${locked === rooms.length ? " full" : ""}">${locked} / ${rooms.length} locked</div>
+        <div class="lock">${rooms.length} / ${rooms.length} locked</div>
       </div>
-      ${rows}
+      <div class="corridor">${doors}</div>
     </section>`;
 }).join("");
 
 document.getElementById("plates").innerHTML = FLOORS.map(f => {
   const rooms = ROOMS.filter(r => floorOf(r.n) === f.id);
   const plates = rooms.map(r => {
-    const names = r.people.length === 2
-      ? `<li>${r.people[0]}</li><li class="amp" aria-hidden="true">&amp;</li><li>${r.people[1]}</li>`
+    const lis = r.people.length === 2
+      ? `<li>${r.king ? "♛ " : ""}${r.people[0]}</li><li class="amp" aria-hidden="true">&amp;</li><li>${r.people[1]}</li>`
       : r.people.map(p => `<li>${p}</li>`).join("");
+    const cls = `plate ${rank(r.n)}${r.bridal ? " bridal" : ""}${r.king ? " king" : ""}`;
     return `
-    <article class="plate${r.bridal ? " bridal" : ""}">
+    <article class="${cls}">
       <div class="frame"><div class="frame2">
         ${corner.replace('class="orn"', 'class="orn tl"')}
         ${corner.replace('class="orn"', 'class="orn tr"')}
         ${corner.replace('class="orn"', 'class="orn bl"')}
         ${corner.replace('class="orn"', 'class="orn br"')}
+        ${r.king || r.bridal ? plateCrown : ""}
         <p class="kicker">Noor <em>weds</em> Raghib</p>
         <p class="date">15 November 2026</p>
         <div class="rule"></div>
         <div class="seal"><span>Room</span><strong>${r.n}</strong></div>
-        <ul class="guests${r.people.length > 2 ? " triple" : ""}">${names}</ul>
-        <p class="foot">${r.bridal ? "The Couple" : "Baraat Stay"}</p>
+        <ul class="guests${r.people.length > 2 ? " triple" : ""}">${lis}</ul>
+        <p class="foot">${tag(r)}</p>
       </div></div>
     </article>`;
   }).join("");
-  return `<div class="floor-banner">${f.title} · rooms ${rooms[0].n} – ${rooms[rooms.length - 1].n}</div>${plates}`;
+  return `<div class="floor-banner">${f.title} · best room ${rooms[0].n}</div>${plates}`;
 }).join("");
 </script>
 </body>
