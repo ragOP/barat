@@ -217,12 +217,15 @@
 
   @media (max-width: 860px) {
     .corridor { grid-template-columns: 1fr; align-items: stretch; }
-    .door, .r04, .r03, .r02, .r01, .r00 { min-height: 0; transform: none; padding: 12px; }
-    .door { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; text-align: left; border-radius: 12px; }
-    .door .no { font-size: 24px !important; }
-    .door .who { margin: 0; font-size: 16px; }
-    .door .tag { padding: 0; }
-    .crown { margin: 0; }
+    .door, .r04, .r03, .r02, .r01, .r00 {
+      min-height: 0; transform: none; padding: 12px 14px; border-radius: 12px;
+      display: flex; flex-direction: row; flex-wrap: wrap; align-items: center;
+      justify-content: flex-start; text-align: left; gap: 6px 12px;
+    }
+    .crown { width: 22px; height: 16px; margin: 0; }
+    .door .no { font-size: 22px !important; }
+    .door .who { flex: 1; min-width: 140px; margin: 0; font-size: 16px; }
+    .door .tag { margin: 0 0 0 auto; padding: 0; }
   }
   @media print {
     @page { size: A4 portrait; margin: 9mm; }
