@@ -171,6 +171,37 @@
   .empty { text-align: center; padding: 40px 10px; color: var(--muted); }
   .switch { margin: 0 0 12px; font-size: 13px; }
   .switch a { color: var(--navy); font-weight: 700; }
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    background: var(--navy2);
+    padding: 6px 8px calc(8px + env(safe-area-inset-bottom));
+    box-shadow: 0 -8px 24px rgba(18,40,77,.2);
+  }
+  .tabbar a {
+    color: rgba(255,255,255,.7); text-align: center; text-decoration: none;
+    font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    padding: 11px 6px; border-radius: 12px;
+  }
+  .tabbar a.on { background: rgba(255,255,255,.14); color: #fff; }
+  @media (max-width: 859px) {
+    html { -webkit-text-size-adjust: 100%; }
+    aside { padding: 12px 12px 8px; }
+    main { padding: 12px 12px calc(92px + env(safe-area-inset-bottom)); }
+    .count-box { min-width: 78px; padding: 10px 8px; }
+    .count-box strong { font-size: 28px; }
+    input[type="search"], select { font-size: 16px; height: 42px; }
+    .filters { grid-template-columns: 1fr 1fr; }
+    .board { flex-wrap: wrap; font-size: 12px; padding: 10px 12px; }
+    .board b { font-size: 14px; }
+    .switch { display: none; }
+    .who { align-items: flex-start; }
+    .who h3 { font-size: 16px; word-break: break-word; }
+    .badge { min-width: 76px; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .facts b { word-break: break-word; font-size: 12px; }
+    .t-top { font-size: 10px; }
+  }
   @media (min-width: 860px) {
     .app { grid-template-columns: 280px 1fr; }
     aside {
@@ -187,6 +218,7 @@
     .filters { grid-template-columns: 1fr; }
     .list { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
     main { padding: 18px 22px 50px; }
+    .tabbar { display: none; }
   }
 </style>
 </head>
@@ -257,7 +289,7 @@
     </div>
   </aside>
   <main>
-    <p class="switch">Going (15 Nov) · <a href="/return.html">Return (16 Nov)</a></p>
+    <p class="switch">Going (15 Nov) · <a href="/return">Return (16 Nov)</a> · <a href="/rooms">Rooms</a></p>
     <div class="board">
       <div><small>Train</small><b>22348 VANDE BHARAT EXP</b></div>
       <div style="text-align:right"><small>Date · Class</small><b>15 Nov 2026 · CC</b></div>
@@ -266,6 +298,11 @@
     <div class="empty" id="empty" hidden>No tickets match these filters.</div>
   </main>
 </div>
+<nav class="tabbar" aria-label="Pages">
+  <a class="on" href="/barat">Going</a>
+  <a href="/return">Return</a>
+  <a href="/rooms">Rooms</a>
+</nav>
 <script>
 const ROWS = [
   ["6949803856","MOHD ALAM","MOHD ALAM",45,"M","NON VEG","C18 / 5","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],

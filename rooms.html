@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Noor weds Raghib — Room door plates</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +34,19 @@
     padding: 11px 16px; border-radius: 999px;
   }
   .actions a { background: transparent; color: var(--wine); border: 1.5px solid var(--wine); }
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    background: var(--wine2);
+    padding: 6px 8px calc(8px + env(safe-area-inset-bottom));
+    box-shadow: 0 -8px 24px rgba(74,16,27,.22);
+  }
+  .tabbar a {
+    color: rgba(248,231,196,.7); text-align: center; text-decoration: none;
+    font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    padding: 11px 6px; border-radius: 12px; font-family: Cinzel, serif;
+  }
+  .tabbar a.on { background: rgba(255,255,255,.12); color: #fff; }
 
   .hotel {
     margin: 8px 0 28px;
@@ -216,20 +229,35 @@
   }
 
   @media (max-width: 860px) {
-    .corridor { grid-template-columns: 1fr; align-items: stretch; }
+    html { -webkit-text-size-adjust: 100%; }
+    .no-print { padding: 14px 12px calc(92px + env(safe-area-inset-bottom)); }
+    .no-print h1 { font-size: 16px; }
+    .actions button, .actions a { width: 100%; text-align: center; }
+    .floor-num { font-size: 28px; min-width: 34px; }
+    .floor-head { gap: 10px; padding: 10px 12px; }
+    .floor-head h2 { font-size: 13px; }
+    .floor-head p { font-size: 12px; }
+    .floor-head .lock { font-size: 9px; padding: 5px 8px; }
+    .corridor { grid-template-columns: 1fr; align-items: stretch; padding: 10px; }
     .door, .r04, .r03, .r02, .r01, .r00 {
-      min-height: 0; transform: none; padding: 12px 14px; border-radius: 12px;
+      min-height: 0; transform: none; padding: 10px 12px; border-radius: 12px;
       display: flex; flex-direction: row; flex-wrap: wrap; align-items: center;
-      justify-content: flex-start; text-align: left; gap: 6px 12px;
+      justify-content: flex-start; text-align: left; gap: 4px 10px;
     }
-    .crown { width: 22px; height: 16px; margin: 0; }
-    .door .no { font-size: 22px !important; }
-    .door .who { flex: 1; min-width: 140px; margin: 0; font-size: 16px; }
-    .door .tag { margin: 0 0 0 auto; padding: 0; }
+    .crown { width: 20px; height: 14px; margin: 0; }
+    .door .no { font-size: 20px !important; }
+    .door .who { flex: 1; min-width: 0; margin: 0; font-size: 15px; }
+    .door .tag { flex-basis: 100%; margin: 2px 0 0; padding: 0; text-align: left; font-size: 8px; }
+    .plates { padding: 8px 12px calc(92px + env(safe-area-inset-bottom)); }
+    .plate { aspect-ratio: 1.15 / 1; }
+    .guests li { font-size: 20px; }
+  }
+  @media (min-width: 861px) {
+    .tabbar { display: none; }
   }
   @media print {
     @page { size: A4 portrait; margin: 9mm; }
-    .no-print { display: none !important; }
+    .no-print, .tabbar { display: none !important; }
     body { background: #fff; }
     .plates { display: block; padding: 0; max-width: none; }
     .floor-banner { display: none !important; }
@@ -256,8 +284,8 @@
   <p class="legend"><b>Gold tall door</b> = best on that floor · <b>Couple suite</b> = 504 · <b>King</b> = Najmul Huda, 104</p>
   <div class="actions">
     <button type="button" onclick="window.print()">Print door plates</button>
-    <a href="/return.html">Return train list</a>
-    <a href="/barat.html">Going train list</a>
+    <a href="/return">Return train list</a>
+    <a href="/barat">Going train list</a>
   </div>
   <div class="hotel" id="hotel"></div>
 </div>
@@ -376,5 +404,10 @@ document.getElementById("plates").innerHTML = FLOORS.map(f => {
   return `<div class="floor-banner">${f.title} · best room ${rooms[0].n}</div>${plates}`;
 }).join("");
 </script>
+<nav class="tabbar" aria-label="Pages">
+  <a href="/barat">Going</a>
+  <a href="/return">Return</a>
+  <a class="on" href="/rooms">Rooms</a>
+</nav>
 </body>
 </html>
