@@ -34,19 +34,66 @@
     padding: 11px 16px; border-radius: 999px;
   }
   .actions a { background: transparent; color: var(--wine); border: 1.5px solid var(--wine); }
-  table {
-    width: 100%; border-collapse: collapse; background: #fffaf2;
-    font-size: 16px; margin-bottom: 28px;
+  .hotel {
+    margin: 8px 0 28px;
+    border: 2px solid var(--wine);
+    border-radius: 22px;
+    overflow: hidden;
+    background: #fffaf2;
+    box-shadow: 0 16px 40px rgba(74,16,27,.1);
   }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #ead9c4; }
-  th { font-family: Cinzel, serif; font-size: 11px; letter-spacing: .08em; color: var(--wine); }
-  th.tick, td.tick { width: 36px; padding-right: 0; text-align: center; }
-  .room-no { font-family: Cinzel, serif; font-weight: 700; color: var(--wine); }
-  .note { font-size: 14px; color: var(--muted); }
-  tr.ok { background: #f4faf4; }
-  .tick svg { width: 22px; height: 22px; display: block; margin: 0 auto; }
+  .floor + .floor { border-top: 2px solid var(--wine); }
+  .floor-head {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--wine2); color: #f8e7c4;
+    padding: 12px 16px;
+  }
+  .floor-num {
+    font-family: Cinzel, serif; font-size: 40px; line-height: .9; font-weight: 700;
+    min-width: 52px;
+  }
+  .floor-head h2 {
+    margin: 0; font-family: Cinzel, serif; font-size: 15px;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  .floor-head p { margin: 3px 0 0; font-size: 14px; color: var(--gold2); }
+  .floor-head .lock {
+    margin-left: auto; font-family: Cinzel, serif; font-size: 11px;
+    letter-spacing: .08em; text-transform: uppercase;
+    background: rgba(255,255,255,.1); border-radius: 999px; padding: 7px 10px;
+    white-space: nowrap;
+  }
+  .floor-head .lock.full { background: #157347; color: #fff; }
+  .room-row {
+    display: grid;
+    grid-template-columns: 36px 72px 1fr auto;
+    gap: 8px; align-items: center;
+    padding: 11px 14px;
+    border-top: 1px solid #ead9c4;
+  }
+  .room-row.ok { background: #f3faf4; }
+  .room-row.draft { background: #fffaf2; }
+  .tick svg { width: 22px; height: 22px; display: block; }
   .tick .done { color: #157347; }
   .tick .wait { color: #d0bfa8; }
+  .room-no { font-family: Cinzel, serif; font-weight: 700; font-size: 20px; color: var(--wine); }
+  .guests-line { font-size: 18px; line-height: 1.25; }
+  .pill {
+    font-family: Cinzel, serif; font-size: 10px; letter-spacing: .08em;
+    text-transform: uppercase; border-radius: 999px; padding: 5px 9px;
+  }
+  .pill.ok { background: #157347; color: #fff; }
+  .pill.draft { background: #f0e2d0; color: var(--muted); }
+  .floor-banner {
+    font-family: Cinzel, serif; letter-spacing: .14em; text-transform: uppercase;
+    background: var(--wine2); color: #f8e7c4; text-align: center;
+    padding: 12px; border-radius: 14px; margin: 8px 0 4px;
+  }
+  @media (max-width: 640px) {
+    .room-row { grid-template-columns: 28px 58px 1fr; }
+    .pill { grid-column: 2 / -1; justify-self: start; }
+    .floor-num { font-size: 32px; }
+  }
 
   .plates {
     display: grid; gap: 18px; padding: 10px 12px 40px;
@@ -148,12 +195,13 @@
     .no-print { display: none !important; }
     body { background: #fff; }
     .plates { display: block; padding: 0; max-width: none; }
+    .floor-banner { display: none !important; }
     .plate {
       width: 192mm; height: 132mm; margin: 0 auto 8mm;
       box-shadow: none; break-inside: avoid; page-break-inside: avoid;
       aspect-ratio: auto;
     }
-    .plate:nth-child(even) { margin-bottom: 0; }
+    .plate:nth-of-type(even) { margin-bottom: 0; }
     .kicker { font-size: 15px; }
     .date { font-size: 13px; }
     .guests li { font-size: 32px; }
@@ -168,18 +216,13 @@
 <body>
 <div class="no-print">
   <h1>Noor weds Raghib</h1>
-  <p>Green check = you confirmed that room. Print as door plates (2 per A4).</p>
+  <p>Rooms are grouped floor by floor, 5th at the top. Green check = confirmed.</p>
   <div class="actions">
     <button type="button" onclick="window.print()">Print door plates</button>
     <a href="/return.html">Return train list</a>
     <a href="/barat.html">Going train list</a>
   </div>
-  <table>
-    <thead>
-      <tr><th class="tick"></th><th>Room</th><th>Guests</th><th>Why this pair</th></tr>
-    </thead>
-    <tbody id="table"></tbody>
-  </table>
+  <div class="hotel" id="hotel"></div>
 </div>
 <div class="plates" id="plates"></div>
 <script>
@@ -222,34 +265,66 @@ const corner = `
 const done = `<svg class="done" viewBox="0 0 24 24" aria-label="Confirmed"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5 l3 3 6-7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const wait = `<svg class="wait" viewBox="0 0 24 24" aria-label="Draft"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>`;
 
-document.getElementById("table").innerHTML = ROOMS.map(r => `
-  <tr class="${r.ok ? "ok" : ""}">
-    <td class="tick">${r.ok ? done : wait}</td>
-    <td class="room-no">${r.n}</td>
-    <td>${r.people.join(" · ")}</td>
-    <td class="note">${r.why}</td>
-  </tr>
-`).join("");
+const FLOORS = [
+  { id: 5, title: "5th floor", ordinal: "5" },
+  { id: 4, title: "4th floor", ordinal: "4" },
+  { id: 3, title: "3rd floor", ordinal: "3" },
+  { id: 2, title: "2nd floor", ordinal: "2" },
+  { id: 1, title: "1st floor", ordinal: "1" }
+];
 
-document.getElementById("plates").innerHTML = ROOMS.map(r => {
-  const names = r.people.length === 2
-    ? `<li>${r.people[0]}</li><li class="amp" aria-hidden="true">&amp;</li><li>${r.people[1]}</li>`
-    : r.people.map(p => `<li>${p}</li>`).join("");
+function floorOf(n) { return Number(String(n)[0]); }
+
+document.getElementById("hotel").innerHTML = FLOORS.map(f => {
+  const rooms = ROOMS.filter(r => floorOf(r.n) === f.id);
+  const locked = rooms.filter(r => r.ok).length;
+  const nums = rooms.map(r => r.n);
+  const range = nums[0] + " – " + nums[nums.length - 1];
+  const rows = rooms.map(r => `
+    <div class="room-row ${r.ok ? "ok" : "draft"}">
+      <div class="tick">${r.ok ? done : wait}</div>
+      <div class="room-no">${r.n}</div>
+      <div class="guests-line">${r.people.join(" · ")}</div>
+      <span class="pill ${r.ok ? "ok" : "draft"}">${r.ok ? "Locked" : "Draft"}</span>
+    </div>
+  `).join("");
   return `
-  <article class="plate${r.bridal ? " bridal" : ""}">
-    <div class="frame"><div class="frame2">
-      ${corner.replace('class="orn"', 'class="orn tl"')}
-      ${corner.replace('class="orn"', 'class="orn tr"')}
-      ${corner.replace('class="orn"', 'class="orn bl"')}
-      ${corner.replace('class="orn"', 'class="orn br"')}
-      <p class="kicker">Noor <em>weds</em> Raghib</p>
-      <p class="date">15 November 2026</p>
-      <div class="rule"></div>
-      <div class="seal"><span>Room</span><strong>${r.n}</strong></div>
-      <ul class="guests${r.people.length > 2 ? " triple" : ""}">${names}</ul>
-      <p class="foot">${r.bridal ? "The Couple" : "Baraat Stay"}</p>
-    </div></div>
-  </article>`;
+    <section class="floor">
+      <div class="floor-head">
+        <div class="floor-num">${f.ordinal}</div>
+        <div>
+          <h2>${f.title}</h2>
+          <p>Rooms ${range}</p>
+        </div>
+        <div class="lock${locked === rooms.length ? " full" : ""}">${locked} / ${rooms.length} locked</div>
+      </div>
+      ${rows}
+    </section>`;
+}).join("");
+
+document.getElementById("plates").innerHTML = FLOORS.map(f => {
+  const rooms = ROOMS.filter(r => floorOf(r.n) === f.id);
+  const plates = rooms.map(r => {
+    const names = r.people.length === 2
+      ? `<li>${r.people[0]}</li><li class="amp" aria-hidden="true">&amp;</li><li>${r.people[1]}</li>`
+      : r.people.map(p => `<li>${p}</li>`).join("");
+    return `
+    <article class="plate${r.bridal ? " bridal" : ""}">
+      <div class="frame"><div class="frame2">
+        ${corner.replace('class="orn"', 'class="orn tl"')}
+        ${corner.replace('class="orn"', 'class="orn tr"')}
+        ${corner.replace('class="orn"', 'class="orn bl"')}
+        ${corner.replace('class="orn"', 'class="orn br"')}
+        <p class="kicker">Noor <em>weds</em> Raghib</p>
+        <p class="date">15 November 2026</p>
+        <div class="rule"></div>
+        <div class="seal"><span>Room</span><strong>${r.n}</strong></div>
+        <ul class="guests${r.people.length > 2 ? " triple" : ""}">${names}</ul>
+        <p class="foot">${r.bridal ? "The Couple" : "Baraat Stay"}</p>
+      </div></div>
+    </article>`;
+  }).join("");
+  return `<div class="floor-banner">${f.title} · rooms ${rooms[0].n} – ${rooms[rooms.length - 1].n}</div>${plates}`;
 }).join("");
 </script>
 </body>
