@@ -186,7 +186,7 @@
   .tabbar a.on { background: rgba(255,255,255,.14); color: #fff; }
   @media (max-width: 859px) {
     html { -webkit-text-size-adjust: 100%; }
-    aside { padding: 12px 12px 8px; }
+    aside { padding: 12px 12px calc(88px + env(safe-area-inset-bottom)); }
     main { padding: 12px 12px calc(92px + env(safe-area-inset-bottom)); }
     .count-box { min-width: 78px; padding: 10px 8px; }
     .count-box strong { font-size: 28px; }
