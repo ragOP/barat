@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Honeymoon · Andaman · 21–30 Nov 2026</title>
+  <meta name="description" content="Raghib &amp; Noor honeymoon roadmap — Luckeesarai to Andaman, 21–30 November 2026.">
+  <style>
+    :root {
+      --wine: #6b1c2a;
+      --wine2: #4a1220;
+      --gold: #c4a056;
+      --ink: #2a1810;
+      --muted: #7a6454;
+      --paper: #efe4d2;
+      --card: #fffaf2;
+      --line: #e0d2bc;
+      --ok: #1f6b45;
+      --ok-bg: #e8f5ee;
+      --wait: #9a4b12;
+      --wait-bg: #f8ead9;
+      --need: #8a1f1f;
+      --need-bg: #f8e6e4;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(ellipse at top, #f7efe3 0%, transparent 55%),
+        linear-gradient(180deg, #f3e8d6 0%, var(--paper) 40%, #e8d9c4 100%);
+      color: var(--ink);
+      padding: 0 0 calc(28px + env(safe-area-inset-bottom));
+    }
+    a { color: var(--wine); }
+    .wrap { max-width: 440px; margin: 0 auto; padding: 22px 16px 0; }
+    .back {
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-decoration: none;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .kicker {
+      margin: 0;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    h1 {
+      margin: 8px 0 6px;
+      font-size: clamp(26px, 7vw, 32px);
+      line-height: 1.1;
+      color: var(--wine);
+    }
+    .sub {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 22px;
+    }
+    .chip {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,250,242,.7);
+      color: var(--ink);
+    }
+    .chip b { color: var(--wine); }
+    section {
+      margin: 0 0 22px;
+    }
+    .sec-title {
+      margin: 0 0 10px;
+      font-size: 13px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .need-box {
+      background: var(--need-bg);
+      border: 1.5px solid #d7a09a;
+      border-radius: 16px;
+      padding: 14px 14px 6px;
+    }
+    .need-box ol {
+      margin: 0;
+      padding: 0 0 0 18px;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .need-box li { margin: 0 0 10px; padding-left: 2px; }
+    .need-box strong { color: var(--need); }
+    .need-box span { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+
+    .day {
+      background: var(--card);
+      border: 1.5px solid var(--wine);
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 0 0 14px;
+      box-shadow: 3px 4px 0 rgba(74, 18, 32, .08);
+    }
+    .day-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+      padding: 12px 14px;
+      background: var(--wine);
+      color: #fff;
+    }
+    .day-head .d {
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .85;
+    }
+    .day-head h2 {
+      margin: 3px 0 0;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .day-head .place {
+      text-align: right;
+      font-size: 13px;
+      opacity: .9;
+      line-height: 1.3;
+    }
+    .day-body { padding: 12px 14px 14px; }
+    .item {
+      padding: 12px 0;
+      border-top: 1px dashed var(--line);
+    }
+    .item:first-child { border-top: 0; padding-top: 2px; }
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .item-top h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    .item-top .kind {
+      margin: 3px 0 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .status {
+      flex-shrink: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 5px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .ok { background: var(--ok-bg); color: var(--ok); }
+    .wait { background: var(--wait-bg); color: var(--wait); }
+    .need { background: var(--need-bg); color: var(--need); }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 10px;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 13px;
+    }
+    .grid div {
+      background: #f7f0e4;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .grid span {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .grid b { font-weight: 700; color: var(--ink); word-break: break-word; }
+    .note {
+      margin: 10px 0 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    details.proof {
+      margin-top: 10px;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    details.proof summary {
+      cursor: pointer;
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--wine);
+      padding: 8px 0 2px;
+    }
+    details.proof summary::-webkit-details-marker { display: none; }
+    details.proof summary::before {
+      content: "▸";
+      font-size: 12px;
+    }
+    details.proof[open] summary::before { content: "▾"; }
+    .shots {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .shots a, .shots figure {
+      margin: 0;
+      display: block;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .shots img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .shots figcaption {
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .pdf-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .route {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+      margin: 0 0 10px;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    .route .st { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    .route b { display: block; font-size: 17px; line-height: 1.15; }
+    .route .time { color: var(--wine); font-size: 13px; margin-top: 2px; }
+    .route .mid {
+      text-align: center;
+      color: var(--wine);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+    .foot {
+      margin: 8px 0 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .toc {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 22px;
+    }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1.5px solid var(--wine);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+    .toc a b { color: var(--wine); font-size: 15px; }
+    .toc a span { color: var(--muted); font-size: 13px; text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/">← Noor weds Raghib</a>
+    <p class="kicker">Honeymoon roadmap</p>
+    <h1>Andaman · 21–30 Nov</h1>
+    <p class="sub">Raghib Najmi &amp; Afifa Noor · Luckeesarai → Kolkata → Port Blair → Havelock → Neil → home</p>
+
+    <div class="chip-row">
+      <span class="chip"><b>10</b> days</span>
+      <span class="chip"><b>2</b> adults</span>
+      <span class="chip">Booked ferries <b>₹11,650</b></span>
+      <span class="chip">Booked hotels <b>₹6,285</b></span>
+    </div>
+
+    <section id="needed">
+      <h2 class="sec-title">Still required</h2>
+      <div class="need-box">
+        <ol>
+          <li>
+            <strong>Train confirmation</strong> — RJPB–HWH Exp 12352 is still waitlisted (WL/1 &amp; WL/2).
+            <span>PNR 6310144647 · board LKR 21 Nov 23:32 · if not confirmed, rebook or find alternate seats.</span>
+          </li>
+          <li>
+            <strong>Kolkata hotel · 22 &amp; 23 Nov</strong> — 2 nights after Howrah arrival, before the 24 Nov flight.
+            <span>Near airport or Howrah · leave buffer for CCU T2 by ~7:30–8:00 AM on 24 Nov.</span>
+          </li>
+          <li>
+            <strong>Havelock hotel · 2nd night (26 Nov)</strong> — Orient Legend Resort night 1 is paid; night 2 not booked yet.
+            <span>Plan was to extend the same hotel through 27 Nov morning checkout.</span>
+          </li>
+          <li>
+            <strong>Neil Island hotel · from 27 Nov</strong> — ferry lands 11:45 AM; no hotel booked.
+            <span>Decide nights: likely 27–28 Nov (checkout 29) or through 30 Nov morning ferry.</span>
+          </li>
+          <li>
+            <strong>Neil → Port Blair ferry · 30 Nov morning</strong> — no ticket image in the chat export.
+            <span>Must reach IXZ well before SpiceJet SG-487 at 2:20 PM. Target a morning ferry (e.g. ~9:30 AM).</span>
+          </li>
+          <li>
+            <strong>Optional buffer night in Port Blair · 29 Nov</strong> — only if you leave Neil on 29 Nov instead of 30 Nov.
+            <span>Current return flight is 30 Nov; skip this if Neil→PB ferry is on the 30th.</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec-title">Jump to day</h2>
+      <nav class="toc" aria-label="Days">
+        <a href="#d21"><b>21 Sat</b><span>Train · LKR → HWH</span></a>
+        <a href="#d22"><b>22–23</b><span>Kolkata stay · pending</span></a>
+        <a href="#d24"><b>24 Tue</b><span>Flight + Port Blair hotel</span></a>
+        <a href="#d25"><b>25 Wed</b><span>Ferry + Havelock hotel</span></a>
+        <a href="#d26"><b>26 Thu</b><span>Havelock · 2nd night pending</span></a>
+        <a href="#d27"><b>27 Fri</b><span>Ferry to Neil</span></a>
+        <a href="#d28"><b>28–29</b><span>Neil stay · pending</span></a>
+        <a href="#d30"><b>30 Mon</b><span>Return flight</span></a>
+      </nav>
+    </section>
+
+    <!-- 21 Nov -->
+    <article class="day" id="d21">
+      <div class="day-head">
+        <div>
+          <div class="d">Sat · 21 Nov 2026</div>
+          <h2>Leave Bihar</h2>
+        </div>
+        <div class="place">Luckeesarai<br>→ Howrah</div>
+      </div>
+      <div class="day-body">
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>RJPB HWH Express 12352</h3>
+              <p class="kind">Train · AC First Class</p>
+            </div>
+            <span class="status wait">Waitlist</span>
+          </div>
+          <div class="route">
+            <div>
+              <div class="st">Board</div>
+              <b>LKR</b>
+              <div class="time">23:32 · 21 Nov</div>
+            </div>
+            <div class="mid">7h 8m</div>
+            <div style="text-align:right">
+              <div class="st">Arrive</div>
+              <b>HWH</b>
+              <div class="time">06:40 · 22 Nov</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div><span>PNR</span><b>6310144647</b></div>
+            <div><span>Class</span><b>1A · General</b></div>
+            <div><span>Raghib</span><b>WL/1</b></div>
+            <div><span>Afifa</span><b>WL/2</b></div>
+          </div>
+          <p class="note">Both seats still waitlisted. Confirm or replace before travel day.</p>
+          <details class="proof">
+            <summary>Ticket screenshot</summary>
+            <div class="shots">
+              <figure>
+                <a href="/moon/train-lkr-hwh.jpg" target="_blank" rel="noopener">
+                  <img src="/moon/train-lkr-hwh.jpg" alt="IRCTC ticket RJPB HWH Express waitlist for Raghib and Afifa" loading="lazy">
+                </a>
+              </figure>
+            </div>
+          </details>
+        </div>
+      </div>
+    </article>
+
+    <!-- 22-23 Nov -->
+    <article class="day" id="d22">
+      <div class="day-head">
+        <div>
+          <div class="d">Sun–Mon · 22–23 Nov</div>
+          <h2>Kolkata buffer</h2>
+        </div>
+        <div class="place">Howrah /<br>Kolkata</div>
+      </div>
+      <div class="day-body">
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Hotel · 2 nights</h3>
+              <p class="kind">Stay · not booked</p>
+            </div>
+            <span class="status need">Needed</span>
+          </div>
+          <div class="grid">
+            <div><span>Check-in</span><b>22 Nov morning</b></div>
+            <div><span>Check-out</span><b>24 Nov morning</b></div>
+            <div><span>Arrive HWH</span><b>06:40</b></div>
+            <div><span>Next flight</span><b>24 Nov 10:05</b></div>
+          </div>
+          <p class="note">No Kolkata hotel in the chat. Book 2 nights covering 22 &amp; 23 Nov, with easy access to CCU Terminal 2.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 24 Nov -->
+    <article class="day" id="d24">
+      <div class="day-head">
+        <div>
+          <div class="d">Tue · 24 Nov 2026</div>
+          <h2>Fly to Andaman</h2>
+        </div>
+        <div class="place">Kolkata<br>→ Port Blair</div>
+      </div>
+      <div class="day-body">
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>SpiceJet SG-263</h3>
+              <p class="kind">Flight · Economy Spice Flex</p>
+            </div>
+            <span class="status ok">Confirmed</span>
+          </div>
+          <div class="route">
+            <div>
+              <div class="st">Depart</div>
+              <b>CCU T2</b>
+              <div class="time">10:05</div>
+            </div>
+            <div class="mid">2h 15m</div>
+            <div style="text-align:right">
+              <div class="st">Arrive</div>
+              <b>IXZ T1</b>
+              <div class="time">12:20</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div><span>PNR</span><b>TK2FRH</b></div>
+            <div><span>Trip ID</span><b>260923120770</b></div>
+            <div><span>Seats</span><b>6A · 6B</b></div>
+            <div><span>Passengers</span><b>2 adults</b></div>
+          </div>
+          <details class="proof">
+            <summary>Flight screenshot</summary>
+            <div class="shots">
+              <figure>
+                <a href="/moon/flight-outbound-sg263.jpg" target="_blank" rel="noopener">
+                  <img src="/moon/flight-outbound-sg263.jpg" alt="SpiceJet SG-263 Kolkata to Port Blair booking" loading="lazy">
+                </a>
+              </figure>
+            </div>
+          </details>
+        </div>
+
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Premier SeaView Inn</h3>
+              <p class="kind">Hotel · Sri Vijaya Puram</p>
+            </div>
+            <span class="status ok">Paid</span>
+          </div>
+          <div class="grid">
+            <div><span>Check-in</span><b>24 Nov · 10 AM–8 PM</b></div>
+            <div><span>Check-out</span><b>25 Nov · 8 AM</b></div>
+            <div><span>Nights</span><b>1</b></div>
+            <div><span>Paid</span><b>₹2,925</b></div>
+          </div>
+          <p class="note">Free cancellation till check-in. Confirmation to najmiraghib@gmail.com / +91 8447648730.</p>
+          <details class="proof">
+            <summary>Hotel screenshot</summary>
+            <div class="shots">
+              <figure>
+                <a href="/moon/hotel-portblair-premier.jpg" target="_blank" rel="noopener">
+                  <img src="/moon/hotel-portblair-premier.jpg" alt="Premier SeaView Inn booking confirmation" loading="lazy">
+                </a>
+              </figure>
+            </div>
+          </details>
+        </div>
+      </div>
+    </article>
+
+    <!-- 25 Nov -->
+    <article class="day" id="d25">
+      <div class="day-head">
+        <div>
+          <div class="d">Wed · 25 Nov 2026</div>
+          <h2>To Havelock</h2>
+        </div>
+        <div class="place">Port Blair<br>→ Swaraj Dweep</div>
+      </div>
+      <div class="day-body">
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Nautika-Pro</h3>
+              <p class="kind">Ferry · Luxury</p>
+            </div>
+            <span class="status ok">Confirmed</span>
+          </div>
+          <div class="route">
+            <div>
+              <div class="st">Depart</div>
+              <b>Haddo Jetty</b>
+              <div class="time">12:30</div>
+            </div>
+            <div class="mid">~1h 30m</div>
+            <div style="text-align:right">
+              <div class="st">Arrive</div>
+              <b>Havelock</b>
+              <div class="time">~14:00</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div><span>PNR</span><b>NK-68GRKMNJ</b></div>
+            <div><span>Booking</span><b>5863098361</b></div>
+            <div><span>Seats</span><b>10K · 10L</b></div>
+            <div><span>Paid</span><b>₹3,650</b></div>
+          </div>
+          <p class="note">Report 45 min early. Boarding closes 20 min before departure. Hotel check-in is 11 AM but ferry is 12:30 — ask Orient Legend for late check-in.</p>
+          <details class="proof">
+            <summary>E-ticket</summary>
+            <div class="shots">
+              <figure>
+                <a href="/moon/ferry-portblair-havelock-nautika.jpg" target="_blank" rel="noopener">
+                  <img src="/moon/ferry-portblair-havelock-nautika.jpg" alt="Nautika Pro e-ticket Port Blair to Havelock" loading="lazy">
+                </a>
+                <figcaption><a class="pdf-link" href="/moon/ferry-portblair-havelock-nautika.pdf" target="_blank" rel="noopener">Download PDF</a></figcaption>
+              </figure>
+            </div>
+          </details>
+        </div>
+
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Orient Legend Resort</h3>
+              <p class="kind">Hotel · Havelock · night 1</p>
+            </div>
+            <span class="status ok">Paid</span>
+          </div>
+          <div class="grid">
+            <div><span>Check-in</span><b>25 Nov · 11:00</b></div>
+            <div><span>Check-out</span><b>26 Nov · 08:00</b></div>
+            <div><span>Nights</span><b>1 of 2 planned</b></div>
+            <div><span>Paid</span><b>₹3,360</b></div>
+          </div>
+          <p class="note">Free cancellation until 24 hours before check-in. Second night still open — see 26 Nov.</p>
+          <details class="proof">
+            <summary>Hotel screenshot</summary>
+            <div class="shots">
+              <figure>
+                <a href="/moon/hotel-havelock-orient.jpg" target="_blank" rel="noopener">
+                  <img src="/moon/hotel-havelock-orient.jpg" alt="Orient Legend Resort booking confirmation" loading="lazy">
+                </a>
+              </figure>
+            </div>
+          </details>
+        </div>
+      </div>
+    </article>
+
+    <!-- 26 Nov -->
+    <article class="day" id="d26">
+      <div class="day-head">
+        <div>
+          <div class="d">Thu · 26 Nov 2026</div>
+          <h2>Havelock</h2>
+        </div>
+        <div class="place">Swaraj Dweep</div>
+      </div>
+      <div class="day-body">
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Orient Legend Resort · night 2</h3>
+              <p class="kind">Hotel · extend same property</p>
+            </div>
+            <span class="status need">Needed</span>
+          </div>
+          <div class="grid">
+            <div><span>Stay</span><b>26 Nov night</b></div>
+            <div><span>Checkout goal</span><b>27 Nov morning</b></div>
+            <div><span>Next ferry</span><b>27 Nov 10:45</b></div>
+            <div><span>Status</span><b>Not booked</b></div>
+          </div>
+          <p class="note">Chat plan: stay at the same Orient Legend Resort — book the extra night manually.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 27 Nov -->
+    <article class="day" id="d27">
+      <div class="day-head">
+        <div>
+          <div class="d">Fri · 27 Nov 2026</div>
+          <h2>To Neil Island</h2>
+        </div>
+        <div class="place">Havelock<br>→ Neil</div>
+      </div>
+      <div class="day-body">
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Makruzz Ruby</h3>
+              <p class="kind">Ferry · Premium</p>
+            </div>
+            <span class="status ok">Confirmed</span>
+          </div>
+          <div class="route">
+            <div>
+              <div class="st">Depart</div>
+              <b>Havelock</b>
+              <div class="time">10:45</div>
+            </div>
+            <div class="mid">1h</div>
+            <div style="text-align:right">
+              <div class="st">Arrive</div>
+              <b>Neil</b>
+              <div class="time">11:45</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div><span>PNR</span><b>CWFTMP</b></div>
+            <div><span>Ref</span><b>ucJQ8j8XDAdvruh9V99t</b></div>
+            <div><span>Seats</span><b>P17J · P17K</b></div>
+            <div><span>Paid</span><b>₹4,350</b></div>
+          </div>
+          <details class="proof">
+            <summary>Ticket screenshots</summary>
+            <div class="shots">
+              <figure>
+                <a href="/moon/ferry-havelock-neil-ticket.jpg" target="_blank" rel="noopener">
+                  <img src="/moon/ferry-havelock-neil-ticket.jpg" alt="Makruzz boarding pass Havelock to Neil" loading="lazy">
+                </a>
+              </figure>
+              <figure>
+                <a href="/moon/ferry-havelock-neil-confirm.jpg" target="_blank" rel="noopener">
+                  <img src="/moon/ferry-havelock-neil-confirm.jpg" alt="bookyourferry confirmation Makruzz Ruby" loading="lazy">
+                </a>
+              </figure>
+            </div>
+          </details>
+        </div>
+
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Neil Island hotel</h3>
+              <p class="kind">Stay · from 27 Nov</p>
+            </div>
+            <span class="status need">Needed</span>
+          </div>
+          <p class="note">No hotel chosen yet. Arrive 11:45 AM — book before travel so check-in is ready.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 28-29 Nov -->
+    <article class="day" id="d28">
+      <div class="day-head">
+        <div>
+          <div class="d">Sat–Sun · 28–29 Nov</div>
+          <h2>Neil Island</h2>
+        </div>
+        <div class="place">Shaheed Dweep</div>
+      </div>
+      <div class="day-body">
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Continue Neil stay</h3>
+              <p class="kind">Hotel nights · pending</p>
+            </div>
+            <span class="status need">Needed</span>
+          </div>
+          <div class="grid">
+            <div><span>Likely</span><b>28 Nov night</b></div>
+            <div><span>Maybe</span><b>29 Nov night</b></div>
+            <div><span>Leave Neil</span><b>30 Nov morning</b></div>
+            <div><span>Flight</span><b>30 Nov 14:20</b></div>
+          </div>
+          <p class="note">Lock hotel nights once the Neil → Port Blair ferry date is final.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 30 Nov -->
+    <article class="day" id="d30">
+      <div class="day-head">
+        <div>
+          <div class="d">Mon · 30 Nov 2026</div>
+          <h2>Homeward</h2>
+        </div>
+        <div class="place">Neil → PB<br>→ Kolkata</div>
+      </div>
+      <div class="day-body">
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>Neil → Port Blair ferry</h3>
+              <p class="kind">Ferry · morning required</p>
+            </div>
+            <span class="status need">Needed</span>
+          </div>
+          <div class="grid">
+            <div><span>Target</span><b>30 Nov morning</b></div>
+            <div><span>Why</span><b>Before 14:20 flight</b></div>
+            <div><span>Ticket image</span><b>Not in export</b></div>
+            <div><span>Status</span><b>Book / verify</b></div>
+          </div>
+          <p class="note">Chat summary mentioned a Nautika ticket, but the zip only had the return flight screenshot for 30 Nov. Treat ferry as not proven until you attach the ticket.</p>
+        </div>
+
+        <div class="item">
+          <div class="item-top">
+            <div>
+              <h3>SpiceJet SG-487</h3>
+              <p class="kind">Flight · Port Blair → Kolkata</p>
+            </div>
+            <span class="status ok">Confirmed</span>
+          </div>
+          <div class="route">
+            <div>
+              <div class="st">Depart</div>
+              <b>IXZ</b>
+              <div class="time">14:20</div>
+            </div>
+            <div class="mid">2h 10m</div>
+            <div style="text-align:right">
+              <div class="st">Arrive</div>
+              <b>CCU</b>
+              <div class="time">16:30</div>
+            </div>
+          </div>
+          <div class="grid">
+            <div><span>PNR</span><b>C8GR7V</b></div>
+            <div><span>Date</span><b>30 Nov 2026</b></div>
+            <div><span>Raghib</span><b>Confirmed</b></div>
+            <div><span>Afifa</span><b>Confirmed</b></div>
+          </div>
+          <details class="proof">
+            <summary>Flight screenshot</summary>
+            <div class="shots">
+              <figure>
+                <a href="/moon/flight-return-sg487.jpg" target="_blank" rel="noopener">
+                  <img src="/moon/flight-return-sg487.jpg" alt="SpiceJet SG-487 Port Blair to Kolkata booking" loading="lazy">
+                </a>
+              </figure>
+            </div>
+          </details>
+        </div>
+      </div>
+    </article>
+
+    <section>
+      <h2 class="sec-title">Paid so far (from tickets)</h2>
+      <div class="need-box" style="background:var(--ok-bg);border-color:#b7d7c5">
+        <ol style="list-style:none;padding-left:0">
+          <li>Premier SeaView Inn · <strong>₹2,925</strong></li>
+          <li>Nautika PB → Havelock · <strong>₹3,650</strong></li>
+          <li>Orient Legend (1 night) · <strong>₹3,360</strong></li>
+          <li>Makruzz Havelock → Neil · <strong>₹4,350</strong></li>
+          <li style="border-top:1px dashed #b7d7c5;padding-top:10px;margin-top:4px">Hotels + ferries visible · <strong>₹14,285</strong> <span>Train &amp; flights billed separately · pending hotels/ferry not included</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <p class="foot">Raghib &amp; Noor · moon</p>
+  </div>
+</body>
+</html>
