@@ -10,17 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #14241f;
-      --muted: #5a6f68;
-      --line: rgba(20, 36, 31, .12);
-      --sea: #1a4d45;
-      --sea-deep: #0f322e;
-      --foam: #e8f1ed;
-      --sand: #f4efe6;
-      --warn: #8a4b16;
-      --open: #8f2d2d;
-      --ok: #1f6b4a;
-      --white: #fcfbf8;
+      --ink: #1b2430;
+      --muted: #5c6674;
+      --teal: #0e6e78;
+      --navy: #12315c;
+      --coral: #e25b45;
+      --gold: #e0a122;
+      --sand: #fff6ea;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -29,80 +25,106 @@
       color: var(--ink);
       font-family: Manrope, system-ui, sans-serif;
       background:
-        radial-gradient(120% 80% at 100% -10%, #c9ddd6 0%, transparent 50%),
-        radial-gradient(90% 60% at -20% 20%, #dce8e2 0%, transparent 45%),
-        linear-gradient(180deg, #eef5f1 0%, var(--sand) 38%, #ebe4d8 100%);
+        radial-gradient(90% 40% at 100% 0%, #ffd4b8 0%, transparent 50%),
+        radial-gradient(70% 35% at 0% 8%, #b7ece8 0%, transparent 46%),
+        linear-gradient(180deg, #fff8f1 0%, #f3fbff 42%, #fff1e4 100%);
       min-height: 100vh;
     }
-    a { color: var(--sea); }
+    a { color: var(--teal); }
     .page {
       max-width: 430px;
       margin: 0 auto;
-      padding: 18px 18px calc(40px + env(safe-area-inset-bottom));
+      padding: 14px 16px calc(40px + env(safe-area-inset-bottom));
     }
     .back {
       display: inline-block;
-      margin-bottom: 28px;
+      margin-bottom: 14px;
       font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
+      font-weight: 700;
+      color: var(--navy);
       text-decoration: none;
-      letter-spacing: .02em;
     }
     .hero {
-      margin-bottom: 28px;
-      animation: rise .7s ease both;
+      position: relative;
+      overflow: hidden;
+      margin: 0 0 16px;
+      padding: 22px 20px 20px;
+      border-radius: 24px;
+      color: #fff;
+      background:
+        radial-gradient(120% 90% at 100% 0%, #ffb15a 0%, transparent 42%),
+        radial-gradient(80% 80% at 0% 100%, #1aa7a1 0%, transparent 50%),
+        linear-gradient(145deg, #12315c 0%, #0e6e78 55%, #e25b45 140%);
+      box-shadow: 0 16px 40px rgba(18, 49, 92, .28);
+      animation: rise .6s ease both;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      bottom: -40px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .12);
     }
     .hero .mark {
+      position: relative;
       display: inline-block;
-      margin: 0 0 14px;
+      margin: 0 0 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .16);
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .22em;
+      font-weight: 800;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--sea);
+      color: #ffe7b0;
     }
     .hero h1 {
+      position: relative;
       margin: 0;
       font-family: Fraunces, Georgia, serif;
       font-weight: 650;
-      font-size: clamp(34px, 10vw, 42px);
-      line-height: .98;
+      font-size: clamp(36px, 10vw, 46px);
+      line-height: .95;
       letter-spacing: -.02em;
-      color: var(--sea-deep);
+      color: #fff;
     }
     .hero h1 em {
       display: block;
-      margin-top: 6px;
+      margin-top: 8px;
       font-style: normal;
       font-weight: 500;
-      font-size: .52em;
+      font-size: .46em;
       letter-spacing: 0;
-      color: var(--muted);
+      color: #ffe7b0;
     }
     .hero p {
+      position: relative;
       margin: 14px 0 0;
-      max-width: 28ch;
-      font-size: 15px;
-      line-height: 1.5;
-      color: var(--muted);
+      max-width: 26ch;
+      font-size: 14.5px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, .88);
     }
 
     .open {
-      margin: 0 0 34px;
+      margin: 0 0 22px;
       padding: 16px 16px 14px;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #fff7f4, #f8ece7);
-      border: 1px solid rgba(143, 45, 45, .16);
-      animation: rise .7s .08s ease both;
+      border-radius: 20px;
+      background: linear-gradient(160deg, #fff 0%, #ffe8df 100%);
+      border: 1.5px solid #f3b7a8;
+      box-shadow: 0 8px 0 #f6d2c8;
+      animation: rise .6s .06s ease both;
     }
     .open h2 {
-      margin: 0 0 10px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .16em;
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--open);
+      color: var(--coral);
     }
     .open ul {
       margin: 0;
@@ -114,132 +136,144 @@
     .open li {
       display: grid;
       gap: 2px;
-      font-size: 14px;
+      font-size: 14.5px;
       line-height: 1.35;
-      font-weight: 600;
+      font-weight: 800;
+      color: #7a2618;
     }
     .open li span {
       font-size: 12.5px;
-      font-weight: 500;
-      color: var(--muted);
+      font-weight: 600;
+      color: #8d5348;
     }
 
     .rail {
       position: relative;
-      padding-left: 22px;
-      animation: rise .7s .14s ease both;
+      padding-left: 18px;
+      animation: rise .6s .1s ease both;
     }
     .rail::before {
       content: "";
       position: absolute;
-      left: 5px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(180deg, var(--sea), rgba(26, 77, 69, .15));
-      border-radius: 2px;
+      left: 4px;
+      top: 10px;
+      bottom: 10px;
+      width: 3px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, #e0a122, #0e6e78 35%, #e25b45 70%, #12315c);
     }
     .stop {
       position: relative;
-      padding: 0 0 28px;
+      padding: 0 0 16px;
     }
-    .stop:last-child { padding-bottom: 8px; }
+    .stop:last-child { padding-bottom: 4px; }
     .stop::before {
       content: "";
       position: absolute;
-      left: -22px;
-      top: 7px;
-      width: 12px;
-      height: 12px;
+      left: -18px;
+      top: 16px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
-      background: var(--white);
-      border: 2.5px solid var(--sea);
-      box-shadow: 0 0 0 4px rgba(26, 77, 69, .08);
+      background: #0e6e78;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px #0e6e78;
     }
-    .stop.is-open::before {
-      border-color: var(--open);
-      box-shadow: 0 0 0 4px rgba(143, 45, 45, .1);
+    .card {
+      border-radius: 20px;
+      padding: 14px 14px 12px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(18, 49, 92, .08);
     }
-    .stop.is-wait::before {
-      border-color: var(--warn);
-      box-shadow: 0 0 0 4px rgba(138, 75, 22, .1);
-    }
+    .stop:nth-child(1) .card { background: linear-gradient(180deg, #fff8e8, #fff); border-top: 4px solid #e0a122; }
+    .stop:nth-child(1)::before { background: #e0a122; box-shadow: 0 0 0 2px #e0a122; }
+    .stop:nth-child(2) .card { background: linear-gradient(180deg, #fff0f4, #fff); border-top: 4px solid #d4537e; }
+    .stop:nth-child(2)::before { background: #d4537e; box-shadow: 0 0 0 2px #d4537e; }
+    .stop:nth-child(3) .card { background: linear-gradient(180deg, #e7f8f6, #fff); border-top: 4px solid #0e6e78; }
+    .stop:nth-child(4) .card { background: linear-gradient(180deg, #e8f4ff, #fff); border-top: 4px solid #2b6cb0; }
+    .stop:nth-child(4)::before { background: #2b6cb0; box-shadow: 0 0 0 2px #2b6cb0; }
+    .stop:nth-child(5) .card { background: linear-gradient(180deg, #e5fbf4, #fff); border-top: 4px solid #0f9b6c; }
+    .stop:nth-child(5)::before { background: #0f9b6c; box-shadow: 0 0 0 2px #0f9b6c; }
+    .stop:nth-child(6) .card { background: linear-gradient(180deg, #fff1ea, #fff); border-top: 4px solid #e25b45; }
+    .stop:nth-child(6)::before { background: #e25b45; box-shadow: 0 0 0 2px #e25b45; }
+    .stop:nth-child(7) .card { background: linear-gradient(180deg, #fff4e8, #fff); border-top: 4px solid #e07a2f; }
+    .stop:nth-child(7)::before { background: #e07a2f; box-shadow: 0 0 0 2px #e07a2f; }
+    .stop:nth-child(8) .card { background: linear-gradient(180deg, #eef1ff, #fff); border-top: 4px solid #12315c; }
+    .stop:nth-child(8)::before { background: #12315c; box-shadow: 0 0 0 2px #12315c; }
+
     .when {
-      margin: 0 0 4px;
+      margin: 0 0 2px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--teal);
     }
     .stop h3 {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       font-family: Fraunces, Georgia, serif;
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 650;
-      line-height: 1.1;
-      letter-spacing: -.01em;
-      color: var(--sea-deep);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--navy);
     }
-    .legs {
-      display: grid;
-      gap: 10px;
-    }
+    .legs { display: grid; gap: 8px; }
     .leg {
-      background: rgba(252, 251, 248, .78);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px 14px 12px;
-      backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, .72);
+      border-radius: 14px;
+      padding: 12px;
     }
     .leg-top {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       align-items: flex-start;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .leg-top strong {
       display: block;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 800;
       line-height: 1.25;
+      color: var(--navy);
     }
     .leg-top em {
       display: block;
-      margin-top: 3px;
+      margin-top: 2px;
       font-style: normal;
       font-size: 12.5px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--muted);
     }
     .tag {
       flex-shrink: 0;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .04em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .05em;
       text-transform: uppercase;
-      color: var(--ok);
+      color: #0b5c3b;
+      background: #d8f5e6;
     }
-    .tag.wait { color: var(--warn); }
-    .tag.open { color: var(--open); }
+    .tag.wait { color: #8a4b00; background: #ffe4b5; }
+    .tag.open { color: #9a2418; background: #ffd6ce; }
     .meta {
       margin: 0;
       font-size: 13.5px;
-      line-height: 1.55;
-      color: var(--ink);
+      line-height: 1.5;
+      color: #243041;
     }
-    .meta b { font-weight: 700; }
-    details {
-      margin-top: 8px;
-    }
+    .meta b { font-weight: 800; color: var(--navy); }
+    details { margin-top: 6px; }
     summary {
       cursor: pointer;
       list-style: none;
       width: fit-content;
       font-size: 12.5px;
-      font-weight: 700;
-      color: var(--sea);
+      font-weight: 800;
+      color: var(--teal);
       padding: 4px 0;
     }
     summary::-webkit-details-marker { display: none; }
@@ -247,64 +281,65 @@
       margin: 8px 0 0;
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid var(--line);
       background: #fff;
+      box-shadow: 0 4px 12px rgba(18, 49, 92, .08);
     }
-    .shot img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+    .shot img { display: block; width: 100%; height: auto; }
     .shot a.pdf {
       display: block;
       padding: 10px 12px;
       font-size: 12.5px;
-      font-weight: 700;
+      font-weight: 800;
       text-decoration: none;
+      background: #12315c;
+      color: #ffe7b0;
     }
 
     .spend {
       margin-top: 8px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
-      animation: rise .7s .2s ease both;
+      padding: 18px 16px 16px;
+      border-radius: 22px;
+      color: #fff;
+      background: linear-gradient(160deg, #12315c, #0e6e78);
+      box-shadow: 0 14px 30px rgba(18, 49, 92, .25);
+      animation: rise .6s .14s ease both;
     }
     .spend h2 {
-      margin: 0 0 6px;
+      margin: 0 0 4px;
       font-family: Fraunces, Georgia, serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 650;
-      color: var(--sea-deep);
+      color: #fff;
     }
     .spend .total {
       margin: 0 0 14px;
       font-size: 14px;
-      color: var(--muted);
+      color: rgba(255, 255, 255, .78);
     }
     .spend .total b {
-      color: var(--ink);
-      font-size: 18px;
+      color: #ffe7b0;
+      font-size: 22px;
     }
-    .spend dl {
-      margin: 0;
-      display: grid;
-      gap: 8px;
-    }
+    .spend dl { margin: 0; display: grid; gap: 8px; }
     .spend div {
       display: flex;
       justify-content: space-between;
       gap: 12px;
       font-size: 13.5px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
     }
-    .spend dt { color: var(--muted); }
-    .spend dd { margin: 0; font-weight: 700; }
+    .spend div:last-child { border-bottom: 0; padding-bottom: 0; }
+    .spend dt { color: rgba(255, 255, 255, .78); }
+    .spend dd { margin: 0; font-weight: 800; color: #fff; }
     .foot {
-      margin: 28px 0 0;
+      margin: 22px 0 0;
       text-align: center;
       font-size: 12px;
-      letter-spacing: .14em;
+      font-weight: 800;
+      letter-spacing: .16em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--coral);
     }
 
     @keyframes rise {
@@ -343,241 +378,35 @@
     <div class="rail">
 
       <article class="stop is-wait">
-        <p class="when">Sat · 21 Nov</p>
-        <h3>Leave Bihar</h3>
-        <div class="legs">
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>RJPB HWH Express 12352</strong>
-                <em>Train · AC First Class</em>
-              </div>
-              <span class="tag wait">Waitlist</span>
-            </div>
-            <p class="meta"><b>LKR 23:32</b> → <b>HWH 06:40</b> · 22 Nov<br>PNR <b>6310144647</b> · Raghib WL/1 · Afifa WL/2</p>
-            <details>
-              <summary>Ticket</summary>
-              <figure class="shot">
-                <a href="/moon/train-lkr-hwh.jpg" target="_blank" rel="noopener">
-                  <img src="/moon/train-lkr-hwh.jpg" alt="Train ticket waitlist screenshot" loading="lazy">
-                </a>
-              </figure>
-            </details>
-          </div>
-        </div>
+        <div class="card">stop is-wait</div>
       </article>
 
       <article class="stop">
-        <p class="when">Sun–Mon · 22–23 Nov</p>
-        <h3>Kolkata</h3>
-        <div class="legs">
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>Own house</strong>
-                <em>No hotel</em>
-              </div>
-              <span class="tag">Set</span>
-            </div>
-            <p class="meta">Arrive Howrah 06:40 · fly out 24 Nov 10:05 from CCU T2</p>
-          </div>
-        </div>
+        <div class="card">stop</div>
       </article>
 
       <article class="stop">
-        <p class="when">Tue · 24 Nov</p>
-        <h3>Port Blair</h3>
-        <div class="legs">
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>SpiceJet SG-263</strong>
-                <em>Flight · Economy</em>
-              </div>
-              <span class="tag">Booked</span>
-            </div>
-            <p class="meta"><b>CCU 10:05</b> → <b>IXZ 12:20</b><br>PNR <b>TK2FRH</b> · seats 6A · 6B</p>
-            <details>
-              <summary>Ticket</summary>
-              <figure class="shot">
-                <a href="/moon/flight-outbound-sg263.jpg" target="_blank" rel="noopener">
-                  <img src="/moon/flight-outbound-sg263.jpg" alt="Outbound SpiceJet booking" loading="lazy">
-                </a>
-              </figure>
-            </details>
-          </div>
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>Premier SeaView Inn</strong>
-                <em>Hotel · 1 night · ₹2,925</em>
-              </div>
-              <span class="tag">Paid</span>
-            </div>
-            <p class="meta">In 24 Nov · Out 25 Nov 08:00</p>
-            <details>
-              <summary>Booking</summary>
-              <figure class="shot">
-                <a href="/moon/hotel-portblair-premier.jpg" target="_blank" rel="noopener">
-                  <img src="/moon/hotel-portblair-premier.jpg" alt="Premier SeaView Inn booking" loading="lazy">
-                </a>
-              </figure>
-            </details>
-          </div>
-        </div>
+        <div class="card">stop</div>
       </article>
 
       <article class="stop">
-        <p class="when">Wed · 25 Nov</p>
-        <h3>Havelock</h3>
-        <div class="legs">
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>Nautika-Pro</strong>
-                <em>Ferry · Luxury · ₹3,650</em>
-              </div>
-              <span class="tag">Booked</span>
-            </div>
-            <p class="meta"><b>Haddo 12:30</b> → Havelock ~14:00<br>PNR <b>NK-68GRKMNJ</b> · seats 10K · 10L · report 45 min early</p>
-            <details>
-              <summary>E-ticket</summary>
-              <figure class="shot">
-                <a href="/moon/ferry-portblair-havelock-nautika.jpg" target="_blank" rel="noopener">
-                  <img src="/moon/ferry-portblair-havelock-nautika.jpg" alt="Nautika ferry e-ticket" loading="lazy">
-                </a>
-                <a class="pdf" href="/moon/ferry-portblair-havelock-nautika.pdf" target="_blank" rel="noopener">Download PDF</a>
-              </figure>
-            </details>
-          </div>
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>Orient Legend Resort</strong>
-                <em>Hotel · 1 night · ₹3,360</em>
-              </div>
-              <span class="tag">Paid</span>
-            </div>
-            <p class="meta">In 25 Nov 11:00 · Out 26 Nov 08:00 · ask late check-in after ferry</p>
-            <details>
-              <summary>Booking</summary>
-              <figure class="shot">
-                <a href="/moon/hotel-havelock-orient.jpg" target="_blank" rel="noopener">
-                  <img src="/moon/hotel-havelock-orient.jpg" alt="Orient Legend Resort booking" loading="lazy">
-                </a>
-              </figure>
-            </details>
-          </div>
-        </div>
+        <div class="card">stop</div>
       </article>
 
       <article class="stop">
-        <p class="when">Thu · 26 Nov</p>
-        <h3>Havelock</h3>
-        <div class="legs">
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>MJ Resort</strong>
-                <em>Hotel · 1 night · ₹6,797</em>
-              </div>
-              <span class="tag">Paid</span>
-            </div>
-            <p class="meta">In 26 Nov 11:30 · Out 27 Nov 08:30<br>Free cancel until 21 Nov 11:29 AM</p>
-          </div>
-        </div>
+        <div class="card">stop</div>
       </article>
 
       <article class="stop is-open">
-        <p class="when">Fri · 27 Nov</p>
-        <h3>Neil Island</h3>
-        <div class="legs">
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>Makruzz Ruby</strong>
-                <em>Ferry · Premium · ₹4,350</em>
-              </div>
-              <span class="tag">Booked</span>
-            </div>
-            <p class="meta"><b>Havelock 10:45</b> → <b>Neil 11:45</b><br>PNR <b>CWFTMP</b> · seats P17J · P17K</p>
-            <details>
-              <summary>Ticket</summary>
-              <figure class="shot">
-                <a href="/moon/ferry-havelock-neil-ticket.jpg" target="_blank" rel="noopener">
-                  <img src="/moon/ferry-havelock-neil-ticket.jpg" alt="Makruzz boarding pass" loading="lazy">
-                </a>
-              </figure>
-              <figure class="shot">
-                <a href="/moon/ferry-havelock-neil-confirm.jpg" target="_blank" rel="noopener">
-                  <img src="/moon/ferry-havelock-neil-confirm.jpg" alt="Makruzz booking confirmation" loading="lazy">
-                </a>
-              </figure>
-            </details>
-          </div>
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>Neil hotel</strong>
-                <em>27–30 Nov · 3 nights</em>
-              </div>
-              <span class="tag open">Open</span>
-            </div>
-            <p class="meta">Book stay through checkout before 30 Nov 09:30 ferry</p>
-          </div>
-        </div>
+        <div class="card">stop is-open</div>
       </article>
 
       <article class="stop is-open">
-        <p class="when">Sat–Sun · 28–29 Nov</p>
-        <h3>Neil Island</h3>
-        <div class="legs">
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>Same Neil hotel</strong>
-                <em>Continue stay</em>
-              </div>
-              <span class="tag open">Open</span>
-            </div>
-            <p class="meta">Nights of 28 &amp; 29 Nov · leave morning of 30 Nov</p>
-          </div>
-        </div>
+        <div class="card">stop is-open</div>
       </article>
 
       <article class="stop">
-        <p class="when">Mon · 30 Nov</p>
-        <h3>Homeward</h3>
-        <div class="legs">
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>Nautika</strong>
-                <em>Ferry · Neil → Port Blair · ₹4,350</em>
-              </div>
-              <span class="tag">Booked</span>
-            </div>
-            <p class="meta"><b>Neil 09:30</b> → Port Blair · then to airport</p>
-          </div>
-          <div class="leg">
-            <div class="leg-top">
-              <div>
-                <strong>SpiceJet SG-487</strong>
-                <em>Flight · Port Blair → Kolkata</em>
-              </div>
-              <span class="tag">Booked</span>
-            </div>
-            <p class="meta"><b>IXZ 14:20</b> → <b>CCU 16:30</b><br>PNR <b>C8GR7V</b></p>
-            <details>
-              <summary>Ticket</summary>
-              <figure class="shot">
-                <a href="/moon/flight-return-sg487.jpg" target="_blank" rel="noopener">
-                  <img src="/moon/flight-return-sg487.jpg" alt="Return SpiceJet booking" loading="lazy">
-                </a>
-              </figure>
-            </details>
-          </div>
-        </div>
+        <div class="card">stop</div>
       </article>
 
     </div>
