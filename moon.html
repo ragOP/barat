@@ -218,12 +218,125 @@
       letter-spacing: -.02em;
       color: var(--navy);
     }
-    .legs { display: grid; gap: 8px; }
-    .leg {
-      background: rgba(255, 255, 255, .72);
-      border-radius: 14px;
-      padding: 12px;
+    .key {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
     }
+    .key li {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 9px 4px;
+      border-radius: 999px;
+    }
+    .key .flight { background: #d7ebff; color: #0d4f8b; }
+    .key .ferry { background: #c9f3f6; color: #085860; }
+    .key .hotel { background: #ffe4b8; color: #8a4e00; }
+    .key .train { background: #f8d0d8; color: #7a2436; }
+
+    .legs { display: grid; gap: 10px; }
+    .leg {
+      position: relative;
+      border-radius: 16px;
+      padding: 12px 12px 12px 16px;
+      border: 1.5px solid transparent;
+      overflow: hidden;
+    }
+    .leg::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+    }
+    .leg.flight { background: #f2f8ff; border-color: #b7d7f6; }
+    .leg.flight::before { background: #1d6fbf; }
+    .leg.ferry { background: #f0fbfc; border-color: #a9e4ea; }
+    .leg.ferry::before { background: #0b7f8c; }
+    .leg.hotel { background: #fff7ea; border-color: #f0d09a; }
+    .leg.hotel::before { background: #d4891a; }
+    .leg.train { background: #fff4f6; border-color: #f0c2cb; }
+    .leg.train::before { background: #a33b4d; }
+    .leg.gap { background: #fff6f4; border-color: #f0b8ae; border-style: dashed; }
+    .leg.gap::before { background: #e25b45; }
+    .kind {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 4px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .kind svg { width: 15px; height: 15px; flex: none; }
+    .leg.flight .kind { color: #1d6fbf; }
+    .leg.ferry .kind { color: #0b7f8c; }
+    .leg.hotel .kind { color: #b86d08; }
+    .leg.train .kind { color: #a33b4d; }
+    .leg.gap .kind { color: #c24132; }
+    .hop {
+      display: grid;
+      grid-template-columns: 1fr 36px 1fr;
+      align-items: center;
+      gap: 6px;
+      margin: 8px 0 6px;
+    }
+    .hop b { display: block; font-size: 18px; line-height: 1; color: var(--navy); }
+    .hop span { display: block; margin-top: 3px; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+    .hop .to { text-align: right; }
+    .hop i {
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      display: block;
+      position: relative;
+    }
+    .hop i::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: -3px;
+      border: 4px solid transparent;
+      border-left-color: currentColor;
+    }
+    .leg.flight .hop i { color: #1d6fbf; }
+    .leg.ferry .hop i { color: #0b7f8c; }
+    .leg.train .hop i { color: #a33b4d; }
+    .nights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 8px 0 6px;
+    }
+    .nights div {
+      background: rgba(255,255,255,.8);
+      border-radius: 12px;
+      padding: 8px 10px;
+    }
+    .nights span {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nights b { font-size: 14px; color: var(--navy); }
+    .spend .group {
+      margin: 12px 0 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .spend .group.hotel { color: #ffd27a; }
+    .spend .group.ferry { color: #9eefe8; }
     .leg-top {
       display: flex;
       justify-content: space-between;
@@ -350,6 +463,7 @@
       .hero, .open, .rail, .spend { animation: none; }
     }
   </style>
+</head>
 <body>
   <div class="page">
     <a class="back" href="/">← Noor weds Raghib</a>
@@ -374,6 +488,13 @@
       </ul>
     </section>
 
+    <ul class="key" aria-label="Booking types">
+      <li class="flight">Flight</li>
+      <li class="ferry">Ferry</li>
+      <li class="hotel">Hotel</li>
+      <li class="train">Train</li>
+    </ul>
+
     <div class="rail">
 
       <article class="stop is-wait">
@@ -381,15 +502,21 @@
         <p class="when">Sat · 21 Nov</p>
         <h3>Leave Bihar</h3>
         <div class="legs">
-          <div class="leg">
+          <div class="leg train">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="3" width="12" height="13" rx="3"/><path d="M6 11h12M8 20l2-4h4l2 4"/></svg>Train</p>
             <div class="leg-top">
               <div>
                 <strong>RJPB HWH Express 12352</strong>
-                <em>Train · AC First Class</em>
+                <em>AC First Class</em>
               </div>
               <span class="tag wait">Waitlist</span>
             </div>
-            <p class="meta"><b>LKR 23:32</b> → <b>HWH 06:40</b> · 22 Nov<br>PNR <b>6310144647</b> · Raghib WL/1 · Afifa WL/2</p>
+            <div class="hop">
+              <div><b>23:32</b><span>LKR · 21 Nov</span></div>
+              <i></i>
+              <div class="to"><b>06:40</b><span>HWH · 22 Nov</span></div>
+            </div>
+            <p class="meta">PNR <b>6310144647</b> · Raghib WL/1 · Afifa WL/2</p>
             <details>
               <summary>Ticket</summary>
               <figure class="shot">
@@ -408,15 +535,19 @@
         <p class="when">Sun–Mon · 22–23 Nov</p>
         <h3>Kolkata</h3>
         <div class="legs">
-          <div class="leg">
+          <div class="leg hotel">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20V9l9-5 9 5v11M9 20v-6h6v6"/></svg>Stay</p>
             <div class="leg-top">
               <div>
                 <strong>Own house</strong>
-                <em>No hotel</em>
+                <em>Kolkata · no hotel</em>
               </div>
               <span class="tag">Set</span>
             </div>
-            <p class="meta">Arrive Howrah 06:40 · fly out 24 Nov 10:05 from CCU T2</p>
+            <div class="nights">
+              <div><span>Arrive</span><b>22 Nov 06:40</b></div>
+              <div><span>Fly out</span><b>24 Nov 10:05</b></div>
+            </div>
           </div>
         </div>
       </div>
@@ -427,15 +558,21 @@
         <p class="when">Tue · 24 Nov</p>
         <h3>Port Blair</h3>
         <div class="legs">
-          <div class="leg">
+          <div class="leg flight">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l18-7-7 18-2-7-9-4z"/></svg>Flight</p>
             <div class="leg-top">
               <div>
                 <strong>SpiceJet SG-263</strong>
-                <em>Flight · Economy</em>
+                <em>Economy</em>
               </div>
               <span class="tag">Booked</span>
             </div>
-            <p class="meta"><b>CCU 10:05</b> → <b>IXZ 12:20</b><br>PNR <b>TK2FRH</b> · seats 6A · 6B</p>
+            <div class="hop">
+              <div><b>10:05</b><span>CCU T2</span></div>
+              <i></i>
+              <div class="to"><b>12:20</b><span>IXZ T1</span></div>
+            </div>
+            <p class="meta">PNR <b>TK2FRH</b> · seats 6A · 6B</p>
             <details>
               <summary>Ticket</summary>
               <figure class="shot">
@@ -445,15 +582,19 @@
               </figure>
             </details>
           </div>
-          <div class="leg">
+          <div class="leg hotel">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20V9l9-5 9 5v11M9 20v-6h6v6"/></svg>Hotel</p>
             <div class="leg-top">
               <div>
                 <strong>Premier SeaView Inn</strong>
-                <em>Hotel · 1 night · ₹2,925</em>
+                <em>1 night</em>
               </div>
-              <span class="tag">Paid</span>
+              <span class="tag">₹2,925</span>
             </div>
-            <p class="meta">In 24 Nov · Out 25 Nov 08:00</p>
+            <div class="nights">
+              <div><span>Check-in</span><b>24 Nov</b></div>
+              <div><span>Check-out</span><b>25 Nov 08:00</b></div>
+            </div>
             <details>
               <summary>Booking</summary>
               <figure class="shot">
@@ -472,15 +613,21 @@
         <p class="when">Wed · 25 Nov</p>
         <h3>Havelock</h3>
         <div class="legs">
-          <div class="leg">
+          <div class="leg ferry">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 16h18l-2 4H5l-2-4zM4 16l2-6h12l2 6M12 4v6"/></svg>Ferry</p>
             <div class="leg-top">
               <div>
                 <strong>Nautika-Pro</strong>
-                <em>Ferry · Luxury · ₹3,650</em>
+                <em>Luxury · ₹3,650</em>
               </div>
               <span class="tag">Booked</span>
             </div>
-            <p class="meta"><b>Haddo 12:30</b> → Havelock ~14:00<br>PNR <b>NK-68GRKMNJ</b> · seats 10K · 10L · report 45 min early</p>
+            <div class="hop">
+              <div><b>12:30</b><span>Haddo</span></div>
+              <i></i>
+              <div class="to"><b>14:00</b><span>Havelock</span></div>
+            </div>
+            <p class="meta">PNR <b>NK-68GRKMNJ</b> · seats 10K · 10L · report 45 min early</p>
             <details>
               <summary>E-ticket</summary>
               <figure class="shot">
@@ -491,15 +638,20 @@
               </figure>
             </details>
           </div>
-          <div class="leg">
+          <div class="leg hotel">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20V9l9-5 9 5v11M9 20v-6h6v6"/></svg>Hotel</p>
             <div class="leg-top">
               <div>
                 <strong>Orient Legend Resort</strong>
-                <em>Hotel · 1 night · ₹3,360</em>
+                <em>1 night</em>
               </div>
-              <span class="tag">Paid</span>
+              <span class="tag">₹3,360</span>
             </div>
-            <p class="meta">In 25 Nov 11:00 · Out 26 Nov 08:00 · ask late check-in after ferry</p>
+            <div class="nights">
+              <div><span>Check-in</span><b>25 Nov 11:00</b></div>
+              <div><span>Check-out</span><b>26 Nov 08:00</b></div>
+            </div>
+            <p class="meta">Ask for late check-in. Ferry arrives after 11:00.</p>
             <details>
               <summary>Booking</summary>
               <figure class="shot">
@@ -518,15 +670,20 @@
         <p class="when">Thu · 26 Nov</p>
         <h3>Havelock</h3>
         <div class="legs">
-          <div class="leg">
+          <div class="leg hotel">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20V9l9-5 9 5v11M9 20v-6h6v6"/></svg>Hotel</p>
             <div class="leg-top">
               <div>
                 <strong>MJ Resort</strong>
-                <em>Hotel · 1 night · ₹6,797</em>
+                <em>1 night</em>
               </div>
-              <span class="tag">Paid</span>
+              <span class="tag">₹6,797</span>
             </div>
-            <p class="meta">In 26 Nov 11:30 · Out 27 Nov 08:30<br>Free cancel until 21 Nov 11:29 AM</p>
+            <div class="nights">
+              <div><span>Check-in</span><b>26 Nov 11:30</b></div>
+              <div><span>Check-out</span><b>27 Nov 08:30</b></div>
+            </div>
+            <p class="meta">Free cancel until 21 Nov 11:29 AM</p>
           </div>
         </div>
       </div>
@@ -537,15 +694,21 @@
         <p class="when">Fri · 27 Nov</p>
         <h3>Neil Island</h3>
         <div class="legs">
-          <div class="leg">
+          <div class="leg ferry">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 16h18l-2 4H5l-2-4zM4 16l2-6h12l2 6M12 4v6"/></svg>Ferry</p>
             <div class="leg-top">
               <div>
                 <strong>Makruzz Ruby</strong>
-                <em>Ferry · Premium · ₹4,350</em>
+                <em>Premium · ₹4,350</em>
               </div>
               <span class="tag">Booked</span>
             </div>
-            <p class="meta"><b>Havelock 10:45</b> → <b>Neil 11:45</b><br>PNR <b>CWFTMP</b> · seats P17J · P17K</p>
+            <div class="hop">
+              <div><b>10:45</b><span>Havelock</span></div>
+              <i></i>
+              <div class="to"><b>11:45</b><span>Neil</span></div>
+            </div>
+            <p class="meta">PNR <b>CWFTMP</b> · seats P17J · P17K</p>
             <details>
               <summary>Ticket</summary>
               <figure class="shot">
@@ -560,15 +723,20 @@
               </figure>
             </details>
           </div>
-          <div class="leg">
+          <div class="leg hotel">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20V9l9-5 9 5v11M9 20v-6h6v6"/></svg>Hotel</p>
             <div class="leg-top">
               <div>
                 <strong>Royal Neil Resort</strong>
-                <em>Hotel · 1 night · ₹3,796</em>
+                <em>AC Deluxe · breakfast</em>
               </div>
-              <span class="tag">Paid</span>
+              <span class="tag">₹3,796</span>
             </div>
-            <p class="meta"><b>In 27 Nov 09:30</b> · <b>Out 28 Nov 08:30</b><br>AC Deluxe · king · breakfast<br>Booking <b>NH72208529440402</b> · PNR <b>0191906097</b><br>Free cancel till 19 Nov 09:29</p>
+            <div class="nights">
+              <div><span>Check-in</span><b>27 Nov 09:30</b></div>
+              <div><span>Check-out</span><b>28 Nov 08:30</b></div>
+            </div>
+            <p class="meta">Booking <b>NH72208529440402</b> · PNR <b>0191906097</b><br>Free cancel till 19 Nov 09:29</p>
           </div>
         </div>
       </div>
@@ -579,15 +747,16 @@
         <p class="when">Sat–Sun · 28–29 Nov</p>
         <h3>Neil Island</h3>
         <div class="legs">
-          <div class="leg">
+          <div class="leg gap">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20V9l9-5 9 5v11M9 20v-6h6v6"/></svg>Hotel · still open</p>
             <div class="leg-top">
               <div>
-                <strong>Hotel · 2 more nights</strong>
+                <strong>2 more nights</strong>
                 <em>28 &amp; 29 Nov</em>
               </div>
               <span class="tag open">Open</span>
             </div>
-            <p class="meta">Royal Neil checks out 28 Nov 08:30. Book through checkout before the 30 Nov 09:30 ferry.</p>
+            <p class="meta">Royal Neil checks out 28 Nov 08:30. Book through the morning of the 30 Nov ferry.</p>
           </div>
         </div>
       </div>
@@ -598,25 +767,36 @@
         <p class="when">Mon · 30 Nov</p>
         <h3>Homeward</h3>
         <div class="legs">
-          <div class="leg">
+          <div class="leg ferry">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 16h18l-2 4H5l-2-4zM4 16l2-6h12l2 6M12 4v6"/></svg>Ferry</p>
             <div class="leg-top">
               <div>
                 <strong>Nautika</strong>
-                <em>Ferry · Neil → Port Blair · ₹4,350</em>
+                <em>₹4,350</em>
               </div>
               <span class="tag">Booked</span>
             </div>
-            <p class="meta"><b>Neil 09:30</b> → Port Blair · then to airport</p>
+            <div class="hop">
+              <div><b>09:30</b><span>Neil</span></div>
+              <i></i>
+              <div class="to"><b>Port Blair</b><span>then airport</span></div>
+            </div>
           </div>
-          <div class="leg">
+          <div class="leg flight">
+            <p class="kind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l18-7-7 18-2-7-9-4z"/></svg>Flight</p>
             <div class="leg-top">
               <div>
                 <strong>SpiceJet SG-487</strong>
-                <em>Flight · Port Blair → Kolkata</em>
+                <em>Port Blair → Kolkata</em>
               </div>
               <span class="tag">Booked</span>
             </div>
-            <p class="meta"><b>IXZ 14:20</b> → <b>CCU 16:30</b><br>PNR <b>C8GR7V</b></p>
+            <div class="hop">
+              <div><b>14:20</b><span>IXZ</span></div>
+              <i></i>
+              <div class="to"><b>16:30</b><span>CCU</span></div>
+            </div>
+            <p class="meta">PNR <b>C8GR7V</b></p>
             <details>
               <summary>Ticket</summary>
               <figure class="shot">
@@ -635,11 +815,15 @@
     <section class="spend">
       <h2>Spend so far</h2>
       <p class="total"><b>₹29,228</b> on hotels &amp; ferries · train &amp; flights separate</p>
+      <p class="group hotel">Hotels</p>
       <dl>
         <div><dt>Premier SeaView Inn</dt><dd>₹2,925</dd></div>
         <div><dt>Orient Legend Resort</dt><dd>₹3,360</dd></div>
         <div><dt>MJ Resort</dt><dd>₹6,797</dd></div>
         <div><dt>Royal Neil Resort</dt><dd>₹3,796</dd></div>
+      </dl>
+      <p class="group ferry">Ferries</p>
+      <dl>
         <div><dt>Nautika · PB → Havelock</dt><dd>₹3,650</dd></div>
         <div><dt>Makruzz · Havelock → Neil</dt><dd>₹4,350</dd></div>
         <div><dt>Nautika · Neil → PB</dt><dd>₹4,350</dd></div>
