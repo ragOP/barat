@@ -79,9 +79,31 @@
   }
   .corridor {
     display: grid;
-    grid-template-columns: 1.22fr 1.08fr 1fr .92fr .84fr;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 8px; padding: 12px 12px 6px; align-items: end;
   }
+  .pending-block {
+    margin: 0 0 18px;
+    border: 2px dashed var(--wine);
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff8ee;
+  }
+  .pending-head {
+    background: #8a4b16; color: #fff8ee;
+    padding: 12px 16px; font-family: Cinzel, serif;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+  .pending-head h2 { margin: 0; font-size: 14px; }
+  .pending-head p { margin: 4px 0 0; font-size: 13px; opacity: .85; letter-spacing: 0; text-transform: none; font-family: "Cormorant Garamond", Georgia, serif; }
+  .pending-row {
+    padding: 14px 16px; border-top: 1px solid #e6d3b8;
+    display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: center;
+  }
+  .pending-row .room-no { font-family: Cinzel, serif; font-size: 22px; color: #8a4b16; font-weight: 700; }
+  .pending-row .who { font-size: 18px; line-height: 1.25; }
+  .plate.pending .seal { background: #8a4b16; }
+  .plate.pending .foot { color: #8a4b16; }
   .door {
     position: relative; text-align: center;
     border-radius: 14px 14px 6px 6px;
@@ -287,6 +309,7 @@
     <a href="/return">Return train list</a>
     <a href="/barat">Going train list</a>
   </div>
+  <div id="pending"></div>
   <div class="hotel" id="hotel"></div>
 </div>
 <div class="plates" id="plates"></div>
@@ -296,8 +319,8 @@ const ROOMS = [
   { n: "503", ok: true, people: ["Amin Huda", "Shagufta"] },
   { n: "502", ok: true, people: ["Shakil Ahmed", "Shaheena"] },
   { n: "501", ok: true, people: ["Aqil Ahmed", "Rehana Begum"] },
-  { n: "500", ok: true, people: ["Taazeem Najmi", "Sayem Kalim"] },
-  { n: "404", ok: true, people: ["Modassir Barkat", "Sarwar Alam", "Md Seraj"] },
+  { n: "500", ok: true, people: ["Taazeem Najmi"] },
+  { n: "404", ok: true, people: ["Aman Dev", "Sayem Kalim"] },
   { n: "403", ok: true, people: ["Md Kamil", "Rahbar Shifat", "Abhishek Gupta"] },
   { n: "402", ok: true, people: ["Rooman Alam", "Abu Noman Khan"] },
   { n: "401", ok: true, people: ["Masood Raghib", "Ashif Alam"] },
@@ -314,9 +337,13 @@ const ROOMS = [
   { n: "200", ok: true, people: ["Fahim Huda", "Sajiadul Arfan"] },
   { n: "104", ok: true, people: ["Najmul Huda", "Israr Rafique"], king: true },
   { n: "103", ok: true, people: ["Mumtaz", "Farghab Saud (Sartaj)"] },
-  { n: "102", ok: true, people: ["Md Shakeel (Sukhi)", "Owais"] },
+  { n: "102", ok: true, people: ["Md Shakeel (Samo)", "Owais"] },
   { n: "101", ok: true, people: ["Zia Ashraf", "Tanweer Asraf"] },
   { n: "100", ok: true, people: ["Manir Huda", "Mazhar Hussain"] }
+];
+
+const PENDING = [
+  { n: "TBD", people: ["Modassir Barkat", "Sarwar Alam", "Md Seraj"] }
 ];
 
 const corner = `
@@ -343,6 +370,7 @@ function rank(n) { return "r" + String(n).slice(-2); }
 function tag(r) {
   if (r.bridal) return "The Couple";
   if (r.king) return "Father of the Groom";
+  if (r.pending) return "New room · number TBD";
   if (String(r.n).endsWith("04")) return "Best on floor";
   return "Baraat Stay";
 }
@@ -352,6 +380,42 @@ function names(people, king) {
     return p;
   }).join("<br>");
 }
+function plateHtml(r) {
+  const lis = r.people.length === 2
+    ? `<li>${r.king ? "♛ " : ""}${r.people[0]}</li><li class="amp" aria-hidden="true">&amp;</li><li>${r.people[1]}</li>`
+    : r.people.map(p => `<li>${p}</li>`).join("");
+  const cls = `plate ${r.pending ? "pending" : rank(r.n)}${r.bridal ? " bridal" : ""}${r.king ? " king" : ""}`;
+  return `
+  <article class="${cls}">
+    <div class="frame"><div class="frame2">
+      ${corner.replace('class="orn"', 'class="orn tl"')}
+      ${corner.replace('class="orn"', 'class="orn tr"')}
+      ${corner.replace('class="orn"', 'class="orn bl"')}
+      ${corner.replace('class="orn"', 'class="orn br"')}
+      ${r.king || r.bridal ? plateCrown : ""}
+      <p class="kicker">Noor <em>weds</em> Raghib</p>
+      <p class="date">15 November 2026</p>
+      <div class="rule"></div>
+      <div class="seal"><span>Room</span><strong>${r.n}</strong></div>
+      <ul class="guests${r.people.length > 2 ? " triple" : ""}">${lis}</ul>
+      <p class="foot">${tag(r)}</p>
+    </div></div>
+  </article>`;
+}
+
+document.getElementById("pending").innerHTML = PENDING.length ? `
+  <section class="pending-block">
+    <div class="pending-head">
+      <h2>New room · number pending</h2>
+      <p>Moved out of 404 for now — assign a room number when ready.</p>
+    </div>
+    ${PENDING.map(r => `
+      <div class="pending-row">
+        <div class="room-no">${r.n}</div>
+        <div class="who">${r.people.join(" · ")}</div>
+      </div>
+    `).join("")}
+  </section>` : "";
 
 document.getElementById("hotel").innerHTML = FLOORS.map(f => {
   const rooms = ROOMS.filter(r => floorOf(r.n) === f.id);
@@ -377,32 +441,13 @@ document.getElementById("hotel").innerHTML = FLOORS.map(f => {
     </section>`;
 }).join("");
 
-document.getElementById("plates").innerHTML = FLOORS.map(f => {
+const pendingPlates = PENDING.map(r => plateHtml({ ...r, pending: true })).join("");
+const floorPlates = FLOORS.map(f => {
   const rooms = ROOMS.filter(r => floorOf(r.n) === f.id);
-  const plates = rooms.map(r => {
-    const lis = r.people.length === 2
-      ? `<li>${r.king ? "♛ " : ""}${r.people[0]}</li><li class="amp" aria-hidden="true">&amp;</li><li>${r.people[1]}</li>`
-      : r.people.map(p => `<li>${p}</li>`).join("");
-    const cls = `plate ${rank(r.n)}${r.bridal ? " bridal" : ""}${r.king ? " king" : ""}`;
-    return `
-    <article class="${cls}">
-      <div class="frame"><div class="frame2">
-        ${corner.replace('class="orn"', 'class="orn tl"')}
-        ${corner.replace('class="orn"', 'class="orn tr"')}
-        ${corner.replace('class="orn"', 'class="orn bl"')}
-        ${corner.replace('class="orn"', 'class="orn br"')}
-        ${r.king || r.bridal ? plateCrown : ""}
-        <p class="kicker">Noor <em>weds</em> Raghib</p>
-        <p class="date">15 November 2026</p>
-        <div class="rule"></div>
-        <div class="seal"><span>Room</span><strong>${r.n}</strong></div>
-        <ul class="guests${r.people.length > 2 ? " triple" : ""}">${lis}</ul>
-        <p class="foot">${tag(r)}</p>
-      </div></div>
-    </article>`;
-  }).join("");
-  return `<div class="floor-banner">${f.title} · best room ${rooms[0].n}</div>${plates}`;
+  return `<div class="floor-banner">${f.title} · best room ${rooms[0].n}</div>${rooms.map(plateHtml).join("")}`;
 }).join("");
+document.getElementById("plates").innerHTML =
+  (PENDING.length ? `<div class="floor-banner">New room · number TBD</div>${pendingPlates}` : "") + floorPlates;
 </script>
 <nav class="tabbar" aria-label="Pages">
   <a href="/barat">Going</a>
