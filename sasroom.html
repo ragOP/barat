@@ -395,11 +395,11 @@
       <header class="top">
         <p class="kicker"><span class="monogram">N&amp;R</span> 15 November 2026</p>
         <h1><span>Sasural stay</span>Room doors</h1>
-        <p class="lede">Fourteen rooms. The couple take the suite. On every other floor the <strong>best door is the highest number</strong>, then the next names down the list.</p>
+        <p class="lede">Fourteen rooms, numbered <strong>01 to 14</strong>. The couple are in 01.</p>
         <div class="stats">
           <span class="stat">14 rooms</span>
           <span class="stat">23 guests</span>
-          <span class="stat">Suite 304</span>
+          <span class="stat">Suite 01</span>
         </div>
       </header>
 
@@ -426,7 +426,7 @@
 
       <main id="floors"></main>
       <p class="empty" id="empty">No room matches that name.</p>
-      <footer class="foot">RAGHIB weds NOOR · Sasural rooms · Gold door = best on that floor</footer>
+      <footer class="foot">RAGHIB weds NOOR · Sasural rooms · 01 to 14</footer>
     </div>
     <section class="stickers" id="stickers" aria-hidden="true"></section>
   </div>
@@ -435,40 +435,40 @@
 const floors = [
   {
     title: "The suite",
-    hint: "Room 304",
+    hint: "Room 01",
     rooms: [
-      { no: "304", tone: "suite", tag: "Suite", people: ["Raghib", "Noor"] }
+      { no: "01", tone: "suite", tag: "Suite", people: ["Raghib", "Noor"] }
     ]
   },
   {
     title: "Upper floor",
-    hint: "Rooms 204 → 201",
+    hint: "Rooms 02 → 05",
     rooms: [
-      { no: "204", tone: "gold", tag: "Best", people: ["Saasu Maa"] },
-      { no: "203", tone: "family", tag: "Family", people: ["Sajid", "Huzaifa"] },
-      { no: "202", tone: "family", tag: "Family", people: ["Hania 👶"] },
-      { no: "201", tone: "family", tag: "Family", people: ["Chote Mamu", "Imjamam"] }
+      { no: "02", tone: "gold", tag: "Best", people: ["Saasu Maa"] },
+      { no: "03", tone: "family", tag: "Family", people: ["Sajid", "Huzaifa"] },
+      { no: "04", tone: "family", tag: "Family", people: ["Hania 👶"] },
+      { no: "05", tone: "family", tag: "Family", people: ["Chote Mamu", "Imjamam"] }
     ]
   },
   {
     title: "Middle floor",
-    hint: "Rooms 104 → 101",
+    hint: "Rooms 06 → 09",
     rooms: [
-      { no: "104", tone: "gold", tag: "Best", people: ["Munni Aunty"] },
-      { no: "103", tone: "family", tag: "Family", people: ["Nesar Khalu", "Mamu"] },
-      { no: "102", tone: "family", tag: "Family", people: ["Rizwana Aunty", "Badi Khala"] },
-      { no: "101", tone: "family", tag: "Family", people: ["Mami", "Inaya", "Layeba"] }
+      { no: "06", tone: "gold", tag: "Best", people: ["Munni Aunty"] },
+      { no: "07", tone: "family", tag: "Family", people: ["Nesar Khalu", "Mamu"] },
+      { no: "08", tone: "family", tag: "Family", people: ["Rizwana Aunty", "Badi Khala"] },
+      { no: "09", tone: "family", tag: "Family", people: ["Mami", "Inaya", "Layeba"] }
     ]
   },
   {
     title: "Ground floor",
-    hint: "Rooms 004 → 000",
+    hint: "Rooms 10 → 14",
     rooms: [
-      { no: "004", tone: "gold", tag: "Best", people: ["Gudiya Aapi"] },
-      { no: "003", tone: "family", tag: "Family", people: ["Affan", "Mizan"] },
-      { no: "002", tone: "family", tag: "Family", people: ["Ziyaul Bhai", "Shahid"] },
-      { no: "001", tone: "crew", tag: "Crew", people: ["Miss Nikhat"] },
-      { no: "000", tone: "crew", tag: "Crew", people: ["Photographer"] }
+      { no: "10", tone: "gold", tag: "Best", people: ["Gudiya Aapi"] },
+      { no: "11", tone: "family", tag: "Family", people: ["Affan", "Mizan"] },
+      { no: "12", tone: "family", tag: "Family", people: ["Ziyaul Bhai", "Shahid"] },
+      { no: "13", tone: "crew", tag: "Crew", people: ["Miss Nikhat"] },
+      { no: "14", tone: "crew", tag: "Crew", people: ["Photographer"] }
     ]
   }
 ];
