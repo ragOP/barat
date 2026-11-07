@@ -174,18 +174,18 @@
 <script>
 const ROOMS = [
   { n: "304", people: ["Raghib", "Noor"], bridal: true },
-  { n: "204", people: ["Ammi"], saasu: true },
+  { n: "204", people: [], saasu: true },
   { n: "203", people: ["Sajid", "Huzaifa"] },
-  { n: "202", people: ["Zeba", "Hania", "Mohsin"] },
+  { n: "202", people: ["Hania 👶"] },
   { n: "201", people: ["Chote Mamu", "Imjamam"] },
-  { n: "104", people: ["Munni", "Zaid", "Zidane"] },
+  { n: "104", people: ["Munni Aunty"] },
   { n: "103", people: ["Nesar Khalu", "Mamu"] },
   { n: "102", people: ["Rizwana Aunty", "Badi Khala"] },
-  { n: "101", people: ["Mami", "Inaya", "Liaba"] },
+  { n: "101", people: ["Mami", "Inaya", "Layeba"] },
   { n: "004", people: ["Gudiya Aapi", "Zoya", "Asif", "Zeeshan"] },
-  { n: "003", people: ["Affan", "Meezan"] },
+  { n: "003", people: ["Affan", "Mizan"] },
   { n: "002", people: ["Ziyaul Bhai", "Shahid"] },
-  { n: "001", people: ["Makeup Artist"], crew: true },
+  { n: "001", people: ["Miss Nikhat"], crew: true },
   { n: "000", people: ["Photographer"], crew: true }
 ];
 
@@ -214,7 +214,9 @@ const ornament = `<svg class="ornament" viewBox="0 0 160 18" fill="none" aria-hi
 </svg>`;
 
 document.getElementById("sheets").innerHTML = ROOMS.map(r => {
-  const names = r.people.map(p => `<li>${p}</li>`).join("");
+  const names = r.people.length
+    ? `<ul class="guests ${sizeClass(r)}">${r.people.map(p => `<li>${p}</li>`).join("")}</ul>`
+    : "";
   const cls = ["sticker", r.bridal ? "bridal" : "", r.saasu ? "saasu" : "", r.crew ? "crew" : ""].filter(Boolean).join(" ");
   const script = r.bridal ? `<p class="script">Dulhan Kamra</p>` : r.saasu ? `<p class="script">Saasu Maa</p>` : "";
   return `
@@ -230,7 +232,7 @@ document.getElementById("sheets").innerHTML = ROOMS.map(r => {
       </div>
       ${script}
       ${ornament}
-      <ul class="guests ${sizeClass(r)}">${names}</ul>
+      ${names}
       <p class="foot">${foot(r)}</p>
     </div>
   </article>`;
