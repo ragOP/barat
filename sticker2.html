@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Noor weds Raghib — Sasural stickers</title>
+<title>Raghib weds Noor — Sasural stickers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=Great+Vibes&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
@@ -70,8 +70,12 @@
     position: relative; z-index: 1;
   }
   .brand {
-    margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--leaf-2);
+    margin: 0; font-size: 15px; font-weight: 700; letter-spacing: .14em;
+    text-transform: none; color: var(--leaf-2);
+  }
+  .brand .weds {
+    font-size: .62em; font-weight: 500; letter-spacing: .04em;
+    text-transform: lowercase; padding: 0 1px;
   }
   .seal {
     width: 86px; height: 86px; flex: none; border-radius: 50%;
@@ -221,7 +225,7 @@ document.getElementById("sheets").innerHTML = ROOMS.map(r => {
       ${corner.replace('class="corner"', 'class="corner bl"')}
       ${corner.replace('class="corner"', 'class="corner br"')}
       <div class="head">
-        <p class="brand">Noor weds Raghib</p>
+        <p class="brand">RAGHIB <span class="weds">weds</span> NOOR</p>
         <p class="seal">${r.n}</p>
       </div>
       ${script}

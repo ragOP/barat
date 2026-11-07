@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Noor weds Raghib — Room door plates</title>
+<title>Raghib weds Noor — Room door plates</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -24,6 +24,10 @@
   .no-print h1 {
     font-family: Cinzel, serif; font-size: 22px; letter-spacing: .12em;
     text-transform: uppercase; margin: 0 0 6px;
+  }
+  .no-print h1 em {
+    font-family: Georgia, serif; font-style: italic; font-size: .62em;
+    letter-spacing: .04em; text-transform: lowercase;
   }
   .no-print > p { margin: 0 0 12px; color: var(--muted); font-size: 17px; }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 18px; }
@@ -203,8 +207,8 @@
   }
   .plate.king .kicker { color: #ffe9a3; }
   .kicker em {
-    font-family: "Great Vibes", cursive; font-style: normal; font-size: 1.7em;
-    letter-spacing: 0; text-transform: none; color: var(--gold); padding: 0 8px;
+    font-family: Georgia, serif; font-style: italic; font-size: .72em;
+    letter-spacing: .04em; text-transform: lowercase; color: var(--gold); padding: 0 5px;
   }
   .date {
     margin: 4px 0 0; font-size: clamp(12px, 2vw, 15px); letter-spacing: .22em;
@@ -306,7 +310,7 @@
 </head>
 <body>
 <div class="no-print">
-  <h1>Noor weds Raghib</h1>
+  <h1>RAGHIB <em>weds</em> NOOR</h1>
   <p>Each floor is a hotel corridor. Best room is always <b>x04</b> (like 504), then 03, 02, 01, 00.</p>
   <p class="legend"><b>Gold tall door</b> = best on that floor · <b>Couple suite</b> = 504 · <b>King</b> = Najmul Huda, 104</p>
   <div class="actions">
@@ -404,7 +408,7 @@ function plateHtml(r) {
       ${corner.replace('class="orn"', 'class="orn bl"')}
       ${corner.replace('class="orn"', 'class="orn br"')}
       ${r.king || r.bridal ? plateCrown : ""}
-      <p class="kicker">Noor <em>weds</em> Raghib</p>
+      <p class="kicker">RAGHIB <em>weds</em> NOOR</p>
       <p class="date">15 November 2026</p>
       <div class="rule"></div>
       <div class="seal"><span>Room</span><strong>${r.n}</strong></div>

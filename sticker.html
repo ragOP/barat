@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Noor weds Raghib — Door stickers</title>
+<title>Raghib weds Noor — Door stickers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Great+Vibes&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
@@ -68,8 +68,12 @@
     position: relative; z-index: 1;
   }
   .brand {
-    margin: 0; font-size: 17px; font-weight: 600; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--wine);
+    margin: 0; font-size: 18px; font-weight: 700; letter-spacing: .12em;
+    text-transform: none; color: var(--wine);
+  }
+  .brand .weds {
+    font-size: .62em; font-weight: 500; letter-spacing: .04em;
+    text-transform: lowercase; padding: 0 1px;
   }
   .room {
     margin: 0; width: 92px; height: 92px; border-radius: 50%;
@@ -239,7 +243,7 @@ document.getElementById("sheets").innerHTML = ROOMS.map(r => {
     return `
     <article class="${cls}">
       <div class="top">
-        <p class="brand">Noor weds Raghib</p>
+        <p class="brand">RAGHIB <span class="weds">weds</span> NOOR</p>
         <p class="room">${r.n}</p>
       </div>
       <p class="dulhan">Dulhan Kamra</p>
@@ -255,7 +259,7 @@ document.getElementById("sheets").innerHTML = ROOMS.map(r => {
       ${corner.replace('class="corner"', 'class="corner bl"')}
       ${corner.replace('class="corner"', 'class="corner br"')}
       <div class="top">
-        <p class="brand">Noor weds Raghib</p>
+        <p class="brand">RAGHIB <span class="weds">weds</span> NOOR</p>
         <p class="room">${r.n}</p>
       </div>
       <div class="rule"></div>
