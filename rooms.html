@@ -380,7 +380,6 @@ function tag(r) {
   if (r.papa) return "Papa";
   if (r.vacant) return "Vacant";
   if (r.pending) return "New room · number TBD";
-  if (String(r.n).padStart(3, "0").endsWith("04")) return "Best on floor";
   return "Baraat Stay";
 }
 function names(people, king, vacant) {

@@ -68,17 +68,17 @@
     position: relative; z-index: 1;
   }
   .brand {
-    margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .18em;
+    margin: 0; font-size: 17px; font-weight: 600; letter-spacing: .14em;
     text-transform: uppercase; color: var(--wine);
   }
   .room {
-    margin: 0; width: 64px; height: 64px; border-radius: 50%;
+    margin: 0; width: 92px; height: 92px; border-radius: 50%;
     display: grid; place-items: center;
-    border: 2px solid var(--wine);
-    box-shadow: 0 0 0 4px #fffdfb, 0 0 0 5.5px #c6a15a;
+    border: 2.5px solid var(--wine);
+    box-shadow: 0 0 0 4px #fffdfb, 0 0 0 6px #c6a15a;
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 26px; font-weight: 700; line-height: 1; color: var(--wine);
-    background: transparent;
+    font-size: 40px; font-weight: 700; line-height: 1; color: var(--wine);
+    background: transparent; flex: none;
   }
   .rule {
     height: 1px; margin: 10px 28px 0; position: relative; z-index: 1;
@@ -128,13 +128,13 @@
   .sticker.bridal .foot { color: rgba(255, 244, 220, .78); }
   .sticker.bridal .room {
     width: auto; height: auto; border: 0; box-shadow: none; border-radius: 0;
-    background: none; color: var(--gold); font-size: 28px;
+    background: none; color: var(--gold); font-size: 48px;
   }
   .sticker.bridal .guests li { color: #fff8ef; }
   .sticker.bridal .guests.two li { font-size: clamp(40px, 6.4vw, 62px); }
   .dulhan {
-    margin: 14px 0 0; font-family: "Great Vibes", cursive;
-    font-size: clamp(42px, 7vw, 64px); line-height: .8; color: var(--gold);
+    margin: 10px 0 0; font-family: "Great Vibes", cursive;
+    font-size: clamp(40px, 6.5vw, 58px); line-height: .85; color: var(--gold);
   }
 
   @media print {
@@ -151,11 +151,9 @@
     }
     .sticker:nth-child(2n) { margin-bottom: 0; page-break-after: always; }
     .sticker:last-child { page-break-after: auto; }
-    .brand { font-size: 11pt; }
-    .room { font-size: 22pt; }
-    .guests { padding-top: 6mm; }
-    .room { width: 18mm; height: 18mm; font-size: 16pt; }
-    .sticker.bridal .room { width: auto; height: auto; font-size: 22pt; }
+    .brand { font-size: 14pt; }
+    .room { width: 24mm; height: 24mm; font-size: 26pt; }
+    .sticker.bridal .room { width: auto; height: auto; font-size: 36pt; }
     .sticker.bridal .guests.two li { font-size: 46pt; }
     .guests { padding-top: 2mm; }
     .guests li { font-size: 78pt; }
@@ -163,7 +161,7 @@
     .guests.three li { font-size: 36pt; }
     .guests.long li { font-size: 44pt; }
     .sticker.papa .foot { font-size: 32pt; }
-    .dulhan { font-size: 42pt; }
+    .dulhan { font-size: 36pt; }
     .foot { font-size: 11pt; }
     .sticker.bridal { min-height: 0; }
   }
@@ -217,7 +215,6 @@ function foot(r) {
   if (r.bridal) return "15 November 2026";
   if (r.papa) return "Papa";
   if (r.king) return "Father of the Groom";
-  if (String(r.n).endsWith("04")) return "Best on floor";
   return "Baraat stay";
 }
 function sizeClass(r) {
@@ -245,7 +242,7 @@ document.getElementById("sheets").innerHTML = ROOMS.map(r => {
         <p class="brand">Noor weds Raghib</p>
         <p class="room">${r.n}</p>
       </div>
-      <p class="dulhan">Dulhan</p>
+      <p class="dulhan">Dulhan Kamra</p>
       <ul class="guests ${sizeClass(r)}">${names}</ul>
       <p class="foot">${foot(r)}</p>
     </article>`;
