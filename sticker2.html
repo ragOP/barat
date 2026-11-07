@@ -6,92 +6,130 @@
 <title>Noor weds Raghib — Sasural stickers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,680&family=Great+Vibes&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=Great+Vibes&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --leaf: #14382f;
-    --leaf-2: #1d4f42;
+    --leaf: #0e2a23;
+    --leaf-2: #16483b;
+    --gold: #e0c27a;
+    --gold-2: #f3e2b0;
     --ink: #14241c;
-    --paper: #e7f0ea;
-    --card: #fbf7f0;
-    --gold: #d7b56a;
-    --muted: #5e7368;
+    --paper: #dfeae3;
+    --card: #fbf6ec;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--paper); color: var(--ink); }
-  body { font-family: Outfit, system-ui, sans-serif; }
-  .toolbar { max-width: 860px; margin: 0 auto; padding: 26px 18px 8px; }
+  body {
+    font-family: Outfit, system-ui, sans-serif;
+    background:
+      radial-gradient(900px 420px at 50% -10%, #2a6a58 0%, transparent 55%),
+      #12362d;
+  }
+  .toolbar { max-width: 880px; margin: 0 auto; padding: 26px 18px 8px; color: #f6f1e4; }
   .toolbar h1 {
     margin: 0 0 6px; font-family: Fraunces, Georgia, serif;
-    font-weight: 560; font-size: 40px; letter-spacing: -.03em; color: var(--leaf);
+    font-weight: 560; font-size: 42px; letter-spacing: -.03em;
   }
-  .toolbar p { margin: 0 0 14px; color: var(--muted); font-size: 16px; }
+  .toolbar p { margin: 0 0 14px; color: rgba(246,241,228,.75); font-size: 16px; }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; }
   .actions button, .actions a {
     appearance: none; cursor: pointer; text-decoration: none;
-    border: 1.5px solid var(--leaf); background: transparent; color: var(--leaf);
+    border: 1.5px solid var(--gold); background: transparent; color: var(--gold-2);
     font-family: Outfit, sans-serif; font-size: 13px; font-weight: 600;
     letter-spacing: .06em; text-transform: uppercase;
     padding: 11px 16px; border-radius: 999px;
   }
-  .actions button { background: var(--leaf); color: #f6f1e4; }
+  .actions button { background: var(--gold); color: var(--leaf); border-color: var(--gold); }
 
-  .sheets {
-    max-width: 860px; margin: 0 auto; padding: 16px 14px 48px;
-    display: grid; gap: 16px;
-  }
+  .sheets { max-width: 880px; margin: 0 auto; padding: 12px 14px 48px; display: grid; gap: 18px; }
+
   .sticker {
-    display: grid; grid-template-columns: 132px 1fr;
-    min-height: 230px; background: var(--card);
-    border-radius: 22px; overflow: hidden;
-    box-shadow: 0 16px 36px -28px rgba(20, 56, 47, .7);
+    position: relative; min-height: 300px; padding: 12px;
+    background:
+      radial-gradient(circle at 18px 18px, rgba(224,194,122,.45) 1.1px, transparent 1.3px) 0 0 / 22px 22px,
+      linear-gradient(160deg, #fffaf1, #f3e7cf 70%, #efe0c0);
+    border: 3px solid var(--leaf);
+    box-shadow: 0 22px 40px -28px rgba(0,0,0,.7);
+    overflow: hidden;
   }
-  .num {
-    margin: 0; background: var(--leaf); color: #f4e7c8;
-    display: grid; place-items: center;
-    font-family: Fraunces, Georgia, serif;
-    font-weight: 680; font-size: 58px; letter-spacing: -.04em; line-height: 1;
+  .inner {
+    min-height: 276px; height: 100%;
+    border: 1.5px solid var(--gold);
+    position: relative;
+    display: flex; flex-direction: column;
+    padding: 16px 18px 14px;
+    background: linear-gradient(180deg, rgba(255,252,245,.55), rgba(255,248,236,.2));
   }
-  .body {
-    padding: 16px 22px 14px;
-    display: flex; flex-direction: column; min-width: 0;
+  .corner { position: absolute; width: 62px; height: 62px; color: #b8923d; pointer-events: none; }
+  .corner.tl { top: 6px; left: 6px; }
+  .corner.tr { top: 6px; right: 6px; transform: scaleX(-1); }
+  .corner.bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+  .corner.br { bottom: 6px; right: 6px; transform: scale(-1); }
+  .head {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    position: relative; z-index: 1;
   }
   .brand {
-    margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--muted);
+    margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--leaf-2);
   }
+  .seal {
+    width: 86px; height: 86px; flex: none; border-radius: 50%;
+    display: grid; place-items: center;
+    color: var(--leaf);
+    background:
+      radial-gradient(circle at 50% 45%, #fff8e8 0 58%, transparent 60%),
+      conic-gradient(from 20deg, #e0c27a, #f8ecc8, #c6a15a, #f3e2b0, #e0c27a);
+    box-shadow: 0 0 0 4px rgba(255,248,232,.85), 0 0 0 6px #b8923d;
+    font-family: Fraunces, Georgia, serif; font-weight: 700;
+    font-size: 30px; letter-spacing: -.03em; line-height: 1;
+  }
+  .ornament { width: 150px; height: 18px; margin: 8px auto 0; color: #b8923d; position: relative; z-index: 1; }
   .guests {
-    list-style: none; margin: 0; padding: 8px 0 0;
+    list-style: none; margin: 0; padding: 6px 8px 0;
     flex: 1; display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 1;
   }
   .guests li {
-    font-family: Fraunces, Georgia, serif; font-weight: 680;
-    line-height: .94; letter-spacing: -.03em; color: var(--leaf);
-    font-size: clamp(52px, 8vw, 78px);
+    font-family: Fraunces, Georgia, serif; font-weight: 700;
+    letter-spacing: -.03em; line-height: .92; color: var(--leaf);
+    font-size: clamp(54px, 9vw, 84px);
   }
-  .guests.two li { font-size: clamp(40px, 6.2vw, 58px); }
-  .guests.three li { font-size: clamp(34px, 5.2vw, 46px); }
-  .guests.four li { font-size: clamp(28px, 4.4vw, 38px); }
+  .guests.two li { font-size: clamp(42px, 7vw, 64px); }
+  .guests.three li { font-size: clamp(34px, 5.4vw, 48px); }
+  .guests.four li { font-size: clamp(28px, 4.6vw, 40px); }
   .foot {
-    margin: 8px 0 0; font-size: 12px; font-weight: 600;
-    letter-spacing: .16em; text-transform: uppercase; color: var(--leaf-2);
+    margin: 4px 0 2px; text-align: center;
+    font-size: 12px; font-weight: 600; letter-spacing: .28em;
+    text-transform: uppercase; color: #7a6240; position: relative; z-index: 1;
   }
-  .sticker.crew .num { background: #3e534b; }
-  .sticker.crew .guests li { color: #24352e; }
 
-  .sticker.bridal {
-    grid-template-columns: 150px 1fr;
-    background: #10241e; min-height: 260px;
+  .sticker.crew { filter: saturate(.85); }
+  .sticker.crew .seal { font-size: 28px; }
+
+  .sticker.bridal, .sticker.saasu {
+    background:
+      radial-gradient(circle at 16px 16px, rgba(224,194,122,.28) 1px, transparent 1.2px) 0 0 / 20px 20px,
+      linear-gradient(165deg, #14382f, #0c241e 55%, #1a4034);
+    border-color: var(--gold);
+    color: #fbf6ec;
   }
-  .sticker.bridal .num { background: var(--gold); color: #10241e; font-size: 64px; }
-  .sticker.bridal .brand { color: rgba(246, 241, 228, .7); }
-  .sticker.bridal .guests li { color: #fbf7f0; }
-  .sticker.bridal .guests.two li { font-size: clamp(48px, 7vw, 70px); }
-  .sticker.bridal .foot { color: rgba(246, 241, 228, .72); }
-  .dulhan {
-    margin: 8px 0 0; font-family: "Great Vibes", cursive;
-    font-size: clamp(40px, 6vw, 56px); line-height: .8; color: var(--gold);
+  .sticker.bridal .inner, .sticker.saasu .inner {
+    border-color: rgba(224,194,122,.75);
+    background: linear-gradient(180deg, rgba(255,236,180,.08), transparent 40%);
   }
+  .sticker.bridal .corner, .sticker.saasu .corner { color: var(--gold); }
+  .sticker.bridal .brand, .sticker.saasu .brand { color: rgba(243,226,176,.8); }
+  .sticker.bridal .guests li, .sticker.saasu .guests li { color: #fff8ea; }
+  .sticker.bridal .foot, .sticker.saasu .foot { color: rgba(243,226,176,.75); }
+  .sticker.bridal .seal, .sticker.saasu .seal { color: #10241e; }
+  .script {
+    margin: 2px 0 0; text-align: center;
+    font-family: "Great Vibes", cursive; font-weight: 400;
+    font-size: clamp(46px, 8vw, 68px); line-height: .8; color: var(--gold);
+    position: relative; z-index: 1;
+  }
+  .sticker.saasu .script { font-size: clamp(52px, 9vw, 76px); }
 
   @media print {
     @page { size: A4 portrait; margin: 8mm; }
@@ -99,26 +137,22 @@
     body { background: #fff; }
     .sheets { display: block; max-width: none; padding: 0; }
     .sticker {
-      width: 194mm; height: 136mm; min-height: 0;
-      margin: 0 0 6mm; border-radius: 0; box-shadow: none;
-      grid-template-columns: 46mm 1fr;
-      break-inside: avoid; page-break-inside: avoid;
+      width: 194mm; height: 136mm; min-height: 0; margin: 0 0 6mm;
+      box-shadow: none; break-inside: avoid; page-break-inside: avoid;
       -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
     .sticker:nth-child(2n) { margin-bottom: 0; page-break-after: always; }
     .sticker:last-child { page-break-after: auto; }
-    .num { font-size: 48pt; }
-    .body { padding: 8mm 10mm; }
+    .inner { min-height: 0; height: 100%; padding: 6mm 7mm; }
+    .seal { width: 22mm; height: 22mm; font-size: 16pt; }
     .brand { font-size: 11pt; }
-    .guests li { font-size: 60pt; }
-    .guests.two li { font-size: 42pt; }
-    .guests.three li { font-size: 32pt; }
-    .guests.four li { font-size: 26pt; }
-    .sticker.bridal { grid-template-columns: 48mm 1fr; min-height: 0; }
-    .sticker.bridal .num { font-size: 52pt; }
-    .sticker.bridal .guests.two li { font-size: 48pt; }
-    .dulhan { font-size: 36pt; }
-    .foot { font-size: 11pt; }
+    .guests li { font-size: 52pt; }
+    .guests.two li { font-size: 38pt; }
+    .guests.three li { font-size: 28pt; }
+    .guests.four li { font-size: 22pt; }
+    .script { font-size: 36pt; }
+    .sticker.saasu .script { font-size: 42pt; }
+    .foot { font-size: 10pt; }
   }
 </style>
 </head>
@@ -136,7 +170,7 @@
 <script>
 const ROOMS = [
   { n: "304", people: ["Raghib", "Noor"], bridal: true },
-  { n: "204", people: ["Ammi"] },
+  { n: "204", people: ["Ammi"], saasu: true },
   { n: "203", people: ["Sajid", "Huzaifa"] },
   { n: "202", people: ["Zeba", "Hania", "Mohsin"] },
   { n: "201", people: ["Chote Mamu", "Imjamam"] },
@@ -162,16 +196,36 @@ function sizeClass(r) {
   if (r.people.length === 2) return "two";
   return "one";
 }
+const corner = `<svg class="corner" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+  <path d="M6 58C6 22 22 6 58 6" stroke="currentColor" stroke-width="1.7"/>
+  <path d="M14 58C14 30 30 14 58 14" stroke="currentColor" stroke-width="1"/>
+  <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+  <path d="M22 8c5 7 12 8 18 2" stroke="currentColor" stroke-width="1"/>
+  <path d="M8 22c7 5 8 12 2 18" stroke="currentColor" stroke-width="1"/>
+</svg>`;
+const ornament = `<svg class="ornament" viewBox="0 0 160 18" fill="none" aria-hidden="true">
+  <path d="M4 9h58M98 9h58" stroke="currentColor" stroke-width="1.2"/>
+  <path d="M70 9l10-7 10 7-10 7z" stroke="currentColor" stroke-width="1.2"/>
+  <circle cx="80" cy="9" r="1.6" fill="currentColor"/>
+</svg>`;
 
 document.getElementById("sheets").innerHTML = ROOMS.map(r => {
   const names = r.people.map(p => `<li>${p}</li>`).join("");
-  const cls = ["sticker", r.bridal ? "bridal" : "", r.crew ? "crew" : ""].filter(Boolean).join(" ");
+  const cls = ["sticker", r.bridal ? "bridal" : "", r.saasu ? "saasu" : "", r.crew ? "crew" : ""].filter(Boolean).join(" ");
+  const script = r.bridal ? `<p class="script">Dulhan Kamra</p>` : r.saasu ? `<p class="script">Saasu Maa</p>` : "";
   return `
   <article class="${cls}">
-    <p class="num">${r.n}</p>
-    <div class="body">
-      <p class="brand">Noor weds Raghib</p>
-      ${r.bridal ? `<p class="dulhan">Dulhan Kamra</p>` : ""}
+    <div class="inner">
+      ${corner.replace('class="corner"', 'class="corner tl"')}
+      ${corner.replace('class="corner"', 'class="corner tr"')}
+      ${corner.replace('class="corner"', 'class="corner bl"')}
+      ${corner.replace('class="corner"', 'class="corner br"')}
+      <div class="head">
+        <p class="brand">Noor weds Raghib</p>
+        <p class="seal">${r.n}</p>
+      </div>
+      ${script}
+      ${ornament}
       <ul class="guests ${sizeClass(r)}">${names}</ul>
       <p class="foot">${foot(r)}</p>
     </div>
