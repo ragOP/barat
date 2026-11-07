@@ -104,6 +104,11 @@
   .pending-row .who { font-size: 18px; line-height: 1.25; }
   .plate.pending .seal { background: #8a4b16; }
   .plate.pending .foot { color: #8a4b16; }
+  .door.vacant, .plate.vacant .frame2 {
+    opacity: .72;
+    background: repeating-linear-gradient(-45deg, #efe0cc, #efe0cc 8px, #e4d2b8 8px, #e4d2b8 16px);
+  }
+  .door.vacant { color: #6a5348; border: 2px dashed #a88868; }
   .door {
     position: relative; text-align: center;
     border-radius: 14px 14px 6px 6px;
@@ -324,7 +329,7 @@ const ROOMS = [
   { n: "403", ok: true, people: ["Md Kamil", "Rahbar Shifat", "Abhishek Gupta"] },
   { n: "402", ok: true, people: ["Rooman Alam", "Abu Noman Khan"] },
   { n: "401", ok: true, people: ["Masood Raghib", "Ashif Alam"] },
-  { n: "400", ok: true, people: ["Kashif Ashiqui", "Shazi (Ayan Kumar)"] },
+  { n: "400", ok: true, people: ["Kashif Ashiqui", "Shazi (Ayan Kumar)", "Salman"] },
   { n: "304", ok: true, people: ["Salhaddin", "Quiser Imam"] },
   { n: "303", ok: true, people: ["Aziz Huda", "Parwez Alam"] },
   { n: "302", ok: true, people: ["Zainul Abadeen", "Tabish Hayat"] },
@@ -339,12 +344,12 @@ const ROOMS = [
   { n: "103", ok: true, people: ["Mumtaz", "Farghab Saud (Sartaj)"] },
   { n: "102", ok: true, people: ["Manir Huda", "Mazhar Hussain"] },
   { n: "101", ok: true, people: ["Zia Ashraf", "Tanweer Asraf"] },
-  { n: "100", ok: true, people: ["Md Shakeel (Samo)", "Owais"] }
+  { n: "100", ok: true, people: ["Md Shakeel (Samo)", "Owais"] },
+  { n: "001", ok: true, people: ["Modassir Barkat", "Sarwar Alam", "Md Seraj"] },
+  { n: "000", ok: true, vacant: true, people: [] }
 ];
 
-const PENDING = [
-  { n: "TBD", people: ["Modassir Barkat", "Sarwar Alam", "Md Seraj"] }
-];
+const PENDING = [];
 
 const corner = `
 <svg class="orn" viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -362,29 +367,34 @@ const FLOORS = [
   { id: 4, title: "4th floor", ordinal: "4" },
   { id: 3, title: "3rd floor", ordinal: "3" },
   { id: 2, title: "2nd floor", ordinal: "2" },
-  { id: 1, title: "1st floor", ordinal: "1" }
+  { id: 1, title: "1st floor", ordinal: "1" },
+  { id: 0, title: "Extra rooms", ordinal: "0" }
 ];
 
-function floorOf(n) { return Number(String(n)[0]); }
-function rank(n) { return "r" + String(n).slice(-2); }
+function floorOf(n) { return Number(String(n).padStart(3, "0")[0]); }
+function rank(n) { return "r" + String(n).padStart(3, "0").slice(-2); }
 function tag(r) {
   if (r.bridal) return "The Couple";
   if (r.king) return "Father of the Groom";
+  if (r.vacant) return "Vacant";
   if (r.pending) return "New room · number TBD";
-  if (String(r.n).endsWith("04")) return "Best on floor";
+  if (String(r.n).padStart(3, "0").endsWith("04")) return "Best on floor";
   return "Baraat Stay";
 }
-function names(people, king) {
+function names(people, king, vacant) {
+  if (vacant || !people.length) return "Vacant";
   return people.map(p => {
     if (king && p === "Najmul Huda") return "♛ " + p;
     return p;
   }).join("<br>");
 }
 function plateHtml(r) {
-  const lis = r.people.length === 2
-    ? `<li>${r.king ? "♛ " : ""}${r.people[0]}</li><li class="amp" aria-hidden="true">&amp;</li><li>${r.people[1]}</li>`
-    : r.people.map(p => `<li>${p}</li>`).join("");
-  const cls = `plate ${r.pending ? "pending" : rank(r.n)}${r.bridal ? " bridal" : ""}${r.king ? " king" : ""}`;
+  const lis = r.vacant || !r.people.length
+    ? `<li>Vacant</li>`
+    : r.people.length === 2
+      ? `<li>${r.king ? "♛ " : ""}${r.people[0]}</li><li class="amp" aria-hidden="true">&amp;</li><li>${r.people[1]}</li>`
+      : r.people.map(p => `<li>${p}</li>`).join("");
+  const cls = `plate ${r.pending ? "pending" : rank(r.n)}${r.bridal ? " bridal" : ""}${r.king ? " king" : ""}${r.vacant ? " vacant" : ""}`;
   return `
   <article class="${cls}">
     <div class="frame"><div class="frame2">
@@ -420,22 +430,23 @@ document.getElementById("pending").innerHTML = PENDING.length ? `
 document.getElementById("hotel").innerHTML = FLOORS.map(f => {
   const rooms = ROOMS.filter(r => floorOf(r.n) === f.id);
   const doors = rooms.map(r => `
-    <article class="door ${rank(r.n)}${r.bridal ? " couple" : ""}${r.king ? " king" : ""}">
+    <article class="door ${rank(r.n)}${r.bridal ? " couple" : ""}${r.king ? " king" : ""}${r.vacant ? " vacant" : ""}">
       ${r.king || r.bridal ? crown : ""}
       <div class="badge no">${r.n}</div>
-      <div class="who">${names(r.people, r.king)}</div>
+      <div class="who">${names(r.people, r.king, r.vacant)}</div>
       <div class="tag">${tag(r)}</div>
     </article>
   `).join("");
+  const locked = rooms.filter(r => r.ok && !r.vacant).length;
   return `
     <section class="floor">
       <div class="floor-head">
         <div class="floor-num">${f.ordinal}</div>
         <div>
           <h2>${f.title}</h2>
-          <p>Best room ${rooms[0].n} → ${rooms[rooms.length - 1].n}</p>
+          <p>Rooms ${rooms[0].n} → ${rooms[rooms.length - 1].n}</p>
         </div>
-        <div class="lock">${rooms.length} / ${rooms.length} locked</div>
+        <div class="lock">${locked} / ${rooms.length} filled</div>
       </div>
       <div class="corridor">${doors}</div>
     </section>`;
