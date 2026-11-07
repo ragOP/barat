@@ -167,6 +167,8 @@
     letter-spacing: .04em;
     text-transform: uppercase;
     font-size: 12px;
+    text-align: center;
+    text-decoration: none;
   }
   .btn-fill { background: var(--emerald); color: #f6f1e7; }
   .btn-line { background: transparent; color: var(--emerald); box-shadow: inset 0 0 0 1.5px var(--emerald); }
@@ -417,7 +419,7 @@
         </label>
         <div class="actions">
           <button class="btn btn-fill" type="button" id="print-board">Print room board</button>
-          <button class="btn btn-line" type="button" id="print-cards">Print door cards</button>
+          <a class="btn btn-line" href="/sticker2">Print door cards</a>
         </div>
       </div>
 
@@ -551,7 +553,6 @@ function printAs(mode) {
   window.print();
 }
 document.getElementById("print-board").addEventListener("click", () => printAs("board"));
-document.getElementById("print-cards").addEventListener("click", () => printAs("stickers"));
 window.addEventListener("afterprint", () => { document.body.dataset.print = ""; });
 </script>
 </body>
