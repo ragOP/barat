@@ -40,50 +40,98 @@
   }
   .sticker {
     background: var(--card);
-    border: 1.5px solid var(--wine);
-    min-height: 250px;
-    padding: 18px 22px 16px;
+    border: 3px solid var(--wine);
+    min-height: 280px;
+    padding: 8px;
     display: flex; flex-direction: column;
     break-inside: avoid;
+    position: relative;
   }
+  .frame {
+    flex: 1; display: flex; flex-direction: column;
+    border: 1.5px solid #c6a15a;
+    padding: 14px 16px 12px;
+    position: relative;
+    background:
+      radial-gradient(120px 80px at 0 0, rgba(198,161,90,.16), transparent 70%),
+      radial-gradient(120px 80px at 100% 100%, rgba(110,24,38,.06), transparent 70%);
+  }
+  .corner {
+    position: absolute; width: 46px; height: 46px; color: #b9924a; pointer-events: none;
+  }
+  .corner.tl { top: 6px; left: 6px; }
+  .corner.tr { top: 6px; right: 6px; transform: scaleX(-1); }
+  .corner.bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+  .corner.br { bottom: 6px; right: 6px; transform: scale(-1); }
   .top {
-    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    position: relative; z-index: 1;
   }
   .brand {
-    margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .16em;
-    text-transform: uppercase; color: var(--muted);
+    margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--wine);
   }
   .room {
-    margin: 0; font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 28px; font-weight: 700; line-height: 1; color: var(--wine);
+    margin: 0; width: 64px; height: 64px; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 2px solid var(--wine);
+    box-shadow: 0 0 0 4px #fffdfb, 0 0 0 5.5px #c6a15a;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 26px; font-weight: 700; line-height: 1; color: var(--wine);
+    background: transparent;
+  }
+  .rule {
+    height: 1px; margin: 10px 28px 0; position: relative; z-index: 1;
+    background: linear-gradient(90deg, transparent, #c6a15a 15%, #c6a15a 85%, transparent);
+  }
+  .rule:before, .rule:after {
+    content: ""; position: absolute; top: -4px; width: 9px; height: 9px;
+    border: 1.5px solid #c6a15a; transform: rotate(45deg); background: #fffdfb;
+  }
+  .rule:before { left: 18%; }
+  .rule:after { right: 18%; }
+  .crown {
+    width: 42px; height: 28px; margin: 8px auto 0; color: #b9924a; position: relative; z-index: 1;
   }
   .guests {
-    list-style: none; margin: 0; padding: 18px 0 8px;
+    list-style: none; margin: 0; padding: 8px 8px 0;
     flex: 1; display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 1;
   }
   .guests li {
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 700; line-height: .96; letter-spacing: -.02em;
-    font-size: clamp(46px, 8vw, 76px); color: var(--ink);
+    font-weight: 700; line-height: .92; letter-spacing: -.025em;
+    font-size: clamp(58px, 11vw, 96px); color: var(--ink);
   }
-  .guests.two li { font-size: clamp(40px, 6.4vw, 62px); }
-  .guests.three li { font-size: clamp(32px, 5vw, 46px); }
-  .guests.long li { font-size: clamp(34px, 5.2vw, 52px); }
+  .guests.two li { font-size: clamp(46px, 8vw, 72px); }
+  .guests.three li { font-size: clamp(36px, 6vw, 52px); }
+  .guests.long li { font-size: clamp(40px, 6.6vw, 60px); }
   .foot {
-    margin: 8px 0 0; font-size: 12px; font-weight: 600;
-    letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+    margin: 6px 0 2px; font-size: 13px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--wine);
+    position: relative; z-index: 1;
+  }
+  .sticker.papa .foot {
+    font-family: "Great Vibes", cursive; font-weight: 400;
+    font-size: 42px; letter-spacing: 0; text-transform: none; line-height: .8;
+    margin-left: 36px;
   }
 
   .sticker.bridal {
     background: #8d1530;
-    border-color: #e8c56d;
+    border: 1.5px solid #e8c56d;
     color: #fff8ef;
     min-height: 300px;
+    padding: 18px 22px 16px;
   }
   .sticker.bridal .brand,
   .sticker.bridal .foot { color: rgba(255, 244, 220, .78); }
-  .sticker.bridal .room { color: var(--gold); }
+  .sticker.bridal .room {
+    width: auto; height: auto; border: 0; box-shadow: none; border-radius: 0;
+    background: none; color: var(--gold); font-size: 28px;
+  }
   .sticker.bridal .guests li { color: #fff8ef; }
+  .sticker.bridal .guests.two li { font-size: clamp(40px, 6.4vw, 62px); }
   .dulhan {
     margin: 14px 0 0; font-family: "Great Vibes", cursive;
     font-size: clamp(42px, 7vw, 64px); line-height: .8; color: var(--gold);
@@ -106,10 +154,15 @@
     .brand { font-size: 11pt; }
     .room { font-size: 22pt; }
     .guests { padding-top: 6mm; }
-    .guests li { font-size: 64pt; }
-    .guests.two li { font-size: 46pt; }
-    .guests.three li { font-size: 34pt; }
-    .guests.long li { font-size: 40pt; }
+    .room { width: 18mm; height: 18mm; font-size: 16pt; }
+    .sticker.bridal .room { width: auto; height: auto; font-size: 22pt; }
+    .sticker.bridal .guests.two li { font-size: 46pt; }
+    .guests { padding-top: 2mm; }
+    .guests li { font-size: 78pt; }
+    .guests.two li { font-size: 52pt; }
+    .guests.three li { font-size: 36pt; }
+    .guests.long li { font-size: 44pt; }
+    .sticker.papa .foot { font-size: 32pt; }
     .dulhan { font-size: 42pt; }
     .foot { font-size: 11pt; }
     .sticker.bridal { min-height: 0; }
@@ -174,18 +227,45 @@ function sizeClass(r) {
   return "one";
 }
 
+const corner = `
+<svg class="corner" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  <path d="M6 46 Q6 6 46 6" stroke="currentColor" stroke-width="2"/>
+  <path d="M14 46 Q14 14 46 14" stroke="currentColor" stroke-width="1.2"/>
+  <circle cx="12" cy="12" r="2.4" fill="currentColor"/>
+</svg>`;
+const crown = `<svg class="crown" viewBox="0 0 64 40" fill="currentColor" aria-hidden="true"><path d="M6 34h52l-4-18-12 10L32 6 22 26 10 16 6 34z"/></svg>`;
+
 document.getElementById("sheets").innerHTML = ROOMS.map(r => {
-  const dulhan = r.bridal ? `<p class="dulhan">Dulhan</p>` : "";
   const names = r.people.map(p => `<li>${p}</li>`).join("");
+  const cls = ["sticker", r.bridal ? "bridal" : "", r.papa ? "papa" : "", r.king ? "king" : ""].filter(Boolean).join(" ");
+  if (r.bridal) {
+    return `
+    <article class="${cls}">
+      <div class="top">
+        <p class="brand">Noor weds Raghib</p>
+        <p class="room">${r.n}</p>
+      </div>
+      <p class="dulhan">Dulhan</p>
+      <ul class="guests ${sizeClass(r)}">${names}</ul>
+      <p class="foot">${foot(r)}</p>
+    </article>`;
+  }
   return `
-  <article class="sticker${r.bridal ? " bridal" : ""}">
-    <div class="top">
-      <p class="brand">Noor weds Raghib</p>
-      <p class="room">${r.n}</p>
+  <article class="${cls}">
+    <div class="frame">
+      ${corner.replace('class="corner"', 'class="corner tl"')}
+      ${corner.replace('class="corner"', 'class="corner tr"')}
+      ${corner.replace('class="corner"', 'class="corner bl"')}
+      ${corner.replace('class="corner"', 'class="corner br"')}
+      <div class="top">
+        <p class="brand">Noor weds Raghib</p>
+        <p class="room">${r.n}</p>
+      </div>
+      <div class="rule"></div>
+      ${r.king ? crown : ""}
+      <ul class="guests ${sizeClass(r)}">${names}</ul>
+      <p class="foot">${foot(r)}</p>
     </div>
-    ${dulhan}
-    <ul class="guests ${sizeClass(r)}">${names}</ul>
-    <p class="foot">${foot(r)}</p>
   </article>`;
 }).join("");
 </script>
