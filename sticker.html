@@ -110,6 +110,15 @@
   .guests.two li { font-size: clamp(46px, 8vw, 72px); }
   .guests.three li { font-size: clamp(36px, 6vw, 52px); }
   .guests.long li { font-size: clamp(40px, 6.6vw, 60px); }
+  .under {
+    list-style: none; margin: 8px 0 0; padding: 0;
+    position: relative; z-index: 1;
+  }
+  .under li {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 600; font-size: clamp(26px, 4.6vw, 36px);
+    line-height: 1.05; color: var(--wine);
+  }
   .foot {
     margin: 6px 0 2px; font-size: 13px; font-weight: 600;
     letter-spacing: .22em; text-transform: uppercase; color: var(--wine);
@@ -164,6 +173,7 @@
     .guests.two li { font-size: 52pt; }
     .guests.three li { font-size: 36pt; }
     .guests.long li { font-size: 44pt; }
+    .under li { font-size: 20pt; }
     .sticker.papa .foot { font-size: 32pt; }
     .dulhan { font-size: 36pt; }
     .foot { font-size: 11pt; }
@@ -188,11 +198,11 @@ const SKIP = new Set(["Shagufta", "Shaheena", "Rehana Begum"]);
 const ROOMS = [
   { n: "504", people: ["Raghib Najmi", "Afifa Noor"], bridal: true },
   { n: "503", people: ["Taazeem Najmi"] },
-  { n: "502", people: ["Aminul Huda Ansari"], papa: true },
-  { n: "501", people: ["Shakil Ahmed"] },
-  { n: "500", people: ["Aqil Ahmed"] },
+  { n: "502", people: ["Aminul Huda Ansari"], below: ["P Papa", "Choti Ammi"] },
+  { n: "501", people: ["Shakil Ahmed"], below: ["Bade Mama", "Badi Mami"] },
+  { n: "500", people: ["Aqil Ahmed"], below: ["Chote Mama", "Choti Mami"] },
   { n: "404", people: ["Aman Dev", "Sayem Kalim"] },
-  { n: "403", people: ["Md Kamil", "Rahbar Shifat"] },
+  { n: "403", people: ["Md Kamil Khan", "Rahbar Shifat Urf Golden"] },
   { n: "402", people: ["Rooman Alam", "Abu Noman Khan"] },
   { n: "401", people: ["Masood Raghib", "Ashif Alam"] },
   { n: "400", people: ["Kashif Ashiqui", "Shazi (Ayan Kumar)", "Salman"] },
@@ -238,6 +248,7 @@ const crown = `<svg class="crown" viewBox="0 0 64 40" fill="currentColor" aria-h
 
 document.getElementById("sheets").innerHTML = ROOMS.map(r => {
   const names = r.people.map(p => `<li>${p}</li>`).join("");
+  const under = (r.below || []).map(p => `<li>${p}</li>`).join("");
   const cls = ["sticker", r.bridal ? "bridal" : "", r.papa ? "papa" : "", r.king ? "king" : ""].filter(Boolean).join(" ");
   if (r.bridal) {
     return `
@@ -248,6 +259,7 @@ document.getElementById("sheets").innerHTML = ROOMS.map(r => {
       </div>
       <p class="dulhan">Dulhan Kamra</p>
       <ul class="guests ${sizeClass(r)}">${names}</ul>
+      ${under ? `<ul class="under">${under}</ul>` : ""}
       <p class="foot">${foot(r)}</p>
     </article>`;
   }
@@ -265,6 +277,7 @@ document.getElementById("sheets").innerHTML = ROOMS.map(r => {
       <div class="rule"></div>
       ${r.king ? crown : ""}
       <ul class="guests ${sizeClass(r)}">${names}</ul>
+      ${under ? `<ul class="under">${under}</ul>` : ""}
       <p class="foot">${foot(r)}</p>
     </div>
   </article>`;

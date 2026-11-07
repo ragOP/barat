@@ -124,6 +124,7 @@
   .door .badge { font-family: Cinzel, serif; letter-spacing: .12em; text-transform: uppercase; }
   .door .no { font-family: Cinzel, serif; font-weight: 700; line-height: 1; }
   .door .who { margin: 6px 0 0; font-size: 14px; line-height: 1.2; }
+  .below { display: block; margin-top: 3px; font-style: italic; font-size: .92em; }
   .door .tag {
     margin-top: auto; padding-top: 8px;
     font-family: Cinzel, serif; font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
@@ -242,6 +243,8 @@
   .plate.king .guests li { color: #ffe9a3; }
   .guests li + li { margin-top: 4px; }
   .guests.triple li { font-size: clamp(18px, 2.8vw, 28px); }
+  .plate .under { list-style: none; margin: 8px 0 0; padding: 0; }
+  .plate .under li { font-size: clamp(16px, 2.4vw, 24px); font-style: italic; line-height: 1.15; color: var(--wine); }
   .guests li.amp {
     font-family: "Great Vibes", cursive; color: var(--gold);
     font-size: 22px; font-weight: 400; line-height: 1; margin: 2px 0;
@@ -327,11 +330,11 @@
 const ROOMS = [
   { n: "504", ok: true, people: ["Raghib Najmi", "Afifa Noor"], bridal: true },
   { n: "503", ok: true, people: ["Taazeem Najmi"] },
-  { n: "502", ok: true, people: ["Aminul Huda Ansari"], papa: true },
-  { n: "501", ok: true, people: ["Shakil Ahmed"] },
-  { n: "500", ok: true, people: ["Aqil Ahmed"] },
+  { n: "502", ok: true, people: ["Aminul Huda Ansari"], below: ["P Papa", "Choti Ammi"] },
+  { n: "501", ok: true, people: ["Shakil Ahmed"], below: ["Bade Mama", "Badi Mami"] },
+  { n: "500", ok: true, people: ["Aqil Ahmed"], below: ["Chote Mama", "Choti Mami"] },
   { n: "404", ok: true, people: ["Aman Dev", "Sayem Kalim"] },
-  { n: "403", ok: true, people: ["Md Kamil", "Rahbar Shifat"] },
+  { n: "403", ok: true, people: ["Md Kamil Khan", "Rahbar Shifat Urf Golden"] },
   { n: "402", ok: true, people: ["Rooman Alam", "Abu Noman Khan"] },
   { n: "401", ok: true, people: ["Masood Raghib", "Ashif Alam"] },
   { n: "400", ok: true, people: ["Kashif Ashiqui", "Shazi (Ayan Kumar)", "Salman"] },
@@ -386,12 +389,14 @@ function tag(r) {
   if (r.pending) return "New room · number TBD";
   return "Baraat Stay";
 }
-function names(people, king, vacant) {
+function names(people, king, vacant, below) {
   if (vacant || !people.length) return "Vacant";
-  return people.map(p => {
+  const main = people.map(p => {
     if (king && p === "Najmul Huda") return "♛ " + p;
     return p;
   }).join("<br>");
+  if (!below || !below.length) return main;
+  return main + `<span class="below">${below.join("<br>")}</span>`;
 }
 function plateHtml(r) {
   const lis = r.vacant || !r.people.length
@@ -413,6 +418,7 @@ function plateHtml(r) {
       <div class="rule"></div>
       <div class="seal"><span>Room</span><strong>${r.n}</strong></div>
       <ul class="guests${r.people.length > 2 ? " triple" : ""}">${lis}</ul>
+      ${(r.below || []).length ? `<ul class="under">${r.below.map(p => `<li>${p}</li>`).join("")}</ul>` : ""}
       <p class="foot">${tag(r)}</p>
     </div></div>
   </article>`;
@@ -438,7 +444,7 @@ document.getElementById("hotel").innerHTML = FLOORS.map(f => {
     <article class="door ${rank(r.n)}${r.bridal ? " couple" : ""}${r.king ? " king" : ""}${r.vacant ? " vacant" : ""}">
       ${r.king || r.bridal ? crown : ""}
       <div class="badge no">${r.n}</div>
-      <div class="who">${names(r.people, r.king, r.vacant)}</div>
+      <div class="who">${names(r.people, r.king, r.vacant, r.below)}</div>
       <div class="tag">${tag(r)}</div>
     </article>
   `).join("");
