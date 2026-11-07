@@ -323,7 +323,7 @@
 const ROOMS = [
   { n: "504", ok: true, people: ["Raghib Najmi", "Afifa Noor"], bridal: true },
   { n: "503", ok: true, people: ["Taazeem Najmi"] },
-  { n: "502", ok: true, people: ["Amin Huda"] },
+  { n: "502", ok: true, people: ["Aminul Huda Ansari"], papa: true },
   { n: "501", ok: true, people: ["Shakil Ahmed"] },
   { n: "500", ok: true, people: ["Aqil Ahmed"] },
   { n: "404", ok: true, people: ["Aman Dev", "Sayem Kalim"] },
@@ -377,6 +377,7 @@ function rank(n) { return "r" + String(n).padStart(3, "0").slice(-2); }
 function tag(r) {
   if (r.bridal) return "The Couple";
   if (r.king) return "Father of the Groom";
+  if (r.papa) return "Papa";
   if (r.vacant) return "Vacant";
   if (r.pending) return "New room · number TBD";
   if (String(r.n).padStart(3, "0").endsWith("04")) return "Best on floor";
