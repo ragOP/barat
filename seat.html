@@ -161,11 +161,11 @@
   <section class="aside">
     <h2>Notes</h2>
     <ul>
-      <li>Raghib’s group fills chairs 30–38 in C18. Golden is Abhishek Gupta. His ticket is C3-21.</li>
-      <li>Masood’s ticket is C3-24. Aqil takes that window, and Tanweer sits beside Zia.</li>
-      <li>Qaiser Mam is in C1. Salhaddin is in C18.</li>
-      <li>Md Seraj is in C3. Modassin Barkat and Sarwar Alam are in C18.</li>
-      <li>Owais does not have a ticket yet.</li>
+      <li>Raghib’s group is chairs 27–37 in C18: Raghib, Modassin, Sarwar, Rooman, Abhishek, Shazi, Abu Noman, Masood, Taazeem, Asif, Kashif.</li>
+      <li>Golden is Rahbar Shifat. That name is on Abhishek Gupta’s ticket, C3-21.</li>
+      <li>Md Kamil and Md Seraj sit together in C3, chairs 21 and 22.</li>
+      <li>Parwez Alam and Faizan Ahmed are off this plan.</li>
+      <li>Qaiser Mam is in C1. Salhaddin is in C18. Owais has no ticket yet.</li>
     </ul>
     <p class="links"><a href="/barat">Going list</a> · <a href="/rooms">Hotel rooms</a> · <a href="/">Home</a></p>
   </section>
@@ -180,8 +180,8 @@
 const PEOPLE = [
   ["Mohd Alam","C18",5,5,"alam","LKR",""],
   ["Manahil Alam","C18",6,6,"alam","LKR",""],
-  ["Modassin Barkat","C18",7,32,"crew","LKR",""],
-  ["Sarwar Alam","C18",8,33,"crew","LKR",""],
+  ["Modassin Barkat","C18",7,28,"crew","LKR",""],
+  ["Sarwar Alam","C18",8,29,"crew","LKR",""],
   ["Amin Huda","C18",23,9,"","LKR","Papa"],
   ["Tabish Hayat","C18",10,10,"tabish","LKR",""],
   ["Zainul Abadeen","C18",11,11,"tabish","LKR",""],
@@ -189,31 +189,31 @@ const PEOPLE = [
   ["Shakil Ahmed","C18",13,13,"shakil","LKR",""],
   ["Shaheena","C18",14,14,"shakil","LKR",""],
   ["Rehana Begum","C18",15,15,"","LKR",""],
-  ["Faisal Shakeel","C18",18,18,"faisal","LKR",""],
-  ["Faizan Ahmed","C18",19,19,"faisal","LKR",""],
-  ["Abu Noman Khan","C18",9,34,"crew","LKR",""],
-  ["Rooman Alam","C18",41,31,"crew","LKR",""],
-  ["Raghib Najmi","C18",22,30,"crew","LKR","Groom"],
+  ["Faisal Shakeel","C18",18,18,"","LKR",""],
+  ["Faizan Ahmed","C18",19,null,"","LKR",""],
+  ["Abu Noman Khan","C18",9,33,"crew","LKR",""],
+  ["Rooman Alam","C18",41,30,"crew","LKR",""],
+  ["Raghib Najmi","C18",22,27,"crew","LKR","Groom"],
   ["Israr Rafique","C18",12,23,"najmul","LKR",""],
   ["Najmul Huda","C18",20,24,"najmul","LKR","Father"],
-  ["Taazeem Najmi","C18",21,36,"crew","LKR",""],
-  ["Shagufta","C18",26,26,"shagufta","LKR",""],
-  ["Shazi","C18",27,27,"shagufta","LKR",""],
-  ["Mazhar Hussain","C18",36,28,"manir","LKR",""],
-  ["Manir Huda","C18",29,29,"manir","LKR",""],
-  ["Asif Alam","C18",30,37,"crew","LKR",""],
+  ["Taazeem Najmi","C18",21,35,"crew","LKR",""],
+  ["Shagufta","C18",26,26,"","LKR",""],
+  ["Shazi","C18",27,32,"crew","LKR",""],
+  ["Mazhar Hussain","C18",36,20,"manir","LKR",""],
+  ["Manir Huda","C18",29,21,"manir","LKR",""],
+  ["Asif Alam","C18",30,36,"crew","LKR",""],
   ["Tanweer Ashraf","C3",31,26,"zia","LKR","","C18"],
   ["Salhaddin","C18",32,22,"","LKR",""],
-  ["Aziz Huda","C18",24,21,"aziz","LKR",""],
-  ["Parwez Alam","C18",25,20,"aziz","LKR",""],
+  ["Aziz Huda","C18",24,19,"","LKR",""],
+  ["Parwez Alam","C18",25,null,"","LKR",""],
   ["Tabrez Hayat","C18",35,8,"tabrez","LKR",""],
   ["Minhajul Abeeden","C18",34,7,"tabrez","LKR",""],
   ["Sartaj Alam","C18",37,25,"","LKR",""],
-  ["Abhishek Gupta","C18",21,38,"crew","LKR","Golden","C3"],
-  ["Kashif Ashiqui","C18",28,41,"","LKR",""],
-  ["Md Kamil","C3",22,22,"","LKR",""],
-  ["Md Seraj","C3",23,23,"","LKR",""],
-  ["Masood Raghib","C18",24,35,"crew","LKR","","C3"],
+  ["Abhishek Gupta","C18",21,31,"crew","LKR","Golden","C3"],
+  ["Kashif Ashiqui","C18",28,37,"crew","LKR",""],
+  ["Md Kamil","C3",22,21,"kamil","LKR",""],
+  ["Md Seraj","C3",23,22,"kamil","LKR",""],
+  ["Masood Raghib","C18",24,34,"crew","LKR","","C3"],
   ["Zia Ashraf","C3",25,25,"zia","LKR",""],
   ["Aqil Ahmed","C3",26,24,"","LKR",""],
   ["Shahwaz Anis","C3",50,50,"shahwaz","ASN",""],
@@ -231,7 +231,7 @@ const PEOPLE = [
 const COLOR = {
   alam:"#e4f1dd", barkat:"#d9e6f6", tabish:"#fdecd2", shakil:"#f8dce6",
   faisal:"#e8def8", shagufta:"#f8ddd4", noman:"#d7f2ea", najmul:"#f6e7bc",
-  crew:"#d4e8f8", zia:"#e5f3d4",
+  crew:"#d4e8f8", zia:"#e5f3d4", kamil:"#fde7c8",
   manir:"#dce8f8", aziz:"#f8e3cc", tabrez:"#e6efd6", soeb:"#d7f1e4",
   shahwaz:"#e7e0f7", sajid:"#f8ebc9", fahim:"#f6ddd8"
 };
@@ -270,10 +270,8 @@ function connected(seats) {
 }
 function asBlock(seats) {
   if (connected(seats)) return true;
-  const rows = seats.map(rowOf);
-  const min = Math.min(...rows), max = Math.max(...rows);
-  const span = Math.max(...seats) - Math.min(...seats);
-  return max - min === 1 && span <= 9 && seats.length >= 4;
+  const sorted = [...seats].sort((a, b) => a - b);
+  return sorted.every((s, i) => i === 0 || s - sorted[i - 1] === 1);
 }
 function groups(mode) {
   const g = {};
@@ -292,7 +290,10 @@ function groups(mode) {
   return { together, split };
 }
 function loc(p) {
-  if (mode === "plan") return { coach: p.coach, seat: p.plan };
+  if (mode === "plan") {
+    if (p.plan == null) return null;
+    return { coach: p.coach, seat: p.plan };
+  }
   if (p.ticket == null) return null;
   return { coach: p.from, seat: p.ticket };
 }
@@ -387,7 +388,7 @@ function coachHtml(c) {
 function render() {
   const g = groups(mode);
   document.getElementById("lede").textContent = mode === "plan"
-    ? g.together + " groups sit side by side. Raghib’s group is chairs 30–38 in C18. A ticket number under the name is the chair on their slip."
+    ? g.together + " groups sit side by side. Raghib’s group is chairs 27–37 in C18. A ticket number under the name is the chair on their slip."
     : "This is the chair printed on each ticket. Split marks a room pair sitting apart.";
   document.getElementById("btnPlan").classList.toggle("on", mode === "plan");
   document.getElementById("btnTicket").classList.toggle("on", mode === "ticket");
