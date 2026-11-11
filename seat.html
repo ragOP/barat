@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Who sits where — 15 Nov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1b2433;
+    --muted: #6d6458;
+    --paper: #ebe4d6;
+    --navy: #1e3358;
+    --line: #e3d9c8;
+    --card: #fffcf7;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: Outfit, system-ui, sans-serif;
+    padding: 22px 14px calc(96px + env(safe-area-inset-bottom));
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .kicker {
+    margin: 0; letter-spacing: .16em; text-transform: uppercase;
+    font-size: 11px; font-weight: 700; color: var(--muted);
+  }
+  h1 { margin: 4px 0 8px; font-size: 32px; letter-spacing: -.03em; line-height: 1; }
+  .lede { margin: 0 0 14px; color: #4e463c; font-size: 15px; line-height: 1.4; }
+  .toggle {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    background: #e3dacb; padding: 4px; border-radius: 14px; margin-bottom: 12px;
+  }
+  .toggle button {
+    border: 0; background: transparent; font: inherit; font-weight: 600;
+    font-size: 14px; padding: 10px 8px; border-radius: 11px; color: #5c5348; cursor: pointer;
+  }
+  .toggle button.on { background: #fff; color: var(--navy); box-shadow: 0 1px 2px rgba(30,51,88,.12); }
+  .jumps { display: flex; gap: 8px; margin: 0 0 14px; position: sticky; top: 0; z-index: 4;
+    background: rgba(235,228,214,.94); backdrop-filter: blur(8px); padding: 8px 0; }
+  .jumps a {
+    flex: 1; text-align: center; text-decoration: none; color: var(--navy);
+    background: #fff; border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 6px; font-size: 13px; font-weight: 700;
+  }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 0 0 16px; font-size: 12px; color: var(--muted); }
+  .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 4px; vertical-align: -1px; margin-right: 5px; background: #f6e7bc; box-shadow: inset 0 0 0 1px rgba(30,51,88,.15); }
+  .swatch.plain { background: #fff; }
+  .coach { margin: 0 0 22px; }
+  .coach-head {
+    display: flex; justify-content: space-between; gap: 10px; align-items: flex-end;
+    margin: 0 0 8px;
+  }
+  .coach-head h2 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+  .coach-head p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+  .coach-head b { font-size: 13px; color: var(--navy); }
+  .shell {
+    background: var(--card);
+    border: 2px solid var(--navy);
+    border-radius: 28px;
+    padding: 12px 8px 14px;
+    box-shadow: 0 10px 28px rgba(30,51,88,.06);
+  }
+  .endcap {
+    text-align: center; font-size: 10px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: #8a7d6c; margin: 0 0 8px;
+  }
+  .endcap.back { margin: 8px 0 0; }
+  .divider {
+    margin: 10px 4px; padding: 6px 8px; border-radius: 10px;
+    background: #1e3358; color: #fff; font-size: 12px; font-weight: 600;
+    letter-spacing: .02em;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 12px 1fr 1fr;
+    column-gap: 4px;
+    margin: 0 0 6px;
+    align-items: stretch;
+  }
+  .bay { display: flex; gap: 4px; min-width: 0; border-radius: 12px; }
+  .bay.pair { background: var(--c); padding: 3px; }
+  .bay.s1 { grid-column: span 1; }
+  .bay.s2 { grid-column: span 2; }
+  .bay.s3 { grid-column: span 3; }
+  .aisle { grid-column: 4; border-radius: 99px;
+    background: repeating-linear-gradient(to bottom, transparent 0 5px, #e6dccb 5px 9px); }
+  .seat {
+    flex: 1; min-width: 0; background: #fff; border-radius: 10px;
+    border: 1px solid #eadfce; padding: 6px 5px 7px; min-height: 76px;
+    display: flex; flex-direction: column; position: relative;
+  }
+  .bay.pair .seat { border-color: transparent; background: rgba(255,255,255,.55); }
+  .seat.empty {
+    background: transparent; border-style: dashed; color: #c3b7a6;
+    min-height: 76px; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+  }
+  .seat .top { display: flex; justify-content: space-between; gap: 4px; align-items: baseline; }
+  .seat .no { font-weight: 700; font-size: 13px; color: var(--navy); }
+  .seat .ty { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #8d7f6d; }
+  .seat.win .ty { color: #8a6420; }
+  .seat .nm { margin-top: 5px; font-size: 12.5px; font-weight: 600; line-height: 1.15; letter-spacing: -.02em; }
+  .seat .nm.long { font-size: 11px; }
+  .seat .sub { margin-top: auto; padding-top: 4px; font-size: 10px; color: #7a6d5e; line-height: 1.2; }
+  .seat .sub em { font-style: normal; color: var(--navy); font-weight: 700; }
+  .seat.win.edge-l { box-shadow: inset 3px 0 0 #e0c98a; }
+  .seat.win.edge-r { box-shadow: inset -3px 0 0 #e0c98a; }
+  .foot { margin: 8px 4px 0; font-size: 13px; color: #5c5348; line-height: 1.35; }
+  .aside {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; margin-top: 4px;
+  }
+  .aside h2 { margin: 0 0 6px; font-size: 15px; }
+  .aside ul { margin: 0; padding-left: 18px; color: #4e463c; font-size: 14px; line-height: 1.45; }
+  .aside li { margin: 0 0 4px; }
+  .links { margin: 14px 0 0; font-size: 14px; }
+  .links a { color: var(--navy); font-weight: 700; }
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    background: #14284d;
+    padding: 6px 8px calc(8px + env(safe-area-inset-bottom));
+  }
+  .tabbar a {
+    color: rgba(255,255,255,.72); text-align: center; text-decoration: none;
+    font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+    padding: 11px 4px; border-radius: 12px;
+  }
+  .tabbar a.on { background: rgba(255,255,255,.14); color: #fff; }
+  @media (min-width: 720px) {
+    .seat .nm { font-size: 13px; }
+    .tabbar { display: none; }
+    body { padding-bottom: 28px; }
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .toggle, .jumps, .tabbar, .links { display: none !important; }
+    .shell { box-shadow: none; break-inside: avoid; }
+    .coach { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">15 Nov 2026 · 22348 Vande Bharat · CC</p>
+  <h1>Who sits where</h1>
+  <p class="lede" id="lede"></p>
+  <div class="toggle" role="tablist">
+    <button type="button" id="btnPlan" class="on">Sit together</button>
+    <button type="button" id="btnTicket">On the ticket</button>
+  </div>
+  <nav class="jumps" aria-label="Coaches">
+    <a href="#c18">C18</a>
+    <a href="#c3">C3</a>
+    <a href="#c1">C1</a>
+  </nav>
+  <p class="legend"><span><i class="swatch"></i>Same colour sits together</span><span><i class="swatch plain"></i>On their own</span><span>Gold edge = window</span></p>
+  <div id="coaches"></div>
+  <section class="aside">
+    <h2>Different coaches</h2>
+    <ul>
+      <li>Masood Raghib is in C3. Asif Alam is in C18.</li>
+      <li>Zia Ashraf is in C3. Tanweer Ashraf is in C18.</li>
+      <li>Qaiser Mam is in C1. Salhaddin is in C18.</li>
+      <li>Md Seraj is in C3. Modassin Barkat and Sarwar Alam are in C18.</li>
+      <li>Owais does not have a ticket yet.</li>
+    </ul>
+    <p class="links"><a href="/barat">Going list</a> · <a href="/rooms">Hotel rooms</a> · <a href="/">Home</a></p>
+  </section>
+</div>
+<nav class="tabbar" aria-label="Pages">
+  <a href="/barat">Going</a>
+  <a class="on" href="/seat">Seats</a>
+  <a href="/return">Return</a>
+  <a href="/rooms">Rooms</a>
+</nav>
+<script>
+const PEOPLE = [
+  ["Mohd Alam","C18",5,5,"alam","LKR",""],
+  ["Manahil Alam","C18",6,6,"alam","LKR",""],
+  ["Modassin Barkat","C18",7,7,"barkat","LKR",""],
+  ["Sarwar Alam","C18",8,8,"barkat","LKR",""],
+  ["Amin Huda","C18",23,9,"","LKR","Papa"],
+  ["Tabish Hayat","C18",10,10,"tabish","LKR",""],
+  ["Zainul Abadeen","C18",11,11,"tabish","LKR",""],
+  ["Mumtaz","C18",33,12,"","LKR",""],
+  ["Shakil Ahmed","C18",13,13,"shakil","LKR",""],
+  ["Shaheena","C18",14,14,"shakil","LKR",""],
+  ["Rehana Begum","C18",15,15,"","LKR",""],
+  ["Faisal Shakeel","C18",18,18,"faisal","LKR",""],
+  ["Faizan Ahmed","C18",19,19,"faisal","LKR",""],
+  ["Abu Noman Khan","C18",9,20,"noman","LKR",""],
+  ["Rooman Alam","C18",41,21,"noman","LKR",""],
+  ["Raghib Najmi","C18",22,22,"","LKR","Groom"],
+  ["Israr Rafique","C18",12,23,"najmul","LKR",""],
+  ["Najmul Huda","C18",20,24,"najmul","LKR","Father"],
+  ["Taazeem Najmi","C18",21,25,"","LKR",""],
+  ["Shagufta","C18",26,26,"shagufta","LKR",""],
+  ["Shazi","C18",27,27,"shagufta","LKR",""],
+  ["Mazhar Hussain","C18",36,28,"manir","LKR",""],
+  ["Manir Huda","C18",29,29,"manir","LKR",""],
+  ["Asif Alam","C18",30,30,"","LKR",""],
+  ["Tanweer Ashraf","C18",31,31,"","LKR",""],
+  ["Salhaddin","C18",32,32,"","LKR",""],
+  ["Aziz Huda","C18",24,33,"aziz","LKR",""],
+  ["Parwez Alam","C18",25,34,"aziz","LKR",""],
+  ["Tabrez Hayat","C18",35,35,"tabrez","LKR",""],
+  ["Minhajul Abeeden","C18",34,36,"tabrez","LKR",""],
+  ["Sartaj Alam","C18",37,37,"","LKR",""],
+  ["Kashif Ashiqui","C18",28,41,"","LKR",""],
+  ["Abhishek Gupta","C3",21,21,"","LKR",""],
+  ["Md Kamil","C3",22,22,"","LKR",""],
+  ["Md Seraj","C3",23,23,"","LKR",""],
+  ["Masood Raghib","C3",24,24,"","LKR",""],
+  ["Zia Ashraf","C3",25,25,"","LKR",""],
+  ["Aqil Ahmed","C3",26,26,"","LKR",""],
+  ["Shahwaz Anis","C3",50,50,"shahwaz","ASN",""],
+  ["Anwarul Haque","C3",52,51,"shahwaz","ASN",""],
+  ["Fahimul Huda","C3",53,52,"fahim","ASN",""],
+  ["Sajidul Huda","C3",51,53,"sajid","ASN",""],
+  ["Imranul Huda","C3",54,54,"sajid","ASN",""],
+  ["Sajjadul Arfan","C3",55,55,"fahim","ASN",""],
+  ["Shamim Iqbal","C3",64,64,"","ASN","Samo"],
+  ["Soeb Raja","C1",10,10,"soeb","PNBE",""],
+  ["Nasim Perwaz","C1",12,11,"soeb","PNBE",""],
+  ["Qaiser Mam","C1",11,12,"","PNBE",""]
+].map(r => ({ name:r[0], coach:r[1], ticket:r[2], plan:r[3], pair:r[4], board:r[5], tag:r[6] }));
+
+const COLOR = {
+  alam:"#e4f1dd", barkat:"#d9e6f6", tabish:"#fdecd2", shakil:"#f8dce6",
+  faisal:"#e8def8", shagufta:"#f8ddd4", noman:"#d7f2ea", najmul:"#f6e7bc",
+  manir:"#dce8f8", aziz:"#f8e3cc", tabrez:"#e6efd6", soeb:"#d7f1e4",
+  shahwaz:"#e7e0f7", sajid:"#f8ebc9", fahim:"#f6ddd8"
+};
+
+const COACHES = [
+  { id:"C18", anchor:"c18", title:"Coach C18", meta:"32 people · boards Luckeesarai 09:30" },
+  { id:"C3", anchor:"c3", title:"Coach C3", meta:"13 people · Luckeesarai, then Asansol" },
+  { id:"C1", anchor:"c1", title:"Coach C1", meta:"3 people · boards Patna 08:00" }
+];
+
+const TYPES = ["window","middle","aisle","aisle","window"];
+
+function rowOf(n) {
+  const off = n - 5;
+  return 2 + Math.floor(off / 5);
+}
+function startOf(row) { return 5 + (row - 2) * 5; }
+function idxOf(n) { return (n - 5) % 5; }
+
+function adjacent(a, b) {
+  if (rowOf(a) !== rowOf(b)) return false;
+  return Math.abs(idxOf(a) - idxOf(b)) === 1;
+}
+function connected(seats) {
+  if (seats.length < 2) return true;
+  const seen = new Set([seats[0]]);
+  const q = [seats[0]];
+  while (q.length) {
+    const cur = q.pop();
+    for (const s of seats) {
+      if (seen.has(s)) continue;
+      if (adjacent(cur, s)) { seen.add(s); q.push(s); }
+    }
+  }
+  return seen.size === seats.length;
+}
+function groups(mode) {
+  const g = {};
+  for (const p of PEOPLE) {
+    if (!p.pair) continue;
+    (g[p.pair] ||= []).push(p[mode]);
+  }
+  let together = 0, split = [];
+  for (const [id, seats] of Object.entries(g)) {
+    if (connected(seats)) together++;
+    else split.push(id);
+  }
+  return { together, split };
+}
+
+let mode = "plan";
+
+function bays(seats) {
+  const out = [];
+  for (const s of seats) {
+    const id = s.person && s.person.pair;
+    const prev = out[out.length - 1];
+    if (prev && id && prev.id === id) prev.seats.push(s);
+    else out.push({ id: id || "", seats: [s] });
+  }
+  return out;
+}
+
+function seatHtml(s) {
+  if (!s.person) {
+    return `<div class="seat empty"><span>${s.n}</span></div>`;
+  }
+  const p = s.person;
+  const bits = [];
+  if (p.tag) bits.push(p.tag);
+  if (mode === "plan" && p.plan !== p.ticket) bits.push("Ticket " + p.ticket);
+  if (mode === "ticket" && p.pair) {
+    const mates = PEOPLE.filter(o => o.pair === p.pair);
+    const seats = mates.map(o => o.ticket);
+    if (!connected(seats)) bits.push("Split");
+  }
+  const long = p.name.length > 14 ? " long" : "";
+  const edge = s.i === 0 ? " edge-l" : s.i === 4 ? " edge-r" : "";
+  const win = s.type === "window" ? " win" : "";
+  return `<div class="seat${win}${edge}">
+    <div class="top"><span class="no">${s.n}</span><span class="ty">${s.type}</span></div>
+    <div class="nm${long}">${p.name}</div>
+    ${bits.length ? `<div class="sub">${bits.map((b,i) => i === 0 && p.tag && b === p.tag ? `<em>${b}</em>` : b).join(" · ")}</div>` : ""}
+  </div>`;
+}
+
+function bayHtml(bay) {
+  const span = "s" + bay.seats.length;
+  const on = Boolean(bay.id);
+  const style = on ? ` style="--c:${COLOR[bay.id]}"` : "";
+  return `<div class="bay ${span}${on ? " pair" : ""}"${style}>${bay.seats.map(seatHtml).join("")}</div>`;
+}
+
+function coachHtml(c) {
+  const list = PEOPLE.filter(p => p.coach === c.id);
+  const placed = {};
+  for (const p of list) placed[p[mode]] = p;
+  const rows = [...new Set(list.map(p => rowOf(p[mode])))].sort((a,b) => a - b);
+  let prevAsn = false;
+  const body = rows.map(row => {
+    const start = startOf(row);
+    const seats = TYPES.map((type, i) => ({
+      n: start + i, i, type, person: placed[start + i] || null
+    }));
+    const asn = start >= 50;
+    const divider = asn && !prevAsn ? `<div class="divider">Asansol boards here · 11:58</div>` : "";
+    prevAsn = asn;
+    const left = bays(seats.slice(0, 3)).map(bayHtml).join("");
+    const right = bays(seats.slice(3)).map(bayHtml).join("");
+    return `${divider}<div class="row">${left}<div class="aisle"></div>${right}</div>`;
+  }).join("");
+
+  const splitNames = {
+    fahim: "Fahim and Sajjad share a room. Sajjad keeps the next window — no two free chairs side by side were left for them."
+  };
+  const noteIds = groups(mode).split.filter(id => list.some(p => p.pair === id));
+  const note = mode === "plan"
+    ? noteIds.map(id => splitNames[id]).filter(Boolean).map(t => `<p class="foot">${t}</p>`).join("")
+    : "";
+
+  return `<section class="coach" id="${c.anchor}">
+    <div class="coach-head">
+      <div><h2>${c.title}</h2><p>${c.meta}</p></div>
+      <b>${list.length}</b>
+    </div>
+    <div class="shell">
+      <p class="endcap">Front · toward the engine</p>
+      ${body}
+      <p class="endcap back">Back</p>
+    </div>
+    ${note}
+  </section>`;
+}
+
+function render() {
+  const g = groups(mode);
+  document.getElementById("lede").textContent = mode === "plan"
+    ? g.together + " pairs sit side by side, the way the hotel rooms are shared. The window goes to the person who asked for a window. A ticket number under the name is the chair on their slip."
+    : "This is the chair printed on each ticket. Split marks a room pair sitting apart.";
+  document.getElementById("btnPlan").classList.toggle("on", mode === "plan");
+  document.getElementById("btnTicket").classList.toggle("on", mode === "ticket");
+  document.getElementById("coaches").innerHTML = COACHES.map(coachHtml).join("");
+  document.getElementById("btnPlan").setAttribute("aria-selected", mode === "plan" ? "true" : "false");
+  document.getElementById("btnTicket").setAttribute("aria-selected", mode === "ticket" ? "true" : "false");
+}
+
+document.getElementById("btnPlan").onclick = () => { mode = "plan"; render(); };
+document.getElementById("btnTicket").onclick = () => { mode = "ticket"; render(); };
+render();
+</script>
+</body>
+</html>

@@ -173,7 +173,7 @@
   .switch a { color: var(--navy); font-weight: 700; }
   .tabbar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
     background: var(--navy2);
     padding: 6px 8px calc(8px + env(safe-area-inset-bottom));
     box-shadow: 0 -8px 24px rgba(18,40,77,.2);
@@ -289,7 +289,7 @@
     </div>
   </aside>
   <main>
-    <p class="switch">Going (15 Nov) · <a href="/return">Return (16 Nov)</a> · <a href="/rooms">Rooms</a></p>
+    <p class="switch">Going (15 Nov) · <a href="/seat">Seat plan</a> · <a href="/return">Return (16 Nov)</a> · <a href="/rooms">Rooms</a></p>
     <div class="board">
       <div><small>Train</small><b>22348 VANDE BHARAT EXP</b></div>
       <div style="text-align:right"><small>Date · Class</small><b>15 Nov 2026 · CC</b></div>
@@ -300,6 +300,7 @@
 </div>
 <nav class="tabbar" aria-label="Pages">
   <a class="on" href="/barat">Going</a>
+  <a href="/seat">Seats</a>
   <a href="/return">Return</a>
   <a href="/rooms">Rooms</a>
 </nav>

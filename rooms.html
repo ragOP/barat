@@ -40,7 +40,7 @@
   .actions a { background: transparent; color: var(--wine); border: 1.5px solid var(--wine); }
   .tabbar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
     background: var(--wine2);
     padding: 6px 8px calc(8px + env(safe-area-inset-bottom));
     box-shadow: 0 -8px 24px rgba(74,16,27,.22);
@@ -321,6 +321,7 @@
     <a href="/sticker">Print door stickers</a>
     <a href="/return">Return train list</a>
     <a href="/barat">Going train list</a>
+    <a href="/seat">Train seat plan</a>
   </div>
   <div id="pending"></div>
   <div class="hotel" id="hotel"></div>
@@ -473,6 +474,7 @@ document.getElementById("plates").innerHTML =
 </script>
 <nav class="tabbar" aria-label="Pages">
   <a href="/barat">Going</a>
+  <a href="/seat">Seats</a>
   <a href="/return">Return</a>
   <a class="on" href="/rooms">Rooms</a>
 </nav>
