@@ -159,10 +159,10 @@
   <p class="legend"><span><i class="swatch"></i>Same colour sits together</span><span><i class="swatch plain"></i>On their own</span><span>Gold edge = window</span></p>
   <div id="coaches"></div>
   <section class="aside">
-    <h2>Different coaches</h2>
+    <h2>Notes</h2>
     <ul>
-      <li>Masood Raghib is in C3. Asif Alam is in C18.</li>
-      <li>Zia Ashraf is in C3. Tanweer Ashraf is in C18.</li>
+      <li>Raghib’s group fills chairs 30–38 in C18. Golden is Rahbar Shifat, on empty chair 38, because he has no ticket yet.</li>
+      <li>Masood’s ticket is C3-24. Aqil takes that window, and Tanweer sits beside Zia.</li>
       <li>Qaiser Mam is in C1. Salhaddin is in C18.</li>
       <li>Md Seraj is in C3. Modassin Barkat and Sarwar Alam are in C18.</li>
       <li>Owais does not have a ticket yet.</li>
@@ -180,8 +180,8 @@
 const PEOPLE = [
   ["Mohd Alam","C18",5,5,"alam","LKR",""],
   ["Manahil Alam","C18",6,6,"alam","LKR",""],
-  ["Modassin Barkat","C18",7,7,"barkat","LKR",""],
-  ["Sarwar Alam","C18",8,8,"barkat","LKR",""],
+  ["Modassin Barkat","C18",7,32,"crew","LKR",""],
+  ["Sarwar Alam","C18",8,33,"crew","LKR",""],
   ["Amin Huda","C18",23,9,"","LKR","Papa"],
   ["Tabish Hayat","C18",10,10,"tabish","LKR",""],
   ["Zainul Abadeen","C18",11,11,"tabish","LKR",""],
@@ -191,31 +191,32 @@ const PEOPLE = [
   ["Rehana Begum","C18",15,15,"","LKR",""],
   ["Faisal Shakeel","C18",18,18,"faisal","LKR",""],
   ["Faizan Ahmed","C18",19,19,"faisal","LKR",""],
-  ["Abu Noman Khan","C18",9,20,"noman","LKR",""],
-  ["Rooman Alam","C18",41,21,"noman","LKR",""],
-  ["Raghib Najmi","C18",22,22,"","LKR","Groom"],
+  ["Abu Noman Khan","C18",9,34,"crew","LKR",""],
+  ["Rooman Alam","C18",41,31,"crew","LKR",""],
+  ["Raghib Najmi","C18",22,30,"crew","LKR","Groom"],
   ["Israr Rafique","C18",12,23,"najmul","LKR",""],
   ["Najmul Huda","C18",20,24,"najmul","LKR","Father"],
-  ["Taazeem Najmi","C18",21,25,"","LKR",""],
+  ["Taazeem Najmi","C18",21,36,"crew","LKR",""],
   ["Shagufta","C18",26,26,"shagufta","LKR",""],
   ["Shazi","C18",27,27,"shagufta","LKR",""],
   ["Mazhar Hussain","C18",36,28,"manir","LKR",""],
   ["Manir Huda","C18",29,29,"manir","LKR",""],
-  ["Asif Alam","C18",30,30,"","LKR",""],
-  ["Tanweer Ashraf","C18",31,31,"","LKR",""],
-  ["Salhaddin","C18",32,32,"","LKR",""],
-  ["Aziz Huda","C18",24,33,"aziz","LKR",""],
-  ["Parwez Alam","C18",25,34,"aziz","LKR",""],
-  ["Tabrez Hayat","C18",35,35,"tabrez","LKR",""],
-  ["Minhajul Abeeden","C18",34,36,"tabrez","LKR",""],
-  ["Sartaj Alam","C18",37,37,"","LKR",""],
+  ["Asif Alam","C18",30,37,"crew","LKR",""],
+  ["Tanweer Ashraf","C3",31,26,"zia","LKR","","C18"],
+  ["Salhaddin","C18",32,22,"","LKR",""],
+  ["Aziz Huda","C18",24,21,"aziz","LKR",""],
+  ["Parwez Alam","C18",25,20,"aziz","LKR",""],
+  ["Tabrez Hayat","C18",35,8,"tabrez","LKR",""],
+  ["Minhajul Abeeden","C18",34,7,"tabrez","LKR",""],
+  ["Sartaj Alam","C18",37,25,"","LKR",""],
+  ["Golden","C18",null,38,"crew","LKR","Rahbar Shifat"],
   ["Kashif Ashiqui","C18",28,41,"","LKR",""],
   ["Abhishek Gupta","C3",21,21,"","LKR",""],
   ["Md Kamil","C3",22,22,"","LKR",""],
   ["Md Seraj","C3",23,23,"","LKR",""],
-  ["Masood Raghib","C3",24,24,"","LKR",""],
-  ["Zia Ashraf","C3",25,25,"","LKR",""],
-  ["Aqil Ahmed","C3",26,26,"","LKR",""],
+  ["Masood Raghib","C18",24,35,"crew","LKR","","C3"],
+  ["Zia Ashraf","C3",25,25,"zia","LKR",""],
+  ["Aqil Ahmed","C3",26,24,"","LKR",""],
   ["Shahwaz Anis","C3",50,50,"shahwaz","ASN",""],
   ["Anwarul Haque","C3",52,51,"shahwaz","ASN",""],
   ["Fahimul Huda","C3",53,52,"fahim","ASN",""],
@@ -226,17 +227,18 @@ const PEOPLE = [
   ["Soeb Raja","C1",10,10,"soeb","PNBE",""],
   ["Nasim Perwaz","C1",12,11,"soeb","PNBE",""],
   ["Qaiser Mam","C1",11,12,"","PNBE",""]
-].map(r => ({ name:r[0], coach:r[1], ticket:r[2], plan:r[3], pair:r[4], board:r[5], tag:r[6] }));
+].map(r => ({ name:r[0], coach:r[1], ticket:r[2], plan:r[3], pair:r[4], board:r[5], tag:r[6], from:r[7] || r[1] }));
 
 const COLOR = {
   alam:"#e4f1dd", barkat:"#d9e6f6", tabish:"#fdecd2", shakil:"#f8dce6",
   faisal:"#e8def8", shagufta:"#f8ddd4", noman:"#d7f2ea", najmul:"#f6e7bc",
+  crew:"#d4e8f8", zia:"#e5f3d4",
   manir:"#dce8f8", aziz:"#f8e3cc", tabrez:"#e6efd6", soeb:"#d7f1e4",
   shahwaz:"#e7e0f7", sajid:"#f8ebc9", fahim:"#f6ddd8"
 };
 
 const COACHES = [
-  { id:"C18", anchor:"c18", title:"Coach C18", meta:"32 people · boards Luckeesarai 09:30" },
+  { id:"C18", anchor:"c18", title:"Coach C18", meta:"Boards Luckeesarai 09:30" },
   { id:"C3", anchor:"c3", title:"Coach C3", meta:"13 people · Luckeesarai, then Asansol" },
   { id:"C1", anchor:"c1", title:"Coach C1", meta:"3 people · boards Patna 08:00" }
 ];
@@ -267,18 +269,33 @@ function connected(seats) {
   }
   return seen.size === seats.length;
 }
+function asBlock(seats) {
+  if (connected(seats)) return true;
+  const rows = seats.map(rowOf);
+  const min = Math.min(...rows), max = Math.max(...rows);
+  const span = Math.max(...seats) - Math.min(...seats);
+  return max - min === 1 && span <= 9 && seats.length >= 4;
+}
 function groups(mode) {
   const g = {};
   for (const p of PEOPLE) {
     if (!p.pair) continue;
-    (g[p.pair] ||= []).push(p[mode]);
+    const seat = mode === "plan" ? p.plan : p.ticket;
+    if (seat == null) continue;
+    (g[p.pair] ||= []).push(seat);
   }
   let together = 0, split = [];
   for (const [id, seats] of Object.entries(g)) {
-    if (connected(seats)) together++;
+    const ok = mode === "plan" ? asBlock(seats) : connected(seats);
+    if (ok) together++;
     else split.push(id);
   }
   return { together, split };
+}
+function loc(p) {
+  if (mode === "plan") return { coach: p.coach, seat: p.plan };
+  if (p.ticket == null) return null;
+  return { coach: p.from, seat: p.ticket };
 }
 
 let mode = "plan";
@@ -301,11 +318,14 @@ function seatHtml(s) {
   const p = s.person;
   const bits = [];
   if (p.tag) bits.push(p.tag);
-  if (mode === "plan" && p.plan !== p.ticket) bits.push("Ticket " + p.ticket);
+  if (mode === "plan" && p.ticket == null) bits.push("No ticket");
+  else if (mode === "plan" && (p.plan !== p.ticket || p.from !== p.coach)) {
+    bits.push(p.from !== p.coach ? "Ticket " + p.from + "-" + p.ticket : "Ticket " + p.ticket);
+  }
   if (mode === "ticket" && p.pair) {
-    const mates = PEOPLE.filter(o => o.pair === p.pair);
+    const mates = PEOPLE.filter(o => o.pair === p.pair && o.ticket != null);
     const seats = mates.map(o => o.ticket);
-    if (!connected(seats)) bits.push("Split");
+    if (seats.length > 1 && !connected(seats)) bits.push("Split");
   }
   const long = p.name.length > 14 ? " long" : "";
   const edge = s.i === 0 ? " edge-l" : s.i === 4 ? " edge-r" : "";
@@ -325,10 +345,10 @@ function bayHtml(bay) {
 }
 
 function coachHtml(c) {
-  const list = PEOPLE.filter(p => p.coach === c.id);
+  const list = PEOPLE.map(p => ({ p, at: loc(p) })).filter(x => x.at && x.at.coach === c.id);
   const placed = {};
-  for (const p of list) placed[p[mode]] = p;
-  const rows = [...new Set(list.map(p => rowOf(p[mode])))].sort((a,b) => a - b);
+  for (const x of list) placed[x.at.seat] = x.p;
+  const rows = [...new Set(list.map(x => rowOf(x.at.seat)))].sort((a,b) => a - b);
   let prevAsn = false;
   const body = rows.map(row => {
     const start = startOf(row);
@@ -346,7 +366,7 @@ function coachHtml(c) {
   const splitNames = {
     fahim: "Fahim and Sajjad share a room. Sajjad keeps the next window — no two free chairs side by side were left for them."
   };
-  const noteIds = groups(mode).split.filter(id => list.some(p => p.pair === id));
+  const noteIds = groups(mode).split.filter(id => list.some(x => x.p.pair === id));
   const note = mode === "plan"
     ? noteIds.map(id => splitNames[id]).filter(Boolean).map(t => `<p class="foot">${t}</p>`).join("")
     : "";
@@ -368,7 +388,7 @@ function coachHtml(c) {
 function render() {
   const g = groups(mode);
   document.getElementById("lede").textContent = mode === "plan"
-    ? g.together + " pairs sit side by side, the way the hotel rooms are shared. The window goes to the person who asked for a window. A ticket number under the name is the chair on their slip."
+    ? g.together + " groups sit side by side. Raghib’s group is chairs 30–38 in C18. A ticket number under the name is the chair on their slip."
     : "This is the chair printed on each ticket. Split marks a room pair sitting apart.";
   document.getElementById("btnPlan").classList.toggle("on", mode === "plan");
   document.getElementById("btnTicket").classList.toggle("on", mode === "ticket");
