@@ -144,6 +144,7 @@
   }
   .who h3 { margin: 0; font-size: 18px; line-height: 1.15; }
   .who .final { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+  .who .final.note { color: var(--navy); font-weight: 700; }
   .badge {
     min-width: 86px;
     text-align: center;
@@ -313,13 +314,13 @@ const ROWS = [
   ["6949803856","ABU NOMAN KHAN","ABU NOMAN KHAN",35,"M","NON VEG","C18 / 9","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
   ["6949803856","ROOMAN ALAM","ROOMAN ALAM",29,"M","NON VEG","C18 / 41","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
   ["6609698876","SHAGUFTA","SHAGUFTA",50,"F","NON VEG","C18 / 26","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
-  ["6609698876","SHAZI","SHAZI",44,"M","NON VEG","C18 / 27","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6609698876","SHAZI","SHAZI",44,"M","NON VEG","C18 / 27","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP","Substitute: Ayan"],
   ["6609698876","KASHIF ASHIQUI","KASHIF ASHIQUI",22,"M","NON VEG","C18 / 28","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
   ["6609698876","MANIR HUDA","MANIR HUDA",58,"M","NON VEG","C18 / 29","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
   ["6609698876","MAZHAR HUSSAIN","MAZHAR HUSSAIN",58,"M","NON VEG","C18 / 36","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
   ["6609698876","SARTAJ ALAM","SARTAJ ALAM",62,"M","NON VEG","C18 / 37","AISLE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
   ["6109700606","MASOOD RAGHIB","MASOOD RAGHIB",27,"M","VEG","C3 / 24","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
-  ["6109700606","ABHISHEK GUPTA","ABHISHEK GUPTA",29,"M","NON VEG","C3 / 21","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
+  ["6109700606","ABHISHEK GUPTA","ABHISHEK GUPTA",29,"M","NON VEG","C3 / 21","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP","Substitute: Golden (Rahbar Shifat)"],
   ["6109700606","MD KAMIL","MD KAMIL",29,"M","NON VEG","C3 / 22","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
   ["6109700606","MD SERAJ","MD SERAJ",31,"M","NON VEG","C3 / 23","NO CHOICE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
   ["6109700606","ZIA ASHRAF","ZIA ASHRAF",52,"M","NON VEG","C3 / 25","WINDOW SIDE","LUCKEESARAI JN (LKR)","15-Nov-2026","09:30","14:35","22348 / VANDE BHARAT EXP"],
@@ -356,7 +357,8 @@ const ROWS = [
   coachSeat:r[6], pref:r[7], from:r[8], date:r[9], dep:r[10], arr:r[11], train:r[12],
   coach: r[6].split(" / ")[0], seat: Number(r[6].split(" / ")[1]),
   code: r[8].includes("PNBE") ? "PNBE" : r[8].includes("ASN") ? "ASN" : "LKR",
-  st: r[8].includes("PNBE") ? "PNBE" : r[8].includes("ASN") ? "ASN" : "LKR"
+  st: r[8].includes("PNBE") ? "PNBE" : r[8].includes("ASN") ? "ASN" : "LKR",
+  note: r[13] || ""
 }));
 
 function rows() {
@@ -367,7 +369,7 @@ function rows() {
   const gender = document.getElementById("gender").value;
   const sort = document.getElementById("sort").value;
   let out = ROWS.filter(r => {
-    const hay = [r.pnr, r.ticket, r.final, r.coachSeat, r.pref, r.from].join(" ").toLowerCase();
+    const hay = [r.pnr, r.ticket, r.final, r.note, r.coachSeat, r.pref, r.from].join(" ").toLowerCase();
     return (!q || hay.includes(q))
       && (from === "all" || r.code === from)
       && (coach === "all" || r.coach === coach)
@@ -418,7 +420,7 @@ function render() {
         <div class="who">
           <div>
             <h3>${r.ticket}</h3>
-            <p class="final">Final list name: ${r.final}</p>
+            <p class="final${r.note ? " note" : ""}">${r.note || "Final list name: " + r.final}</p>
           </div>
           <div class="badge"><b>${r.coach}-${r.seat}</b><span>${r.pref}</span></div>
         </div>

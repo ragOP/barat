@@ -76,6 +76,7 @@
   .who { display: flex; justify-content: space-between; gap: 10px; padding: 12px 0 8px; }
   .who h3 { margin: 0; font-size: 18px; line-height: 1.15; }
   .who .final { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+  .who .final.note { color: var(--navy); font-weight: 700; }
   .badge {
     min-width: 86px; text-align: center; background: #4e1b0e; color: #fff;
     border-radius: 12px; padding: 8px 8px 7px;
@@ -229,7 +230,7 @@ const ROWS = [
   ["6209732543","AMIN HUDA","AMIN HUDA",55,"M","C2 / 24","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6209732543","AZIZ HUDA","AZIZ HUDA",55,"M","C2 / 25","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6109731962","MASOOD RAGHIB","MASOOD RAGHIB",27,"M","C2 / 40","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
-  ["6109731962","ABHISHEK GUPTA","ABHISHEK GUPTA",29,"M","C2 / 41","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
+  ["6109731962","ABHISHEK GUPTA","ABHISHEK GUPTA",29,"M","C2 / 41","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP","Substitute: Golden (Rahbar Shifat)"],
   ["6109731962","MD KAMIL","MD KAMIL",29,"M","C2 / 42","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6109731962","MD SERAJ","MD SERAJ",31,"M","C2 / 43","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6109731962","ZIA ASHRAF","ZIA ASHRAF",52,"M","C2 / 44","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
@@ -244,7 +245,7 @@ const ROWS = [
   ["6109768692","SAYEM KALIM","SAYEM KALIM",25,"M","C1 / 69","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6109768692","RAHBAR SHIFAT","RAHBAR SHIFAT",29,"M","C1 / 68","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6949837015","SHAGUFTA","SHAGUFTA",50,"F","C1 / 70","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
-  ["6949837015","SHAZI","SHAZI",44,"M","C1 / 71","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
+  ["6949837015","SHAZI","SHAZI",44,"M","C1 / 71","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP","Substitute: Ayan"],
   ["6949837015","KASHIF ASHIQUI","KASHIF ASHIQUI",22,"M","C1 / 72","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6949837015","MANIR HUDA","MANIR HUDA",58,"M","C1 / 73","NO CHOICE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
   ["6949837015","MAZHAR HUSSAIN","MAZHAR HUSSAIN",58,"M","C1 / 74","WINDOW SIDE","HOWRAH JN (HWH)","LUCKEESARAI JN (LKR)","16-Nov-2026","14:05","19:53","12023 / JANSHATABDI EXP"],
@@ -261,7 +262,8 @@ const ROWS = [
   pnr:r[0], ticket:r[1], final:r[2], age:r[3], gender:r[4],
   coachSeat:r[5], pref:r[6], from:r[7], to:r[8], date:r[9], dep:r[10], arr:r[11], train:r[12],
   coach: r[5].split(" / ")[0], seat: Number(r[5].split(" / ")[1]),
-  code: r[8].includes("PNBE") ? "PNBE" : r[8].includes("ASN") ? "ASN" : "LKR"
+  code: r[8].includes("PNBE") ? "PNBE" : r[8].includes("ASN") ? "ASN" : "LKR",
+  note: r[13] || ""
 }));
 
 function rows() {
@@ -271,7 +273,7 @@ function rows() {
   const gender = document.getElementById("gender").value;
   const sort = document.getElementById("sort").value;
   let out = ROWS.filter(r => {
-    const hay = [r.pnr, r.ticket, r.final, r.coachSeat, r.pref, r.to].join(" ").toLowerCase();
+    const hay = [r.pnr, r.ticket, r.final, r.note, r.coachSeat, r.pref, r.to].join(" ").toLowerCase();
     return (!q || hay.includes(q))
       && (dest === "all" || r.code === dest)
       && (coach === "all" || r.coach === coach)
@@ -320,7 +322,7 @@ function render() {
         <div class="who">
           <div>
             <h3>${r.ticket}</h3>
-            <p class="final">Final list name: ${r.final}</p>
+            <p class="final${r.note ? " note" : ""}">${r.note || "Final list name: " + r.final}</p>
           </div>
           <div class="badge"><b>${r.coach}-${r.seat}</b><span>${r.pref}</span></div>
         </div>
