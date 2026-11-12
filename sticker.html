@@ -200,7 +200,7 @@ const ROOMS = [
   { n: "503", people: ["Taazeem Najmi"] },
   { n: "502", people: ["Aminul Huda Ansari"], below: ["P Papa", "Choti Ammi"] },
   { n: "501", people: ["Shakil Ahmed"], below: ["Bade Mama", "Badi Mami"] },
-  { n: "500", people: [] },
+  { n: "500", people: ["Aqil Ahmed"], below: ["Chote Mama", "Choti Mami"] },
   { n: "404", people: ["Aman Dev", "Sayem Kalim"] },
   { n: "403", people: ["Md Kamil Khan", "Rahbar Shifat Urf Golden"] },
   { n: "402", people: ["Rooman Alam", "Abu Noman Khan"] },
@@ -220,7 +220,7 @@ const ROOMS = [
   { n: "103", people: ["Mumtaz Uncle", "Farghab Saud Uncle"] },
   { n: "102", people: ["Manir Huda", "Mazhar Hussain"] },
   { n: "101", people: ["Tanweer Asraf"] },
-  { n: "100", people: ["Samo Uncle"] },
+  { n: "100", people: ["Samo Uncle", "Owais Uncle"] },
   { n: "001", people: ["Modassir Barkat", "Sarwar Alam", "Md Seraj"] }
 ].map(r => ({ ...r, people: r.people.filter(p => !SKIP.has(p)) }))
  .filter(r => r.people.length);
